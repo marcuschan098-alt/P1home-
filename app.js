@@ -3,7 +3,13 @@ const state={
   data:[],filtered:[],
   compare:new Set(JSON.parse(localStorage.getItem("p1_compare")||"[]")),
   shortlist:new Set(JSON.parse(localStorage.getItem("p1_shortlist")||"[]")),
-  notes:JSON.parse(localStorage.getItem("p1_notes")||"{}")
+  notes:JSON.parse(localStorage.getItem("p1_notes")||"{}"),
+  coordinates:JSON.parse(localStorage.getItem("p1_onemap_coordinates")||"{}"),
+  oneMapToken:sessionStorage.getItem("p1_onemap_token")||"",
+  map:null,
+  mapLayer:null,
+  radiusLayer:null,
+  selectedMapSchool:""
 };
 
 const $=id=>document.getElementById(id);
@@ -15,6 +21,7 @@ function persist(){
   localStorage.setItem("p1_compare",JSON.stringify([...state.compare]));
   localStorage.setItem("p1_shortlist",JSON.stringify([...state.shortlist]));
   localStorage.setItem("p1_notes",JSON.stringify(state.notes));
+  localStorage.setItem("p1_onemap_coordinates",JSON.stringify(state.coordinates));
   updateCounts();
 }
 function updateCounts(){
@@ -102,7 +109,7 @@ function renderInsights(){
 }
 function renderAll(){
   $("resultCount").textContent=`${state.filtered.length} pairing${state.filtered.length===1?"":"s"} shown`;
-  renderInsights();renderCards(state.filtered);renderTable(state.filtered);renderCompare();renderShortlist();
+  renderInsights();renderCards(state.filtered);renderTable(state.filtered);renderCompare();renderShortlist();refreshMapSchoolFilter();if($("mapView")?.classList.contains("active"))renderMap();
 }
 function progress(value,max){
   const pct=Math.max(0,Math.min(100,(Number(value||0)/max)*100));
@@ -226,6 +233,12 @@ function setView(name){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===name));
   $(`${name}View`).classList.add("active");
+  if(name==="map"){
+    ensureMap();
+    refreshMapSchoolFilter();
+    renderMap();
+    setTimeout(()=>state.map&&state.map.invalidateSize(),80);
+  }
 }
 function applyPreset(name){
   document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.preset===name));
@@ -242,6 +255,244 @@ function exportCsv(){
   const blob=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");
   a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href);
 }
+
+function setMapStatus(message,type=""){
+  const el=$("mapStatus");
+  if(!el)return;
+  el.textContent=message;
+  el.className=`map-status ${type}`.trim();
+}
+function coordinateKey(type,name){
+  return `${type}:${String(name||"").trim().toLowerCase()}`;
+}
+function getCoordinate(type,name){
+  return state.coordinates[coordinateKey(type,name)]||null;
+}
+function ensureMap(){
+  if(state.map||!window.L||!$("oneMap"))return;
+  state.map=L.map("oneMap",{zoomControl:true}).setView([1.3521,103.8198],11);
+  L.tileLayer("https://www.onemap.gov.sg/maps/tiles/GreyLite/{z}/{x}/{y}.png",{
+    maxZoom:19,
+    attribution:"OneMap © contributors | Singapore Land Authority"
+  }).addTo(state.map);
+  state.mapLayer=L.layerGroup().addTo(state.map);
+}
+function mapIcon(type){
+  const letter=type==="school"?"S":type==="condo"?"C":"A";
+  const size=type==="school"?29:type==="condo"?25:21;
+  return L.divIcon({
+    className:"",
+    html:`<div class="map-marker ${type}">${letter}</div>`,
+    iconSize:[size,size],
+    iconAnchor:[size/2,size/2]
+  });
+}
+function refreshMapSchoolFilter(){
+  const el=$("mapSchoolFilter");
+  if(!el)return;
+  const current=el.value;
+  const schools=[...new Set(state.filtered.map(d=>d.target_school))].sort();
+  el.innerHTML='<option value="">All visible target schools</option>'+
+    schools.map(s=>`<option value="${String(s).replaceAll('"','&quot;')}">${s}</option>`).join("");
+  if(schools.includes(current))el.value=current;
+  else{el.value="";state.selectedMapSchool=""}
+}
+function visibleMapPairings(){
+  const selected=$("mapSchoolFilter")?.value||"";
+  return selected?state.filtered.filter(d=>d.target_school===selected):state.filtered;
+}
+function renderMap(){
+  if(!$("mapView")?.classList.contains("active"))return;
+  ensureMap();
+  if(!state.map||!state.mapLayer)return;
+
+  state.mapLayer.clearLayers();
+  if(state.radiusLayer){state.map.removeLayer(state.radiusLayer);state.radiusLayer=null}
+
+  const selected=$("mapSchoolFilter").value;
+  state.selectedMapSchool=selected;
+  const items=visibleMapPairings();
+  const bounds=[];
+  const seenSchools=new Set(),seenCondos=new Set(),seenAlternatives=new Set();
+
+  items.forEach(d=>{
+    if(!seenSchools.has(d.target_school)){
+      seenSchools.add(d.target_school);
+      const c=getCoordinate("school",d.target_school);
+      if(c){
+        const marker=L.marker([c.lat,c.lng],{icon:mapIcon("school")})
+          .addTo(state.mapLayer)
+          .bindPopup(`<strong>${d.target_school}</strong><br>Target school`);
+        marker.on("click",()=>{
+          $("mapSchoolFilter").value=d.target_school;
+          state.selectedMapSchool=d.target_school;
+          renderMap();
+        });
+        bounds.push([c.lat,c.lng]);
+      }
+    }
+
+    if(!seenCondos.has(d.condo)){
+      seenCondos.add(d.condo);
+      const c=getCoordinate("condo",d.condo);
+      if(c){
+        const marker=L.marker([c.lat,c.lng],{icon:mapIcon("condo")})
+          .addTo(state.mapLayer)
+          .bindPopup(`<strong>${d.condo}</strong><br>${d.target_school}<br>${d["3_bed_cost"]}`);
+        marker.on("click",()=>renderMapResults(d.target_school,d.condo));
+        bounds.push([c.lat,c.lng]);
+      }
+    }
+  });
+
+  if(selected){
+    const schoolCoordinate=getCoordinate("school",selected);
+    if(schoolCoordinate){
+      state.radiusLayer=L.circle([schoolCoordinate.lat,schoolCoordinate.lng],{
+        radius:1000,color:"#1e638e",weight:2,fillColor:"#4a9ac5",fillOpacity:.10
+      }).addTo(state.map);
+      bounds.push([schoolCoordinate.lat,schoolCoordinate.lng]);
+    }
+
+    if($("showAlternativeSchools").checked){
+      const alternatives=[...new Set(items.flatMap(d=>d.alternative_schools_list||[]))];
+      alternatives.forEach(name=>{
+        if(seenAlternatives.has(name))return;
+        seenAlternatives.add(name);
+        const c=getCoordinate("alternative",name)||getCoordinate("school",name);
+        if(c){
+          L.marker([c.lat,c.lng],{icon:mapIcon("alternative")})
+            .addTo(state.mapLayer)
+            .bindPopup(`<strong>${name}</strong><br>Alternative school`);
+          bounds.push([c.lat,c.lng]);
+        }
+      });
+    }
+  }
+
+  renderMapResults(selected);
+
+  if(bounds.length){
+    state.map.fitBounds(bounds,{padding:[35,35],maxZoom:selected?15:13});
+    setMapStatus(`${bounds.length} mapped locations shown.`, "ok");
+  }else{
+    state.map.setView([1.3521,103.8198],11);
+    setMapStatus("No cached coordinates are available for the current selection. Open OneMap setup to geocode them.","error");
+  }
+}
+function renderMapResults(school="",condo=""){
+  const box=$("mapResults");
+  if(!box)return;
+  let items=school?state.filtered.filter(d=>d.target_school===school):state.filtered;
+  if(condo)items=items.filter(d=>d.condo===condo);
+
+  box.innerHTML=`<h3>${school||"Visible pairings"}</h3>
+    <p>${items.length} pairing${items.length===1?"":"s"} in the current map selection.</p>
+    ${items.slice(0,25).map(d=>`<div class="map-result" data-id="${idOf(d)}">
+      <strong>${safe(d.condo)}</strong>
+      <span>${safe(d.target_school)} · ${safe(d["3_bed_cost"])} · ${safe(d.overall_score_100)}/100</span>
+    </div>`).join("")}
+    <div class="map-legend">
+      <span><i class="legend-dot school"></i>Target school</span>
+      <span><i class="legend-dot condo"></i>Condo</span>
+      <span><i class="legend-dot alternative"></i>Alternative school</span>
+    </div>`;
+  box.querySelectorAll(".map-result").forEach(el=>el.onclick=()=>openDetail(findById(el.dataset.id)));
+}
+async function oneMapSearch(name,token){
+  const endpoint="https://www.onemap.gov.sg/api/common/elastic/search";
+  const url=`${endpoint}?searchVal=${encodeURIComponent(name)}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
+  const response=await fetch(url,{headers:{Authorization:token}});
+  if(!response.ok)throw new Error(`OneMap Search returned HTTP ${response.status}`);
+  const payload=await response.json();
+  if(payload.error)throw new Error(payload.error);
+  const results=payload.results||[];
+  if(!results.length)return null;
+
+  const lower=String(name).toLowerCase();
+  const selected=results.find(r=>String(r.SEARCHVAL||"").toLowerCase()===lower)
+    ||results.find(r=>String(r.SEARCHVAL||"").toLowerCase().includes(lower))
+    ||results[0];
+
+  const lat=Number(selected.LATITUDE),lng=Number(selected.LONGITUDE);
+  if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+  return{
+    lat,lng,
+    searchValue:selected.SEARCHVAL||name,
+    address:selected.ADDRESS||"",
+    postalCode:selected.POSTAL||""
+  };
+}
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function collectGeocodeTasks(scope="all"){
+  const source=scope==="visible"?state.filtered:state.data;
+  const tasks=[];
+  [...new Set(source.map(d=>d.target_school))].forEach(name=>tasks.push(["school",name]));
+  [...new Set(source.map(d=>d.condo))].forEach(name=>tasks.push(["condo",name]));
+  [...new Set(source.flatMap(d=>d.alternative_schools_list||[]))].forEach(name=>tasks.push(["alternative",name]));
+  return tasks;
+}
+async function geocode(scope){
+  const token=($("tokenInput").value||state.oneMapToken||"").trim();
+  if(!token){alert("Paste a current OneMap access token first.");return}
+
+  state.oneMapToken=token;
+  sessionStorage.setItem("p1_onemap_token",token);
+
+  const tasks=collectGeocodeTasks(scope);
+  let completed=0,found=0,failed=0;
+  setMapStatus(`Preparing ${tasks.length} unique locations…`,"busy");
+
+  try{
+    for(const[type,name]of tasks){
+      const key=coordinateKey(type,name);
+      if(state.coordinates[key]){
+        completed++;found++;
+        continue;
+      }
+      setMapStatus(`Geocoding ${completed+1} of ${tasks.length}: ${name}`,"busy");
+      try{
+        const result=await oneMapSearch(name,token);
+        if(result){state.coordinates[key]=result;found++}
+        else failed++;
+      }catch(error){
+        if(/401|403|token|Forbidden/i.test(error.message))throw error;
+        failed++;
+      }
+      completed++;
+      persist();
+      await delay(140);
+    }
+    $("tokenDialog").close();
+    setMapStatus(`Geocoding completed: ${found} locations available; ${failed} not found.`,"ok");
+    refreshMapSchoolFilter();
+    renderMap();
+  }catch(error){
+    setMapStatus(`${error.message}. Check whether the token has expired.`,"error");
+  }
+}
+function exportCoordinateCache(){
+  const blob=new Blob([JSON.stringify(state.coordinates,null,2)],{type:"application/json"});
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download="onemap-coordinate-cache.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+async function importCoordinateCache(file){
+  if(!file)return;
+  try{
+    const imported=JSON.parse(await file.text());
+    if(!imported||typeof imported!=="object"||Array.isArray(imported))throw new Error("Invalid coordinate file");
+    state.coordinates={...state.coordinates,...imported};
+    persist();
+    setMapStatus(`${Object.keys(state.coordinates).length} cached locations available.`,"ok");
+    renderMap();
+  }catch(error){
+    alert(`Could not import coordinate cache: ${error.message}`);
+  }
+}
+
 async function init(){
   state.data=await(await fetch("data/pairings.json?v=2.2.0")).json();
   state.filtered=[...state.data];
@@ -269,6 +520,33 @@ async function init(){
   $("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderAll()};
   $("closeDrawer").onclick=closeDrawer;$("drawerBackdrop").onclick=closeDrawer;
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
+
+  $("mapSetupBtn").onclick=()=>{
+    $("tokenInput").value=state.oneMapToken;
+    $("tokenDialog").showModal();
+  };
+  $("closeTokenDialog").onclick=()=>$("tokenDialog").close();
+  $("saveTokenBtn").onclick=()=>{
+    state.oneMapToken=$("tokenInput").value.trim();
+    sessionStorage.setItem("p1_onemap_token",state.oneMapToken);
+    setMapStatus("Token saved for this browser session. Choose a geocoding option.","ok");
+  };
+  $("geocodeVisibleBtn").onclick=()=>geocode("visible");
+  $("geocodeAllBtn").onclick=()=>geocode("all");
+  $("exportCoordinatesBtn").onclick=exportCoordinateCache;
+  $("importCoordinatesInput").onchange=e=>importCoordinateCache(e.target.files[0]);
+  $("clearCoordinatesBtn").onclick=()=>{
+    state.coordinates={};
+    persist();
+    setMapStatus("Cached coordinates cleared.","ok");
+    renderMap();
+  };
+  $("mapSchoolFilter").onchange=()=>{
+    state.selectedMapSchool=$("mapSchoolFilter").value;
+    renderMap();
+  };
+  $("showAlternativeSchools").onchange=renderMap;
+  $("fitMarkersBtn").onclick=renderMap;
 
   updateCounts();updatePriceRange();applyFilters();
 }
