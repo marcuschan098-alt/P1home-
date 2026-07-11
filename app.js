@@ -96,15 +96,57 @@ function setView(name){
 function mapStatus(text,type=""){const el=$("mapStatus");el.textContent=text;el.className=`map-status ${type}`.trim()}
 function showLoading(show,text="Loading map…"){$("mapLoadingMask").textContent=text;$("mapLoadingMask").classList.toggle("show",show)}
 function createBase(style){
-  const isFallback=style==="Fallback",url=isFallback?"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png":`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`;
-  const layer=L.tileLayer(url,{minZoom:10,maxZoom:19,keepBuffer:8,updateWhenIdle:true,updateWhenZooming:false,crossOrigin:true,attribution:isFallback?"© OpenStreetMap contributors":"OneMap © contributors | Singapore Land Authority"});
-  layer.on("loading",()=>showLoading(true,`Loading ${style} basemap…`));layer.on("load",()=>{showLoading(false);state.tileErrors=0;mapStatus(`${style==="Fallback"?"Fallback streets":`OneMap ${style}`} loaded.`,"ok")});
-  layer.on("tileerror",e=>{state.tileErrors++;const tile=e.tile;if(tile&&!tile.dataset.retried){tile.dataset.retried="1";const base=tile.src.split("?")[0];setTimeout(()=>tile.src=`${base}?r=${Date.now()}`,350);return}if(state.tileErrors>=6&&!state.fallbackUsed&&style!=="Fallback"){state.fallbackUsed=true;mapStatus("OneMap tiles are incomplete on this connection. Switching to fallback streets.","error");switchBase("Fallback",true)}});
-  return layer
+  const isFallback=style==="Fallback";
+  const url=isFallback
+    ?"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    :`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`;
+
+  const options={
+    minZoom:10,
+    maxZoom:19,
+    keepBuffer:6,
+    updateWhenIdle:true,
+    updateWhenZooming:false,
+    attribution:isFallback
+      ?"© OpenStreetMap contributors"
+      :"OneMap © contributors | Singapore Land Authority"
+  };
+
+  // Deliberately omit crossOrigin. It is unnecessary for display-only tiles
+  // and can cause tile images to be rejected when CORS headers are inconsistent.
+  const layer=L.tileLayer(url,options);
+
+  layer.on("loading",()=>{
+    showLoading(true,`Loading ${isFallback?"street":`OneMap ${style}`} basemap…`);
+  });
+
+  layer.on("load",()=>{
+    showLoading(false);
+    if(isFallback){
+      mapStatus("Reliable street basemap loaded. OneMap remains the source for geocoded locations.","ok");
+    }else{
+      mapStatus(`OneMap ${style} basemap loaded. Monitoring tile completeness…`,"ok");
+    }
+  });
+
+  layer.on("tileerror",()=>{
+    state.tileErrors++;
+
+    // A single missing tile produces a broken checkerboard on mobile.
+    // Fall back immediately instead of waiting for several failures.
+    if(!isFallback&&!state.fallbackUsed){
+      state.fallbackUsed=true;
+      showLoading(true,"OneMap tile failed. Switching to reliable street basemap…");
+      mapStatus("A OneMap tile failed on this connection. Switching to the reliable street basemap.","error");
+      setTimeout(()=>switchBase("Fallback",true),150);
+    }
+  });
+
+  return layer;
 }
 function switchBase(style,automatic=false){if(!state.map)return;if(state.baseLayer)state.map.removeLayer(state.baseLayer);state.baseStyle=style;state.tileErrors=0;if(!automatic)state.fallbackUsed=false;localStorage.setItem("p1_basemap_style",style);state.baseLayer=createBase(style).addTo(state.map);$("baseMapStyle").value=style}
 function ensureMap(){
-  if(state.map||!window.L)return;state.map=L.map("oneMap",{preferCanvas:true,zoomControl:true,zoomSnap:1}).setView([1.3521,103.8198],11);switchBase(state.baseStyle);state.markerLayer=L.layerGroup().addTo(state.map);state.map.on("moveend zoomend",()=>state.baseLayer&&state.baseLayer.redraw())
+  if(state.map||!window.L)return;state.map=L.map("oneMap",{preferCanvas:true,zoomControl:true,zoomSnap:1}).setView([1.3521,103.8198],11);switchBase(state.baseStyle);state.markerLayer=L.layerGroup().addTo(state.map);state.map.on("resize",()=>state.map.invalidateSize())
 }
 function icon(type){const char=type==="school"?"S":type==="condo"?"C":"A",size=type==="school"?30:type==="condo"?25:21;return L.divIcon({className:"",html:`<div class="map-marker ${type}">${char}</div>`,iconSize:[size,size],iconAnchor:[size/2,size/2]})}
 function updateMapKpis(){

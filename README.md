@@ -1,6 +1,6 @@
-# P1 Home Intelligence — Version 4.0
+# P1 Home Intelligence — Version 4.0.1
 
-Version 4.0 is a map-first redesign of the Primary School × Condo Pairing application.
+Version 4.0.1 is a map-first redesign of the Primary School × Condo Pairing application.
 
 ## Main changes
 
@@ -39,3 +39,12 @@ The basemap does not need a token. A token is required only for the OneMap Searc
 5. Import that cache on another browser or device.
 
 Never commit a token into the GitHub repository.
+
+
+## Version 4.0.1 mobile tile fix
+
+- Removed the unnecessary `crossOrigin` setting from map tiles.
+- Switches to the reliable street basemap immediately after the first failed OneMap tile.
+- Keeps OneMap as the source for school and condo geocoding.
+- Stops forced tile redraws that created extra requests on mobile.
+- Stacks controls above a full-width map on screens below 1200 px.
