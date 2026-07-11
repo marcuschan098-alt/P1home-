@@ -9,7 +9,13 @@ const state={
   map:null,
   mapLayer:null,
   radiusLayer:null,
-  selectedMapSchool:""
+  selectedMapSchool:"",
+  baseMapLayer:null,
+  baseMapStyle:localStorage.getItem("p1_basemap_style")||"Original",
+  tileErrors:0,
+  fallbackUsed:false,
+  geocodeQueue:JSON.parse(localStorage.getItem("p1_geocode_queue")||"[]"),
+  selectedMapResultId:""
 };
 
 const $=id=>document.getElementById(id);
@@ -22,6 +28,7 @@ function persist(){
   localStorage.setItem("p1_shortlist",JSON.stringify([...state.shortlist]));
   localStorage.setItem("p1_notes",JSON.stringify(state.notes));
   localStorage.setItem("p1_onemap_coordinates",JSON.stringify(state.coordinates));
+  localStorage.setItem("p1_geocode_queue",JSON.stringify(state.geocodeQueue));
   updateCounts();
 }
 function updateCounts(){
@@ -268,14 +275,81 @@ function coordinateKey(type,name){
 function getCoordinate(type,name){
   return state.coordinates[coordinateKey(type,name)]||null;
 }
+function updateMapKpis(){
+  const mappedSchools=new Set();
+  const mappedCondos=new Set();
+  state.data.forEach(d=>{
+    if(getCoordinate("school",d.target_school))mappedSchools.add(d.target_school);
+    if(getCoordinate("condo",d.condo))mappedCondos.add(d.condo);
+  });
+  if($("mappedSchoolCount"))$("mappedSchoolCount").textContent=mappedSchools.size;
+  if($("mappedCondoCount"))$("mappedCondoCount").textContent=mappedCondos.size;
+  if($("cachedLocationCount"))$("cachedLocationCount").textContent=Object.keys(state.coordinates).length;
+}
+
+function showMapLoading(show,text="Loading OneMap…"){
+  const mask=$("mapLoadingMask");
+  if(!mask)return;
+  mask.textContent=text;
+  mask.classList.toggle("show",show);
+}
+function createOneMapLayer(style){
+  const layer=L.tileLayer(`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`,{
+    minZoom:10,maxZoom:19,
+    updateWhenIdle:true,
+    updateWhenZooming:false,
+    keepBuffer:6,
+    crossOrigin:true,
+    attribution:"OneMap © contributors | Singapore Land Authority"
+  });
+  layer.on("loading",()=>showMapLoading(true,`Loading OneMap ${style}…`));
+  layer.on("load",()=>{
+    showMapLoading(false);
+    state.tileErrors=0;
+    setMapStatus(`OneMap ${style} basemap loaded.`,"success");
+  });
+  layer.on("tileerror",event=>{
+    state.tileErrors++;
+    const tile=event.tile;
+    if(tile&&!tile.dataset.retryAttempted){
+      tile.dataset.retryAttempted="1";
+      const base=tile.src.split("?")[0];
+      setTimeout(()=>{tile.src=`${base}?retry=${Date.now()}`},400);
+      return;
+    }
+    if(state.tileErrors>=5&&!state.fallbackUsed){
+      state.fallbackUsed=true;
+      const fallback=style==="Original"?"GreyLite":"Original";
+      setMapStatus(`Some ${style} tiles failed. Switching to ${fallback}.`,"warn");
+      switchBaseMap(fallback,true);
+    }
+  });
+  return layer;
+}
+function switchBaseMap(style,automatic=false){
+  if(!state.map)return;
+  if(state.baseMapLayer)state.map.removeLayer(state.baseMapLayer);
+  state.baseMapStyle=style;
+  state.tileErrors=0;
+  if(!automatic)state.fallbackUsed=false;
+  localStorage.setItem("p1_basemap_style",style);
+  state.baseMapLayer=createOneMapLayer(style);
+  state.baseMapLayer.addTo(state.map);
+  if($("baseMapStyle"))$("baseMapStyle").value=style;
+}
 function ensureMap(){
   if(state.map||!window.L||!$("oneMap"))return;
-  state.map=L.map("oneMap",{zoomControl:true}).setView([1.3521,103.8198],11);
-  L.tileLayer("https://www.onemap.gov.sg/maps/tiles/GreyLite/{z}/{x}/{y}.png",{
-    maxZoom:19,
-    attribution:"OneMap © contributors | Singapore Land Authority"
-  }).addTo(state.map);
+  state.map=L.map("oneMap",{
+    zoomControl:true,
+    preferCanvas:true,
+    zoomSnap:1,
+    wheelPxPerZoomLevel:90
+  }).setView([1.3521,103.8198],11);
+  switchBaseMap(state.baseMapStyle);
   state.mapLayer=L.layerGroup().addTo(state.map);
+  state.map.on("moveend zoomend",()=>{
+    if(state.baseMapLayer)state.baseMapLayer.redraw();
+  });
 }
 function mapIcon(type){
   const letter=type==="school"?"S":type==="condo"?"C":"A";
@@ -296,6 +370,13 @@ function refreshMapSchoolFilter(){
     schools.map(s=>`<option value="${String(s).replaceAll('"','&quot;')}">${s}</option>`).join("");
   if(schools.includes(current))el.value=current;
   else{el.value="";state.selectedMapSchool=""}
+
+  const suggestions=[...new Set(state.filtered.flatMap(d=>[
+    d.target_school,d.condo,...(d.alternative_schools_list||[])
+  ]).filter(Boolean))].sort();
+  if($("mapSearchSuggestions")){
+    $("mapSearchSuggestions").innerHTML=suggestions.map(v=>`<option value="${String(v).replaceAll('"','&quot;')}"></option>`).join("");
+  }
 }
 function visibleMapPairings(){
   const selected=$("mapSchoolFilter")?.value||"";
@@ -374,7 +455,7 @@ function renderMap(){
 
   if(bounds.length){
     state.map.fitBounds(bounds,{padding:[35,35],maxZoom:selected?15:13});
-    setMapStatus(`${bounds.length} mapped locations shown.`, "ok");
+    setMapStatus(`${bounds.length} mapped locations shown.`, "success");updateMapKpis();
   }else{
     state.map.setView([1.3521,103.8198],11);
     setMapStatus("No cached coordinates are available for the current selection. Open OneMap setup to geocode them.","error");
@@ -388,16 +469,51 @@ function renderMapResults(school="",condo=""){
 
   box.innerHTML=`<h3>${school||"Visible pairings"}</h3>
     <p>${items.length} pairing${items.length===1?"":"s"} in the current map selection.</p>
-    ${items.slice(0,25).map(d=>`<div class="map-result" data-id="${idOf(d)}">
+    ${items.slice(0,30).map(d=>`<div class="map-result ${state.selectedMapResultId===idOf(d)?"active":""}" data-id="${idOf(d)}">
       <strong>${safe(d.condo)}</strong>
-      <span>${safe(d.target_school)} · ${safe(d["3_bed_cost"])} · ${safe(d.overall_score_100)}/100</span>
+      <div class="result-sub">${safe(d.target_school)} · ${safe(d["3_bed_cost"])}</div>
+      <div class="result-score">${safe(d.overall_score_100)}/100</div>
     </div>`).join("")}
     <div class="map-legend">
       <span><i class="legend-dot school"></i>Target school</span>
       <span><i class="legend-dot condo"></i>Condo</span>
       <span><i class="legend-dot alternative"></i>Alternative school</span>
     </div>`;
-  box.querySelectorAll(".map-result").forEach(el=>el.onclick=()=>openDetail(findById(el.dataset.id)));
+  box.querySelectorAll(".map-result").forEach(el=>el.onclick=()=>{
+    state.selectedMapResultId=el.dataset.id;
+    const d=findById(el.dataset.id);
+    const c=getCoordinate("condo",d.condo);
+    if(c&&state.map)state.map.setView([c.lat,c.lng],16);
+    renderMapResults(school,condo);
+  });
+}
+function findMapLocation(){
+  const value=$("mapSearchInput").value.trim();
+  if(!value)return;
+  const pairing=state.filtered.find(d=>d.condo===value||d.target_school===value||(d.alternative_schools_list||[]).includes(value));
+  const candidates=[
+    ["condo",value],
+    ["school",value],
+    ["alternative",value]
+  ];
+  for(const[type,name]of candidates){
+    const c=getCoordinate(type,name);
+    if(c&&state.map){
+      state.map.setView([c.lat,c.lng],16);
+      setMapStatus(`${value} located on the map.`,"success");
+      if(pairing){
+        state.selectedMapResultId=idOf(pairing);
+        renderMapResults(pairing.target_school,pairing.condo===value?pairing.condo:"");
+      }
+      return;
+    }
+  }
+  setMapStatus(`${value} has not been geocoded yet. Use OneMap setup.`,"warn");
+}
+function clearMapSearch(){
+  $("mapSearchInput").value="";
+  state.selectedMapResultId="";
+  renderMap();
 }
 async function oneMapSearch(name,token){
   const endpoint="https://www.onemap.gov.sg/api/common/elastic/search";
@@ -432,25 +548,30 @@ function collectGeocodeTasks(scope="all"){
   [...new Set(source.flatMap(d=>d.alternative_schools_list||[]))].forEach(name=>tasks.push(["alternative",name]));
   return tasks;
 }
-async function geocode(scope){
+async function runGeocodeQueue(tasks){
   const token=($("tokenInput").value||state.oneMapToken||"").trim();
   if(!token){alert("Paste a current OneMap access token first.");return}
 
   state.oneMapToken=token;
   sessionStorage.setItem("p1_onemap_token",token);
+  state.geocodeQueue=[...tasks];
+  persist();
 
-  const tasks=collectGeocodeTasks(scope);
-  let completed=0,found=0,failed=0;
-  setMapStatus(`Preparing ${tasks.length} unique locations…`,"busy");
+  let found=0,failed=0,total=state.geocodeQueue.length;
+  setMapStatus(`Preparing ${total} unique locations…`,"busy");
 
   try{
-    for(const[type,name]of tasks){
+    while(state.geocodeQueue.length){
+      const[type,name]=state.geocodeQueue[0];
       const key=coordinateKey(type,name);
+
       if(state.coordinates[key]){
-        completed++;found++;
+        state.geocodeQueue.shift();
+        persist();
         continue;
       }
-      setMapStatus(`Geocoding ${completed+1} of ${tasks.length}: ${name}`,"busy");
+
+      setMapStatus(`Geocoding ${total-state.geocodeQueue.length+1} of ${total}: ${name}`,"busy");
       try{
         const result=await oneMapSearch(name,token);
         if(result){state.coordinates[key]=result;found++}
@@ -459,17 +580,31 @@ async function geocode(scope){
         if(/401|403|token|Forbidden/i.test(error.message))throw error;
         failed++;
       }
-      completed++;
+
+      state.geocodeQueue.shift();
       persist();
-      await delay(140);
+      updateMapKpis();
+      await delay(160);
     }
+
     $("tokenDialog").close();
-    setMapStatus(`Geocoding completed: ${found} locations available; ${failed} not found.`,"ok");
+    setMapStatus(`Geocoding completed: ${found} new locations found; ${failed} not found.`,"success");
     refreshMapSchoolFilter();
     renderMap();
   }catch(error){
-    setMapStatus(`${error.message}. Check whether the token has expired.`,"error");
+    persist();
+    setMapStatus(`${error.message}. ${state.geocodeQueue.length} locations remain in the queue.`,"failure");
   }
+}
+async function geocode(scope){
+  await runGeocodeQueue(collectGeocodeTasks(scope));
+}
+async function resumeGeocoding(){
+  if(!state.geocodeQueue.length){
+    setMapStatus("No incomplete geocoding queue is available.","info");
+    return;
+  }
+  await runGeocodeQueue(state.geocodeQueue);
 }
 function exportCoordinateCache(){
   const blob=new Blob([JSON.stringify(state.coordinates,null,2)],{type:"application/json"});
@@ -485,8 +620,8 @@ async function importCoordinateCache(file){
     const imported=JSON.parse(await file.text());
     if(!imported||typeof imported!=="object"||Array.isArray(imported))throw new Error("Invalid coordinate file");
     state.coordinates={...state.coordinates,...imported};
-    persist();
-    setMapStatus(`${Object.keys(state.coordinates).length} cached locations available.`,"ok");
+    persist();updateMapKpis();
+    setMapStatus(`${Object.keys(state.coordinates).length} cached locations available.`,"success");
     renderMap();
   }catch(error){
     alert(`Could not import coordinate cache: ${error.message}`);
@@ -536,8 +671,8 @@ async function init(){
   $("exportCoordinatesBtn").onclick=exportCoordinateCache;
   $("importCoordinatesInput").onchange=e=>importCoordinateCache(e.target.files[0]);
   $("clearCoordinatesBtn").onclick=()=>{
-    state.coordinates={};
-    persist();
+    state.coordinates={};state.geocodeQueue=[];
+    persist();updateMapKpis();
     setMapStatus("Cached coordinates cleared.","ok");
     renderMap();
   };
@@ -546,8 +681,23 @@ async function init(){
     renderMap();
   };
   $("showAlternativeSchools").onchange=renderMap;
+  $("baseMapStyle").value=state.baseMapStyle;
+  $("baseMapStyle").onchange=()=>{
+    state.fallbackUsed=false;
+    switchBaseMap($("baseMapStyle").value);
+  };
+  $("reloadBaseMapBtn").onclick=()=>{
+    state.fallbackUsed=false;
+    state.tileErrors=0;
+    switchBaseMap(state.baseMapStyle);
+    setTimeout(()=>state.map&&state.map.invalidateSize(),120);
+  };
+  $("mapSearchBtn").onclick=findMapLocation;
+  $("clearMapSearchBtn").onclick=clearMapSearch;
+  $("mapSearchInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();findMapLocation()}};
+  $("resumeGeocodeBtn").onclick=resumeGeocoding;
   $("fitMarkersBtn").onclick=renderMap;
 
-  updateCounts();updatePriceRange();applyFilters();
+  updateCounts();updatePriceRange();updateMapKpis();applyFilters();
 }
 init().catch(err=>document.body.innerHTML=`<main class="panel"><h1>Unable to load data</h1><p>${err.message}</p><p>Use GitHub Pages or a local HTTP server.</p></main>`);

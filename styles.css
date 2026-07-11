@@ -202,3 +202,71 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:20px}
   .one-map{height:520px}
   .map-results{max-height:none}
 }
+
+
+/* Version 3.1 — stable OneMap, search and mobile map UX */
+.map-kpis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:12px;
+}
+.map-kpis article{
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#f8fbfc;
+  padding:11px 13px;
+}
+.map-kpis span{
+  display:block;
+  color:var(--blue);
+  font-size:1.2rem;
+  font-weight:950;
+}
+.map-kpis small{color:var(--muted)}
+.map-search-row{
+  display:grid;
+  grid-template-columns:minmax(240px,1fr) auto auto;
+  gap:9px;
+  align-items:end;
+  margin-bottom:12px;
+}
+.map-search-row label{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:.82rem;
+  font-weight:850;
+}
+.map-loading-mask{
+  position:absolute;
+  inset:0;
+  z-index:450;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  background:rgba(245,249,251,.72);
+  color:var(--navy);
+  font-weight:900;
+}
+.map-loading-mask.show{display:flex}
+.map-status.info{background:#edf4f7;color:var(--navy)}
+.map-status.warn{background:#fff0d5;color:#7f560e}
+.map-status.success{background:#e3f2ea;color:#21654e}
+.map-status.failure{background:#f8dddd;color:#8a2727}
+.map-result.active{background:#edf5f9}
+.map-result .result-score{color:var(--green);font-weight:900}
+.map-result .result-sub{color:var(--muted);font-size:.78rem}
+@media(max-width:800px){
+  .map-kpis{grid-template-columns:1fr 1fr 1fr}
+  .map-search-row{grid-template-columns:1fr 1fr}
+  .map-search-row label{grid-column:1/-1}
+  .map-controls label{min-width:100%}
+}
+@media(max-width:520px){
+  .map-kpis{grid-template-columns:1fr}
+  .map-search-row{grid-template-columns:1fr}
+  .map-search-row label{grid-column:auto}
+  .one-map{height:460px}
+}

@@ -1,24 +1,24 @@
-# Primary School × Condo Pairing — Version 3.0
+# Primary School × Condo Pairing — Version 3.1
 
-Version 3.0 adds an interactive OneMap view to the stable Version 2.2 application.
+Version 3.1 is the new stable OneMap release.
 
-## New features
+## Main improvements
 
-- Official OneMap GreyLite basemap
-- Target-school markers
-- Condo markers
-- Alternative-school markers
-- 1 km radius around the selected target school
-- Existing filters also control what is shown on the map
-- Clickable map results and marker pop-ups
-- Temporary OneMap token kept only in browser session storage
-- Coordinate results cached in local storage
+- OneMap Original and GreyLite basemap selector
+- Automatic tile retry
+- Automatic fallback between basemap styles after repeated tile failures
+- Larger mobile tile buffer
+- Search schools, condos and alternative schools directly on the map
+- Map counters for cached schools, condos and total locations
+- Resume incomplete geocoding after interruption or token expiry
 - Export and import coordinate cache JSON
-- Geocode only visible data or the entire dataset
+- Current filters continue to control the map results
+- 1 km circle around a selected target school
+- Clickable result panel linked to map zoom
 
-## Update the GitHub Pages site
+## Deploy
 
-Replace:
+Replace these files in the existing GitHub repository:
 
 - `index.html`
 - `styles.css`
@@ -26,19 +26,16 @@ Replace:
 - `README.md`
 - `data/pairings.json`
 
-Commit, wait for GitHub Pages deployment, then press `Ctrl + F5`.
+Commit, wait for deployment, then use `Ctrl + F5`.
 
-## First-time OneMap setup
+## First use
 
-1. Open the **OneMap** tab.
-2. Select **OneMap setup**.
-3. Paste a valid temporary OneMap token.
-4. Select **Geocode visible data** for the current filtered selection, or **Geocode all data** for the complete dataset.
-5. Leave the browser open until the progress message completes.
-6. Export the coordinate cache as a backup.
+1. Open **OneMap**.
+2. Confirm the basemap loads.
+3. Open **OneMap setup**.
+4. Paste a valid temporary token.
+5. Choose **Geocode visible data** for a small test.
+6. Use **Geocode all data** when ready.
+7. Export the coordinate cache as a backup.
 
-The token is never included in the repository. Cached coordinates remain available after the token expires.
-
-## Security
-
-Do not commit a token, email address or OneMap password into GitHub.
+The token is stored only in session storage. It is never embedded in the public repository.

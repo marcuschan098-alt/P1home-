@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Singapore primary school and condo pairing decision tool">
-  <title>Primary School × Condo Pairing — Version 3.0</title>
+  <title>Primary School × Condo Pairing — Version 3.1</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
  integrity="sha256-p4NxAoJBhIINfQ3ynhDMCeSOU5tLkMZqSxj7wZ0u7w8=" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=3.0.0">
+  <link rel="stylesheet" href="styles.css?v=3.1.0">
 </head>
 <body>
   <header class="hero">
@@ -182,8 +182,23 @@
           <button id="mapSetupBtn" class="btn btn-small">OneMap setup</button>
         </div>
 
+        <div class="map-kpis">
+          <article><span id="mappedSchoolCount">0</span><small>Mapped schools</small></article>
+          <article><span id="mappedCondoCount">0</span><small>Mapped condos</small></article>
+          <article><span id="cachedLocationCount">0</span><small>Cached locations</small></article>
+        </div>
+
         <div id="mapStatus" class="map-status">
           OneMap basemap is ready. Add a temporary access token to geocode the schools and condos.
+        </div>
+
+        <div class="map-search-row">
+          <label>Search map locations
+            <input id="mapSearchInput" list="mapSearchSuggestions" type="search" placeholder="School or condo">
+            <datalist id="mapSearchSuggestions"></datalist>
+          </label>
+          <button id="mapSearchBtn" class="btn btn-small">Find on map</button>
+          <button id="clearMapSearchBtn" class="btn btn-small">Clear</button>
         </div>
 
         <div class="map-controls">
@@ -196,12 +211,19 @@
             <input id="showAlternativeSchools" type="checkbox" checked>
             Show alternative schools
           </label>
+          <label>Basemap style
+            <select id="baseMapStyle">
+              <option value="Original">OneMap Original</option>
+              <option value="GreyLite">OneMap GreyLite</option>
+            </select>
+          </label>
+          <button id="reloadBaseMapBtn" class="btn btn-small">Reload basemap</button>
           <button id="fitMarkersBtn" class="btn btn-small">Fit visible markers</button>
         </div>
 
         <div class="map-layout">
           <div class="map-shell">
-            <div id="oneMap" class="one-map"></div>
+            <div id="oneMap" class="one-map"></div><div id="mapLoadingMask" class="map-loading-mask">Loading OneMap…</div>
             <div class="onemap-attribution">
               <a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener">OneMap</a>
               © contributors |
@@ -268,6 +290,7 @@
       <button id="saveTokenBtn" class="btn btn-primary">Save for this session</button>
       <button id="geocodeVisibleBtn" class="btn">Geocode visible data</button>
       <button id="geocodeAllBtn" class="btn">Geocode all data</button>
+      <button id="resumeGeocodeBtn" class="btn">Resume incomplete geocoding</button>
     </div>
 
     <div class="setup-secondary">
@@ -282,11 +305,11 @@
   </dialog>
 
   <footer>
-    <p>Version 3.0 · Static GitHub Pages application · Data from Pairings Master V6</p>
+    <p>Version 3.1 · Static GitHub Pages application · Data from Pairings Master V6</p>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=3.0.0"></script>
+  <script src="app.js?v=3.1.0"></script>
 </body>
 </html>
