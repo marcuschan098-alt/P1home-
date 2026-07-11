@@ -1,17 +1,18 @@
-# Primary School × Condo Pairing — Version 2.1
+# Primary School × Condo Pairing — Version 2.2
 
-This stable release is built from the last working Version 2 hotfix.
+Version 2.2 is a user-interface redesign built on the stable Version 2.1 functionality.
 
-## Change in this release
+## Improvements
 
-The old single maximum-budget dropdown has been replaced with a dual-ended estimated 3-bedroom property-value slider:
-
-- Minimum: S$1,000,000
-- Maximum: S$3,000,000
-- Increment: S$50,000
-- Pairings remain visible when their estimated price range overlaps your selected range
-
-No OneMap code is included in this release. Mapping will be added separately after this version is confirmed stable.
+- Actionable insight cards instead of generic counters
+- Cleaner dual-ended property-price slider
+- Search autocomplete
+- Redesigned property cards
+- Visual admission and property score bars
+- Slide-in details drawer
+- Card-based compare view
+- Improved spacing, typography and mobile responsiveness
+- Existing shortlist, notes, CSV export and filters retained
 
 ## Update your GitHub Pages site
 
@@ -23,12 +24,6 @@ Replace:
 - `README.md`
 - `data/pairings.json`
 
-Commit the changes, wait for GitHub Pages to redeploy, then press `Ctrl + F5`.
+Commit, wait for deployment, then force-refresh with `Ctrl + F5`.
 
-## Test locally
-
-```bash
-python -m http.server 8000
-```
-
-Open `http://localhost:8000`.
+No OneMap code is included in this release.

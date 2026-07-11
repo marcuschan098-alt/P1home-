@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Singapore primary school and condo pairing decision tool">
-  <title>Primary School × Condo Pairing — Version 2.1</title>
-  <link rel="stylesheet" href="styles.css?v=2.1">
+  <title>Primary School × Condo Pairing — Version 2.2</title>
+  <link rel="stylesheet" href="styles.css?v=2.2.0">
 </head>
 <body>
   <header class="hero">
@@ -13,70 +13,93 @@
       <div>
         <p class="eyebrow">Singapore P1 Strategy</p>
         <h1>Primary School × Condo Pairing</h1>
-        <p class="subtitle">Admission evidence, property trade-offs, shortlist and comparison in one decision workspace.</p>
+        <p class="subtitle">Compare admission evidence, property value and family fit in one decision workspace.</p>
       </div>
       <div class="hero-actions">
-        <button id="resetBtn" class="secondary">Reset filters</button>
-        <button id="exportBtn" class="primary">Export filtered CSV</button>
+        <button id="resetBtn" class="btn btn-ghost">Reset filters</button>
+        <button id="exportBtn" class="btn btn-primary">Export filtered CSV</button>
       </div>
     </div>
   </header>
 
-  <nav class="app-nav" aria-label="Application sections">
+  <nav class="app-nav">
     <button class="nav-btn active" data-view="explore">Explore</button>
-    <button class="nav-btn" data-view="map">Map</button>
     <button class="nav-btn" data-view="compare">Compare <span id="compareCount" class="nav-count">0</span></button>
     <button class="nav-btn" data-view="shortlist">Shortlist <span id="shortlistCount" class="nav-count">0</span></button>
   </nav>
 
   <main>
-    <section class="kpis" aria-label="Summary">
-      <article><span id="kpiPairings">0</span><small>Visible pairings</small></article>
-      <article><span id="kpiSchools">0</span><small>Target schools</small></article>
-      <article><span id="kpiCondos">0</span><small>Condos</small></article>
-      <article><span id="kpiAvgScore">0</span><small>Average score</small></article>
+    <section class="insight-grid" aria-label="Decision insights">
+      <article class="insight-card">
+        <span class="insight-label">Best overall</span>
+        <strong id="insightOverallName">—</strong>
+        <div><span id="insightOverallScore">—</span><small> /100</small></div>
+      </article>
+      <article class="insight-card">
+        <span class="insight-label">Highest admission</span>
+        <strong id="insightAdmissionName">—</strong>
+        <div><span id="insightAdmissionScore">—</span><small> /20</small></div>
+      </article>
+      <article class="insight-card">
+        <span class="insight-label">Best property score</span>
+        <strong id="insightPropertyName">—</strong>
+        <div><span id="insightPropertyScore">—</span><small> /20</small></div>
+      </article>
+      <article class="insight-card">
+        <span class="insight-label">Visible options</span>
+        <strong id="insightVisible">0 pairings</strong>
+        <div><span id="insightSchools">0</span><small> schools · </small><span id="insightCondos">0</span><small> condos</small></div>
+      </article>
     </section>
 
     <section id="exploreView" class="view active">
-      <section class="panel filters">
-        <div class="section-title">
+      <section class="panel filter-panel">
+        <div class="section-heading">
           <div>
+            <p class="section-kicker">Explore</p>
             <h2>Find the best fit</h2>
-            <p>Filters work together and update the results instantly.</p>
+            <p>Use the decision filters below. Results update instantly.</p>
           </div>
         </div>
 
         <div class="quick-views">
           <button data-preset="overall" class="chip active">Best overall</button>
-          
-          <button data-preset="admission" class="chip">Highest admission chance</button>
-          <button data-preset="property" class="chip">Best property score</button>
+          <button data-preset="admission" class="chip">Highest admission</button>
+          <button data-preset="property" class="chip">Best property</button>
           <button data-preset="newer" class="chip">Newer projects</button>
           <button data-preset="freehold" class="chip">Freehold</button>
         </div>
 
-        <div class="filter-grid">
-          <label>Search
-            <input id="searchInput" type="search" placeholder="School, condo or alternative school">
-          </label>
-          
-        <div class="price-range-filter">
-          <div class="price-range-header">
+        <div class="search-block">
+          <label for="searchInput">Search school, condo or alternative school</label>
+          <input id="searchInput" list="searchSuggestions" type="search" placeholder="Start typing, e.g. Maris Stella or Bartley">
+          <datalist id="searchSuggestions"></datalist>
+        </div>
+
+        <div class="budget-card">
+          <div class="budget-top">
             <div>
-              <strong>Estimated 3-bedroom property value</strong>
-              <small>Show pairings whose estimated range overlaps your selected range.</small>
+              <span class="budget-title">Estimated 3-bedroom property value</span>
+              <small>Shows pairings whose estimated range overlaps your selection.</small>
             </div>
             <output id="priceRangeLabel">S$1.00M – S$3.00M</output>
           </div>
+
+          <div class="budget-values">
+            <div><small>Minimum</small><strong id="priceMinLabel">S$1.00M</strong></div>
+            <div><small>Maximum</small><strong id="priceMaxLabel">S$3.00M</strong></div>
+          </div>
+
           <div class="dual-range">
             <div class="range-track"></div>
             <div id="rangeFill" class="range-fill"></div>
             <input id="priceMin" type="range" min="1000000" max="3000000" step="50000" value="1000000" aria-label="Minimum property price">
             <input id="priceMax" type="range" min="1000000" max="3000000" step="50000" value="3000000" aria-label="Maximum property price">
           </div>
-          <div class="price-range-limits"><span>S$1.00M</span><span>S$3.00M</span></div>
+          <div class="range-limits"><span>S$1.00M</span><span>S$3.00M</span></div>
         </div>
 
+        <div class="filter-grid">
           <label>Region
             <select id="regionFilter"><option value="">All regions</option></select>
           </label>
@@ -114,15 +137,16 @@
         </div>
       </section>
 
-      <section class="panel results">
-        <div class="section-title">
+      <section class="panel results-panel">
+        <div class="section-heading row">
           <div>
+            <p class="section-kicker">Results</p>
             <h2>Pairing cards</h2>
             <p id="resultCount"></p>
           </div>
           <div class="view-toggle">
-            <button id="cardModeBtn" class="secondary compact active">Cards</button>
-            <button id="tableModeBtn" class="secondary compact">Table</button>
+            <button id="cardModeBtn" class="btn btn-small active">Cards</button>
+            <button id="tableModeBtn" class="btn btn-small">Table</button>
           </div>
         </div>
 
@@ -143,69 +167,48 @@
       </section>
     </section>
 
-    <section id="mapView" class="view">
-      <section class="panel">
-        <div class="section-title">
-          <div>
-            <h2>Regional map view</h2>
-            <p>This schematic groups pairings by region. It does not represent exact condo or school coordinates.</p>
-          </div>
-        </div>
-        <div class="map-layout">
-          <div id="regionalMap" class="regional-map" aria-label="Regional schematic map"></div>
-          <aside id="mapResults" class="map-results">
-            <h3>Select a region</h3>
-            <p>Click a regional cluster to inspect its visible pairings.</p>
-          </aside>
-        </div>
-      </section>
-    </section>
-
     <section id="compareView" class="view">
       <section class="panel">
-        <div class="section-title">
-          <div>
-            <h2>Compare pairings</h2>
-            <p>Select up to four pairings from Explore.</p>
-          </div>
-          <button id="clearCompareBtn" class="secondary compact">Clear compare</button>
+        <div class="section-heading row">
+          <div><p class="section-kicker">Compare</p><h2>Side-by-side decision view</h2><p>Select up to four pairings from Explore.</p></div>
+          <button id="clearCompareBtn" class="btn btn-small">Clear compare</button>
         </div>
-        <div id="compareContainer" class="compare-wrap"></div>
+        <div id="compareContainer" class="compare-grid"></div>
       </section>
     </section>
 
     <section id="shortlistView" class="view">
       <section class="panel">
-        <div class="section-title">
-          <div>
-            <h2>My shortlist</h2>
-            <p>Saved on this browser using local storage.</p>
-          </div>
-          <button id="clearShortlistBtn" class="secondary compact">Clear shortlist</button>
+        <div class="section-heading row">
+          <div><p class="section-kicker">Shortlist</p><h2>Saved options</h2><p>Saved in this browser.</p></div>
+          <button id="clearShortlistBtn" class="btn btn-small">Clear shortlist</button>
         </div>
         <div id="shortlistContainer" class="property-grid"></div>
       </section>
     </section>
 
-    <section class="panel notes">
+    <section class="panel interpretation">
       <h2>Important interpretation</h2>
       <div class="notes-grid">
         <p><strong>Admission chance</strong> is a screening score derived from 2025 Phase 2C demand. It is not a personal probability.</p>
+        <p><strong>Property value filter</strong> uses overlap between the selected range and each estimated 3-bedroom range.</p>
         <p><strong>Overall score</strong> combines school quality, admission, property, family living, transit and value.</p>
-        <p><strong>Map view</strong> is deliberately regional until exact coordinates are added to the dataset.</p>
       </div>
     </section>
   </main>
 
-  <dialog id="detailDialog">
-    <button id="closeDialog" class="dialog-close" aria-label="Close">×</button>
-    <div id="detailContent"></div>
-  </dialog>
+  <aside id="detailDrawer" class="detail-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="drawer-panel">
+      <button id="closeDrawer" class="drawer-close" aria-label="Close">×</button>
+      <div id="detailContent"></div>
+    </div>
+  </aside>
 
   <footer>
-    <p>Version 2.1 · Static GitHub Pages application · Data from Pairings Master V6</p>
+    <p>Version 2.2 · Static GitHub Pages application · Data from Pairings Master V6</p>
   </footer>
 
-  <script src="app.js?v=2.1"></script>
+  <script src="app.js?v=2.2.0"></script>
 </body>
 </html>
