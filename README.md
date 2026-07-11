@@ -1,55 +1,24 @@
-# P1 Home Intelligence — Version 4.1.1
+# P1 Home Intelligence — Version 4.2
 
-Version 4.1.1 replaces the experimental basemap handling with the official OneMap Default XYZ configuration.
+Version 4.2 adds the Singapore-ready platform foundation while preserving the stable Version 4.1.1 user experience.
 
-## Map foundation
+## Data architecture
+- `data/schools.json`
+- `data/condos.json`
+- `data/pairings.json` (normalised references)
+- `data/pairings-expanded.json` (stable current UI compatibility)
+- `data/coordinates.json`
+- `data/manifest.json`
 
-- Official Leaflet 1.9.4 CSS and JavaScript
-- Correct Leaflet CSS integrity hash
-- Official OneMap Default XYZ endpoint
-- `detectRetina: true`
-- `minZoom: 11`
-- `maxZoom: 19`
-- Official OneMap logo and attribution
-- Simplified reload behaviour
-- No experimental fallback or automatic tile switching
+## Coverage levels
+- Curated: full evidence and scoring
+- Basic: core property and map data
+- Mapped: location only, without invented scores
 
-## Existing functionality retained
+## Hidden Admin Mode
+Open with `Ctrl + Shift + A` on a keyboard or append `#admin` to the site URL. This is an interface-hiding mechanism, not secure authentication, because GitHub Pages is static hosting.
 
-- Map-first interface
-- Target-school, condo and alternative-school markers
-- 1 km school radius
-- Price slider and filters
-- Ranked results
-- Compare and shortlist
-- Notes
-- Coordinate cache import/export
-- Resume geocoding
-- CSV export
+Admin tools include data health, coordinate setup, adding map-only schools or condos, building local pairings, and exporting a platform bundle.
 
 ## Deploy
-
-Replace these files in your GitHub repository:
-
-- `index.html`
-- `styles.css`
-- `app.js`
-- `README.md`
-- `data/pairings.json`
-
-Commit the changes, wait for GitHub Pages deployment, then force-refresh the page.
-
-## Coordinate setup
-
-The basemap itself does not require a token. A temporary OneMap access token is required only for the Search API that converts school and condo names into latitude and longitude.
-
-Do not commit the token into GitHub.
-
-
-## Version 4.1.1 details-panel fix
-
-- Details panel is now non-modal.
-- Removed the full-screen backdrop.
-- The map remains visible and clickable outside the panel.
-- Only the right-side details panel captures pointer input.
-- Escape or the close button dismisses the panel.
+Replace the repository contents with this package, preserving the `data` folder. Commit and force-refresh after GitHub Pages deploys.

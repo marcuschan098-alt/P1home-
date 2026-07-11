@@ -197,7 +197,7 @@ function exportCache(){const blob=new Blob([JSON.stringify(state.coordinates,nul
 async function importCache(file){if(!file)return;try{const obj=JSON.parse(await file.text());state.coordinates={...state.coordinates,...obj};persist();updateMapKpis();renderMap();$("setupProgress").textContent=`Imported ${Object.keys(obj).length} cached locations.`}catch(e){alert("Invalid coordinate cache file.")}}
 function exportCsv(){const fields=["target_school","condo","region","admission_risk","admission_chance_20","3_bed_cost","top_year","tenure","overall_score_100"],lines=[fields.join(",")].concat(state.filtered.map(d=>fields.map(f=>`"${String(d[f]??"").replaceAll('"','""')}"`).join(","))),blob=new Blob([lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href)}
 async function init(){
-  state.data=await(await fetch("data/pairings.json?v=4.1.1")).json();state.filtered=[...state.data];
+  state.data=await(await fetch("data/pairings-expanded.json?v=4.2.0")).json();state.filtered=[...state.data];
   populate("schoolFilter",unique("target_school"));populate("regionFilter",unique("region"));populate("categoryFilter",unique("school_category"));populate("riskFilter",unique("admission_risk"));populate("tenureFilter",unique("tenure"));populateSuggestions();
   ["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","sortFilter","priceMin","priceMax"].forEach(id=>$(id).addEventListener("input",applyFilters));
   document.querySelectorAll(".topnav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
@@ -209,3 +209,84 @@ async function init(){
   persist();updatePrice();ensureMap();updateMapKpis();applyFilters()
 }
 init().catch(err=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load application</h1><p>${err.message}</p></main>`);
+
+
+/* Version 4.2 platform foundation and hidden Admin Mode */
+const platform={schools:[],condos:[],pairings:[],manifest:{},coordinates:{}};
+async function loadPlatformData(){
+  const [s,c,p,m,co]=await Promise.all([
+    fetch('data/schools.json?v=4.2.0').then(r=>r.json()),
+    fetch('data/condos.json?v=4.2.0').then(r=>r.json()),
+    fetch('data/pairings.json?v=4.2.0').then(r=>r.json()),
+    fetch('data/manifest.json?v=4.2.0').then(r=>r.json()),
+    fetch('data/coordinates.json?v=4.2.0').then(r=>r.json())
+  ]);
+  platform.schools=JSON.parse(localStorage.getItem('p1_platform_schools')||'null')||s;
+  platform.condos=JSON.parse(localStorage.getItem('p1_platform_condos')||'null')||c;
+  platform.pairings=JSON.parse(localStorage.getItem('p1_platform_pairings')||'null')||p;
+  platform.manifest=m;
+  platform.coordinates={...co,...(JSON.parse(localStorage.getItem('p1_onemap_coordinates')||'{}'))};
+  renderAdminHealth(); refreshAdminBuilders();
+}
+function platformSave(){
+  localStorage.setItem('p1_platform_schools',JSON.stringify(platform.schools));
+  localStorage.setItem('p1_platform_condos',JSON.stringify(platform.condos));
+  localStorage.setItem('p1_platform_pairings',JSON.stringify(platform.pairings));
+}
+function activateAdmin(){
+  sessionStorage.setItem('p1_admin_mode','1');
+  document.getElementById('adminPanel').classList.add('open');
+  renderAdminHealth(); refreshAdminBuilders();
+}
+function closeAdmin(){document.getElementById('adminPanel').classList.remove('open')}
+function renderAdminHealth(){
+  if(!document.getElementById('adminHealth'))return;
+  const coords={...platform.coordinates,...(JSON.parse(localStorage.getItem('p1_onemap_coordinates')||'{}'))};
+  const has=(t,n)=>!!coords[`${t}:${String(n).trim().toLowerCase()}`];
+  const ms=platform.schools.filter(x=>has('school',x.name)).length;
+  const mc=platform.condos.filter(x=>has('condo',x.name)).length;
+  const ready=platform.pairings.filter(p=>{
+    const s=platform.schools.find(x=>x.school_id===p.school_id),c=platform.condos.find(x=>x.condo_id===p.condo_id);
+    return s&&c&&has('school',s.name)&&has('condo',c.name);
+  }).length;
+  const values=[
+    ['Schools',platform.schools.length],['Condos',platform.condos.length],['Pairings',platform.pairings.length],
+    ['Mapped schools',`${ms}/${platform.schools.length}`],['Mapped condos',`${mc}/${platform.condos.length}`],
+    ['Map-ready pairings',`${ready}/${platform.pairings.length}`]
+  ];
+  document.getElementById('adminHealth').innerHTML=values.map(([a,b])=>`<div class="admin-kpi"><strong>${b}</strong><span>${a}</span></div>`).join('');
+  const missing=[...platform.schools.filter(x=>!has('school',x.name)).map(x=>`School: ${x.name}`),...platform.condos.filter(x=>!has('condo',x.name)).map(x=>`Condo: ${x.name}`)];
+  document.getElementById('adminIssues').innerHTML=missing.length?missing.slice(0,100).map(x=>`<li>${x}</li>`).join(''):'<li>No missing school or condo coordinates.</li>';
+}
+function refreshAdminBuilders(){
+  const s=document.getElementById('adminSchool'),c=document.getElementById('adminCondo'); if(!s||!c)return;
+  s.innerHTML=platform.schools.map(x=>`<option value="${x.school_id}">${x.name}</option>`).join('');
+  c.innerHTML=platform.condos.map(x=>`<option value="${x.condo_id}">${x.name}</option>`).join('');
+}
+function addAdminEntity(){
+  const type=document.getElementById('adminEntityType').value,name=document.getElementById('adminEntityName').value.trim(),region=document.getElementById('adminEntityRegion').value.trim();
+  if(!name)return alert('Enter an entity name.');
+  const arr=type==='school'?platform.schools:platform.condos,idKey=type==='school'?'school_id':'condo_id',prefix=type==='school'?'SCH':'CON';
+  if(arr.some(x=>x.name.toLowerCase()===name.toLowerCase()))return alert('Entity already exists.');
+  arr.push({[idKey]:`${prefix}${String(arr.length+1).padStart(3,'0')}`,name,region,coverage_status:'mapped'}); platformSave(); refreshAdminBuilders(); renderAdminHealth();
+  document.getElementById('adminEntityStatus').textContent=`Added ${name} as map-only ${type}.`;
+}
+function addAdminPairing(){
+  const school_id=document.getElementById('adminSchool').value,condo_id=document.getElementById('adminCondo').value,coverage_status=document.getElementById('adminCoverage').value;
+  if(platform.pairings.some(x=>x.school_id===school_id&&x.condo_id===condo_id))return alert('Pairing already exists.');
+  platform.pairings.push({pairing_id:`PAIR${String(platform.pairings.length+1).padStart(3,'0')}`,school_id,condo_id,coverage_status,alternative_schools:[]});platformSave();renderAdminHealth();
+  document.getElementById('adminPairingStatus').textContent='Pairing added locally.';
+}
+function exportPlatformBundle(){
+  const bundle={manifest:{...platform.manifest,exported_at:new Date().toISOString()},schools:platform.schools,condos:platform.condos,pairings:platform.pairings,coordinates:{...platform.coordinates,...(JSON.parse(localStorage.getItem('p1_onemap_coordinates')||'{}'))}};
+  const blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='p1-home-platform-bundle.json';a.click();URL.revokeObjectURL(a.href);
+}
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='a'){e.preventDefault();activateAdmin()}});
+window.addEventListener('hashchange',()=>{if(location.hash==='#admin')activateAdmin()});
+window.addEventListener('load',()=>{loadPlatformData();if(location.hash==='#admin'||sessionStorage.getItem('p1_admin_mode')==='1')activateAdmin();
+  document.getElementById('closeAdmin').onclick=closeAdmin;
+  document.getElementById('adminAddEntity').onclick=addAdminEntity;
+  document.getElementById('adminAddPairing').onclick=addAdminPairing;
+  document.getElementById('adminExportBundle').onclick=exportPlatformBundle;
+  document.getElementById('adminCoordinateSetup').onclick=()=>document.getElementById('tokenDialog')?.showModal();
+});

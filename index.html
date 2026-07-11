@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Singapore primary school and condo pairing intelligence platform">
   <meta name="theme-color" content="#173b57">
-  <title>P1 Home Intelligence — Version 4.1.1</title>
+  <title>P1 Home Intelligence — Version 4.2</title>
   <link rel="stylesheet"
   href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
   crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=4.1.1">
+  <link rel="stylesheet" href="styles.css?v=4.2.0">
 </head>
 <body>
   <header class="topbar">
@@ -209,6 +209,26 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=4.1.1"></script>
+  <script src="app.js?v=4.2.0"></script>
+
+  <aside id="adminPanel" class="admin-panel" aria-label="Admin Mode">
+    <div class="admin-head"><div><span>ADMIN MODE</span><h2>Platform maintenance</h2></div><button id="closeAdmin">×</button></div>
+    <p class="admin-warning">This is a maintenance interface, not password security. Use Ctrl+Shift+A or #admin to open it.</p>
+    <div id="adminHealth" class="admin-health"></div>
+    <section class="admin-section"><h3>Data health issues</h3><ul id="adminIssues"></ul></section>
+    <section class="admin-section"><h3>Coordinate manager</h3><button id="adminCoordinateSetup" class="btn secondary">Open coordinate setup</button></section>
+    <section class="admin-section"><h3>Add map-only entity</h3>
+      <label>Type<select id="adminEntityType"><option value="school">School</option><option value="condo">Condo</option></select></label>
+      <label>Name<input id="adminEntityName" placeholder="Exact OneMap search name"></label>
+      <label>Region<input id="adminEntityRegion" placeholder="Optional"></label>
+      <button id="adminAddEntity" class="btn primary">Add entity</button><div id="adminEntityStatus" class="admin-status"></div>
+    </section>
+    <section class="admin-section"><h3>Pairing builder</h3>
+      <label>School<select id="adminSchool"></select></label><label>Condo<select id="adminCondo"></select></label>
+      <label>Coverage<select id="adminCoverage"><option value="mapped">Map only</option><option value="basic">Basic</option><option value="curated">Curated</option></select></label>
+      <button id="adminAddPairing" class="btn primary">Add pairing</button><div id="adminPairingStatus" class="admin-status"></div>
+    </section>
+    <section class="admin-section"><h3>Export</h3><button id="adminExportBundle" class="btn secondary">Export platform bundle</button></section>
+  </aside>
 </body>
 </html>
