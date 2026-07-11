@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Singapore primary school and condo pairing decision tool">
+  <title>Primary School × Condo Pairing</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Singapore P1 Strategy</p>
+        <h1>Primary School × Condo Pairing</h1>
+        <p class="subtitle">Compare school admission evidence, property attributes and alternative schools within 1 km.</p>
+      </div>
+      <div class="hero-actions">
+        <button id="resetBtn" class="secondary">Reset filters</button>
+        <button id="exportBtn" class="primary">Export filtered CSV</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="kpis" aria-label="Summary">
+      <article><span id="kpiPairings">0</span><small>Visible pairings</small></article>
+      <article><span id="kpiSchools">0</span><small>Target schools</small></article>
+      <article><span id="kpiCondos">0</span><small>Condos</small></article>
+      <article><span id="kpiAvgScore">0</span><small>Average score</small></article>
+    </section>
+
+    <section class="panel filters">
+      <div class="section-title">
+        <div>
+          <h2>Find the best fit</h2>
+          <p>Filters work together and update the results instantly.</p>
+        </div>
+      </div>
+      <div class="filter-grid">
+        <label>Search
+          <input id="searchInput" type="search" placeholder="School, condo or alternative school">
+        </label>
+        <label>Maximum 3-bed budget
+          <select id="budgetFilter">
+            <option value="">Any budget</option>
+            <option value="1500000">S$1.5M</option>
+            <option value="1800000">S$1.8M</option>
+            <option value="2000000">S$2.0M</option>
+            <option value="2200000">S$2.2M</option>
+            <option value="2500000">S$2.5M</option>
+            <option value="3000000">S$3.0M</option>
+          </select>
+        </label>
+        <label>Region
+          <select id="regionFilter"><option value="">All regions</option></select>
+        </label>
+        <label>School category
+          <select id="categoryFilter"><option value="">All categories</option></select>
+        </label>
+        <label>Admission risk
+          <select id="riskFilter"><option value="">All risks</option></select>
+        </label>
+        <label>Tenure
+          <select id="tenureFilter"><option value="">All tenure types</option></select>
+        </label>
+        <label>Minimum overall score
+          <input id="scoreFilter" type="range" min="0" max="100" value="0">
+          <output id="scoreValue">0</output>
+        </label>
+        <label>Sort by
+          <select id="sortFilter">
+            <option value="overall_desc">Overall score: high to low</option>
+            <option value="admission_desc">Admission chance: high to low</option>
+            <option value="property_desc">Property score: high to low</option>
+            <option value="price_asc">3-bed price: low to high</option>
+            <option value="top_desc">TOP: newest first</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel shortlist">
+      <div class="section-title">
+        <div>
+          <h2>Top visible options</h2>
+          <p>A quick shortlist based on the active filters.</p>
+        </div>
+      </div>
+      <div id="topCards" class="card-grid"></div>
+    </section>
+
+    <section class="panel results">
+      <div class="section-title">
+        <div>
+          <h2>All pairings</h2>
+          <p id="resultCount"></p>
+        </div>
+        <button id="columnBtn" class="secondary compact">Table guide</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>School</th>
+              <th>Condo</th>
+              <th>Region</th>
+              <th>Admission</th>
+              <th>3-bed cost</th>
+              <th>TOP</th>
+              <th>Tenure</th>
+              <th>Alternatives within 1 km</th>
+              <th>Overall</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel notes">
+      <h2>How to read the scores</h2>
+      <div class="notes-grid">
+        <p><strong>Admission chance</strong> is a screening score derived from the 2025 Phase 2C applicant-to-vacancy ratio. It is not a personal probability.</p>
+        <p><strong>Overall score</strong> combines school quality, admission chance, property investment, family living, transit and value.</p>
+        <p><strong>Distance evidence</strong> is shown in each detail panel. Always retain the cited evidence before making a purchase decision.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detailDialog">
+    <button id="closeDialog" class="dialog-close" aria-label="Close">×</button>
+    <div id="detailContent"></div>
+  </dialog>
+
+  <dialog id="guideDialog">
+    <button id="closeGuide" class="dialog-close" aria-label="Close">×</button>
+    <h2>Table guide</h2>
+    <p>Select any row to view full P1 evidence, alternative schools, property details and source links.</p>
+    <ul>
+      <li><strong>Admission</strong>: admission score out of 20 and risk band.</li>
+      <li><strong>Overall</strong>: combined score out of 100.</li>
+      <li><strong>TOP</strong>: temporary occupation permit year.</li>
+    </ul>
+  </dialog>
+
+  <footer>
+    <p>Data source: Pairings Master, Version 6. Built as a static GitHub Pages application.</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
