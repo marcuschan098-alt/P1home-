@@ -4,700 +4,168 @@ const state={
   compare:new Set(JSON.parse(localStorage.getItem("p1_compare")||"[]")),
   shortlist:new Set(JSON.parse(localStorage.getItem("p1_shortlist")||"[]")),
   notes:JSON.parse(localStorage.getItem("p1_notes")||"{}"),
-  coordinates:JSON.parse(localStorage.getItem("p1_onemap_coordinates")||"{}"),
-  oneMapToken:sessionStorage.getItem("p1_onemap_token")||"",
-  map:null,
-  mapLayer:null,
-  radiusLayer:null,
-  selectedMapSchool:"",
-  baseMapLayer:null,
-  baseMapStyle:localStorage.getItem("p1_basemap_style")||"Original",
-  tileErrors:0,
-  fallbackUsed:false,
-  geocodeQueue:JSON.parse(localStorage.getItem("p1_geocode_queue")||"[]"),
-  selectedMapResultId:""
+  coordinates:JSON.parse(localStorage.getItem("p1_coordinates")||"{}"),
+  queue:JSON.parse(localStorage.getItem("p1_geocode_queue")||"[]"),
+  token:sessionStorage.getItem("p1_onemap_token")||"",
+  map:null,markerLayer:null,radius:null,baseLayer:null,
+  baseStyle:localStorage.getItem("p1_basemap_style")||"Original",
+  tileErrors:0,fallbackUsed:false,activePairingId:"",compact:false
 };
-
 const $=id=>document.getElementById(id);
 const safe=v=>(v===null||v===undefined||v==="")?"—":v;
 const idOf=d=>d.id||d.pairing_id;
-const riskClass=r=>/Extreme|Very High|High/.test(r||"")?"risk":/Medium/.test(r||"")?"warn":"good";
+const key=(type,name)=>`${type}:${String(name||"").trim().toLowerCase()}`;
+const coordinate=(type,name)=>state.coordinates[key(type,name)]||null;
+const money=n=>`S$${(Number(n)/1e6).toFixed(2)}M`;
+const riskClass=r=>/Extreme|Very High|High/.test(r||"")?"high":/Medium/.test(r||"")?"medium":"low";
 
 function persist(){
   localStorage.setItem("p1_compare",JSON.stringify([...state.compare]));
   localStorage.setItem("p1_shortlist",JSON.stringify([...state.shortlist]));
   localStorage.setItem("p1_notes",JSON.stringify(state.notes));
-  localStorage.setItem("p1_onemap_coordinates",JSON.stringify(state.coordinates));
-  localStorage.setItem("p1_geocode_queue",JSON.stringify(state.geocodeQueue));
-  updateCounts();
-}
-function updateCounts(){
+  localStorage.setItem("p1_coordinates",JSON.stringify(state.coordinates));
+  localStorage.setItem("p1_geocode_queue",JSON.stringify(state.queue));
   $("compareCount").textContent=state.compare.size;
   $("shortlistCount").textContent=state.shortlist.size;
 }
-function unique(field){
-  return [...new Set(state.data.map(d=>d[field]).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
+function unique(field){return[...new Set(state.data.map(d=>d[field]).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)))}
+function populate(id,values){const el=$(id);values.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o)})}
+function populateSuggestions(){
+  const values=[...new Set(state.data.flatMap(d=>[d.target_school,d.condo,...(d.alternative_schools_list||[])]).filter(Boolean))].sort();
+  $("searchSuggestions").innerHTML=values.map(v=>`<option value="${String(v).replaceAll('"','&quot;')}"></option>`).join("");
 }
-function populateSelect(id,values){
-  const el=$(id);
-  values.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;el.appendChild(o)});
-}
-function populateSearchSuggestions(){
-  const items=[...new Set(state.data.flatMap(d=>[d.target_school,d.condo,...(d.alternative_schools_list||[])]).filter(Boolean))].sort();
-  $("searchSuggestions").innerHTML=items.map(v=>`<option value="${String(v).replaceAll('"','&quot;')}"></option>`).join("");
-}
-function money(n){return `S$${(Number(n)/1000000).toFixed(2)}M`}
 function selectedPriceRange(){
-  const minEl=$("priceMin"),maxEl=$("priceMax");
-  let min=Number(minEl.value),max=Number(maxEl.value);
-  if(min>max-50000){
-    if(document.activeElement===minEl)min=max-50000;else max=min+50000;
-  }
-  min=Math.max(1000000,min);max=Math.min(3000000,max);
-  minEl.value=min;maxEl.value=max;
-  return[min,max];
+  const a=$("priceMin"),b=$("priceMax");let min=Number(a.value),max=Number(b.value);
+  if(min>max-50000){if(document.activeElement===a)min=max-50000;else max=min+50000}
+  min=Math.max(1e6,min);max=Math.min(3e6,max);a.value=min;b.value=max;return[min,max]
 }
-function updatePriceRange(){
-  const[min,max]=selectedPriceRange(),span=2000000;
-  $("priceRangeLabel").textContent=`${money(min)} – ${money(max)}`;
-  $("priceMinLabel").textContent=money(min);
-  $("priceMaxLabel").textContent=money(max);
-  $("rangeFill").style.left=`${((min-1000000)/span)*100}%`;
-  $("rangeFill").style.right=`${100-((max-1000000)/span)*100}%`;
-}
-function overlapsPrice(d,min,max){
-  const low=Number(d.price_min),high=Number(d.price_max);
-  return Number.isFinite(low)&&Number.isFinite(high)&&high>=min&&low<=max;
+function updatePrice(){
+  const[min,max]=selectedPriceRange(),span=2e6;
+  $("priceRangeLabel").textContent=`${money(min)} – ${money(max)}`;$("priceMinLabel").textContent=money(min);$("priceMaxLabel").textContent=money(max);
+  $("rangeFill").style.left=`${((min-1e6)/span)*100}%`;$("rangeFill").style.right=`${100-((max-1e6)/span)*100}%`
 }
 function applyFilters(){
-  updatePriceRange();
-  const [priceMin,priceMax]=selectedPriceRange();
-  const q=$("searchInput").value.trim().toLowerCase();
-  const region=$("regionFilter").value,category=$("categoryFilter").value,risk=$("riskFilter").value;
-  const tenure=$("tenureFilter").value,top=Number($("topFilter").value||0),score=Number($("scoreFilter").value||0);
-  const sort=$("sortFilter").value;
-
+  updatePrice();const[min,max]=selectedPriceRange(),q=$("globalSearch").value.trim().toLowerCase();
+  const school=$("schoolFilter").value,region=$("regionFilter").value,cat=$("categoryFilter").value,risk=$("riskFilter").value,tenure=$("tenureFilter").value,top=Number($("topFilter").value||0),sort=$("sortFilter").value;
   state.filtered=state.data.filter(d=>{
     const hay=[d.target_school,d.condo,d.region,d.school_category,...(d.alternative_schools_list||[])].join(" ").toLowerCase();
-    return(!q||hay.includes(q))
-      &&overlapsPrice(d,priceMin,priceMax)
-      &&(!region||d.region===region)
-      &&(!category||d.school_category===category)
-      &&(!risk||d.admission_risk===risk)
-      &&(!tenure||d.tenure===tenure)
-      &&Number(d.top_year||0)>=top
-      &&Number(d.overall_score_100||0)>=score;
+    const low=Number(d.price_min),high=Number(d.price_max);
+    return(!q||hay.includes(q))&&Number.isFinite(low)&&Number.isFinite(high)&&high>=min&&low<=max&&(!school||d.target_school===school)&&(!region||d.region===region)&&(!cat||d.school_category===cat)&&(!risk||d.admission_risk===risk)&&(!tenure||d.tenure===tenure)&&Number(d.top_year||0)>=top
   });
-
   state.filtered.sort((a,b)=>{
     if(sort==="admission_desc")return Number(b.admission_chance_20||0)-Number(a.admission_chance_20||0);
     if(sort==="property_desc")return Number(b.property_investment_20||0)-Number(a.property_investment_20||0);
     if(sort==="price_asc")return(a.price_min??Infinity)-(b.price_min??Infinity);
     if(sort==="top_desc")return Number(b.top_year||0)-Number(a.top_year||0);
-    return Number(b.overall_score_100||0)-Number(a.overall_score_100||0);
+    return Number(b.overall_score_100||0)-Number(a.overall_score_100||0)
   });
-  renderAll();
+  renderSummary();renderResults();renderMap()
 }
-function renderInsights(){
-  const data=state.filtered;
-  const bestOverall=[...data].sort((a,b)=>Number(b.overall_score_100||0)-Number(a.overall_score_100||0))[0];
-  const bestAdmission=[...data].sort((a,b)=>Number(b.admission_chance_20||0)-Number(a.admission_chance_20||0))[0];
-  const bestProperty=[...data].sort((a,b)=>Number(b.property_investment_20||0)-Number(a.property_investment_20||0))[0];
-
-  $("insightOverallName").textContent=bestOverall?safe(bestOverall.condo):"No result";
-  $("insightOverallScore").textContent=bestOverall?safe(bestOverall.overall_score_100):"—";
-  $("insightAdmissionName").textContent=bestAdmission?safe(bestAdmission.target_school):"No result";
-  $("insightAdmissionScore").textContent=bestAdmission?safe(bestAdmission.admission_chance_20):"—";
-  $("insightPropertyName").textContent=bestProperty?safe(bestProperty.condo):"No result";
-  $("insightPropertyScore").textContent=bestProperty?safe(bestProperty.property_investment_20):"—";
-  $("insightVisible").textContent=`${data.length} pairing${data.length===1?"":"s"}`;
-  $("insightSchools").textContent=new Set(data.map(d=>d.target_school)).size;
-  $("insightCondos").textContent=new Set(data.map(d=>d.condo)).size;
+function renderSummary(){
+  const d=state.filtered;$("visiblePairings").textContent=d.length;$("visibleSchools").textContent=new Set(d.map(x=>x.target_school)).size;$("visibleCondos").textContent=new Set(d.map(x=>x.condo)).size;
+  $("averageScore").textContent=d.length?(d.reduce((s,x)=>s+Number(x.overall_score_100||0),0)/d.length).toFixed(1):"0";$("resultCount").textContent=`${d.length} shown`
 }
-function renderAll(){
-  $("resultCount").textContent=`${state.filtered.length} pairing${state.filtered.length===1?"":"s"} shown`;
-  renderInsights();renderCards(state.filtered);renderTable(state.filtered);renderCompare();renderShortlist();refreshMapSchoolFilter();if($("mapView")?.classList.contains("active"))renderMap();
-}
-function progress(value,max){
-  const pct=Math.max(0,Math.min(100,(Number(value||0)/max)*100));
-  return `${pct}%`;
-}
-function cardHtml(d,rank){
+function resultCard(d,i){
   const id=idOf(d),fav=state.shortlist.has(id),cmp=state.compare.has(id);
-  return `<article class="property-card">
-    <div class="card-head">
-      <span class="rank-badge">#${rank}</span>
-      <span class="pill ${riskClass(d.admission_risk)}">${safe(d.admission_risk)}</span>
-    </div>
-    <h3>${safe(d.target_school)}</h3>
-    <div class="condo-name">${safe(d.condo)}</div>
-    <div class="score-line"><span class="big-score">${safe(d.overall_score_100)}</span><span class="score-label">overall /100</span></div>
-    <div class="bar-group">
-      <div class="bar-row"><span>Admission</span><div class="bar"><span style="width:${progress(d.admission_chance_20,20)}"></span></div><strong>${safe(d.admission_chance_20)}/20</strong></div>
-      <div class="bar-row"><span>Property</span><div class="bar"><span style="width:${progress(d.property_investment_20,20)}"></span></div><strong>${safe(d.property_investment_20)}/20</strong></div>
-    </div>
-    <div class="meta-grid">
-      <div class="meta"><small>3-bed cost</small><strong>${safe(d["3_bed_cost"])}</strong></div>
-      <div class="meta"><small>TOP / tenure</small><strong>${safe(d.top_year)} · ${safe(d.tenure)}</strong></div>
-      <div class="meta"><small>Region</small><strong>${safe(d.region)}</strong></div>
-      <div class="meta"><small>School category</small><strong>${safe(d.school_category)}</strong></div>
-    </div>
-    <div class="card-actions">
-      <button class="details-btn" data-id="${id}">Details</button>
-      <button class="compare-btn ${cmp?"selected":""}" data-id="${id}">${cmp?"Compared":"Compare"}</button>
-      <button class="fav-btn ${fav?"selected":""}" data-id="${id}">${fav?"Saved":"Shortlist"}</button>
-    </div>
-  </article>`;
+  return`<article class="result-card ${state.activePairingId===id?"active":""}" data-id="${id}">
+    <div class="result-top"><div><h3>${safe(d.target_school)}</h3><div class="condo-name">${safe(d.condo)}</div></div><span class="score-badge">${safe(d.overall_score_100)}</span></div>
+    <div class="result-meta"><span class="pill ${riskClass(d.admission_risk)}">${safe(d.admission_risk)}</span><span class="pill">${safe(d["3_bed_cost"])}</span><span class="pill">${safe(d.top_year)} · ${safe(d.tenure)}</span></div>
+    <div class="result-actions"><button class="details" data-id="${id}">Details</button><button class="compare ${cmp?"selected":""}" data-id="${id}">${cmp?"Compared":"Compare"}</button><button class="save ${fav?"selected":""}" data-id="${id}">${fav?"Saved":"Save"}</button></div>
+  </article>`
 }
-function bindCardActions(root=document){
-  root.querySelectorAll(".details-btn").forEach(b=>b.onclick=()=>openDetail(findById(b.dataset.id)));
-  root.querySelectorAll(".compare-btn").forEach(b=>b.onclick=()=>toggleCompare(b.dataset.id));
-  root.querySelectorAll(".fav-btn").forEach(b=>b.onclick=()=>toggleShortlist(b.dataset.id));
-}
-function renderCards(items){
-  const box=$("cardsContainer");
-  box.innerHTML=items.length?items.map((d,i)=>cardHtml(d,i+1)).join(""):'<div class="empty">No pairings match the active filters.</div>';
-  bindCardActions(box);
-}
-function renderTable(items){
-  $("resultsBody").innerHTML=items.length?items.map((d,i)=>`<tr data-id="${idOf(d)}">
-    <td>${i+1}</td>
-    <td><strong>${safe(d.target_school)}</strong><br><span class="muted">${safe(d.school_category)}</span></td>
-    <td><strong>${safe(d.condo)}</strong></td>
-    <td>${safe(d.region)}</td>
-    <td><span class="pill ${riskClass(d.admission_risk)}">${safe(d.admission_chance_20)}/20 · ${safe(d.admission_risk)}</span></td>
-    <td>${safe(d["3_bed_cost"])}</td><td>${safe(d.top_year)}</td><td>${safe(d.tenure)}</td>
-    <td>${safe((d.alternative_schools_list||[]).slice(0,3).join("; "))}</td>
-    <td class="score">${safe(d.overall_score_100)}</td>
-  </tr>`).join(""):'<tr><td colspan="10" class="empty">No results.</td></tr>';
-  $("resultsBody").querySelectorAll("tr[data-id]").forEach(tr=>tr.onclick=()=>openDetail(findById(tr.dataset.id)));
+function renderResults(){
+  const list=$("resultsList");list.classList.toggle("compact",state.compact);list.innerHTML=state.filtered.length?state.filtered.map(resultCard).join(""):'<p>No results match the filters.</p>';
+  list.querySelectorAll(".result-card").forEach(el=>el.onclick=e=>{if(e.target.tagName==="BUTTON")return;focusPairing(el.dataset.id)});
+  list.querySelectorAll(".details").forEach(b=>b.onclick=()=>openDetails(findById(b.dataset.id)));
+  list.querySelectorAll(".compare").forEach(b=>b.onclick=()=>toggleCompare(b.dataset.id));
+  list.querySelectorAll(".save").forEach(b=>b.onclick=()=>toggleSave(b.dataset.id))
 }
 function findById(id){return state.data.find(d=>idOf(d)===id)}
-function toggleCompare(id){
-  if(state.compare.has(id))state.compare.delete(id);
-  else{
-    if(state.compare.size>=4){alert("Compare supports up to four pairings.");return}
-    state.compare.add(id);
-  }
-  persist();renderAll();
-}
-function toggleShortlist(id){
-  state.shortlist.has(id)?state.shortlist.delete(id):state.shortlist.add(id);
-  persist();renderAll();
-}
-function renderCompare(){
-  const items=[...state.compare].map(findById).filter(Boolean),box=$("compareContainer");
-  if(!items.length){box.innerHTML='<div class="empty">No pairings selected. Add up to four from Explore.</div>';return}
-  box.innerHTML=items.map(d=>`<article class="compare-card">
-    <h3>${safe(d.target_school)}</h3>
-    <div class="condo-name">${safe(d.condo)}</div>
-    <div class="compare-metric"><span>Overall</span><strong>${safe(d.overall_score_100)}/100</strong></div>
-    <div class="compare-metric"><span>Admission</span><strong>${safe(d.admission_chance_20)}/20</strong></div>
-    <div class="compare-metric"><span>Admission risk</span><strong>${safe(d.admission_risk)}</strong></div>
-    <div class="compare-metric"><span>Property</span><strong>${safe(d.property_investment_20)}/20</strong></div>
-    <div class="compare-metric"><span>3-bed cost</span><strong>${safe(d["3_bed_cost"])}</strong></div>
-    <div class="compare-metric"><span>TOP</span><strong>${safe(d.top_year)}</strong></div>
-    <div class="compare-metric"><span>Tenure</span><strong>${safe(d.tenure)}</strong></div>
-    <button class="btn btn-small details-btn" data-id="${idOf(d)}">Open details</button>
-  </article>`).join("");
-  bindCardActions(box);
-}
-function renderShortlist(){
-  const items=[...state.shortlist].map(findById).filter(Boolean),box=$("shortlistContainer");
-  box.innerHTML=items.length?items.map((d,i)=>cardHtml(d,i+1)).join(""):'<div class="empty">Your shortlist is empty.</div>';
-  bindCardActions(box);
-}
-function detailItem(label,value){return`<div class="detail-item"><small>${label}</small><strong>${safe(value)}</strong></div>`}
-function sourceLink(label,url){return url&&/^https?:/.test(url)?`<a href="${url}" target="_blank" rel="noopener">${label}</a>`:""}
-function openDetail(d){
-  const id=idOf(d),note=state.notes[id]||"";
-  $("detailContent").innerHTML=`<div class="detail-head"><h2>${safe(d.target_school)}</h2><p>${safe(d.condo)}</p></div>
-    <div class="detail-grid">
-      ${detailItem("Overall",`${safe(d.overall_score_100)}/100`)}
-      ${detailItem("Admission",`${safe(d.admission_chance_20)}/20`)}
-      ${detailItem("Admission risk",d.admission_risk)}
-      ${detailItem("School quality",`${safe(d.school_quality_30)}/30`)}
-      ${detailItem("Property score",`${safe(d.property_investment_20)}/20`)}
-      ${detailItem("3-bed cost",d["3_bed_cost"])}
-      ${detailItem("TOP",d.top_year)}
-      ${detailItem("Tenure",d.tenure)}
-      ${detailItem("Estimated PSF",d.estimated_psf)}
-      ${detailItem("Liquidity",d.liquidity)}
-      ${detailItem("Transit",d.transit_mrt)}
-      ${detailItem("Distance",d.estimated_evidenced_distance)}
-    </div>
-    <div class="detail-section"><h3>Alternative schools within 1 km</h3><p>${(d.alternative_schools_list||[]).join(" · ")||"None listed"}</p></div>
-    <div class="detail-section"><h3>Assessment note</h3><p>${safe(d.key_property_pairing_note)}</p></div>
-    <div class="detail-section"><h3>My note</h3><textarea id="noteInput" class="notes-input" placeholder="Viewing notes, concerns or follow-up questions">${note}</textarea><button id="saveNoteBtn" class="btn btn-primary">Save note</button></div>
-    <div class="detail-section sources"><h3>Sources</h3>${sourceLink("Distance source",d.distance_source)}${sourceLink("P1 source",d.p1_source)}${sourceLink("Property source",d.property_source)}</div>`;
-  $("saveNoteBtn").onclick=()=>{state.notes[id]=$("noteInput").value;persist();$("saveNoteBtn").textContent="Saved"};
-  $("detailDrawer").classList.add("open");$("detailDrawer").setAttribute("aria-hidden","false");
-}
-function closeDrawer(){
-  $("detailDrawer").classList.remove("open");$("detailDrawer").setAttribute("aria-hidden","true");
+function toggleCompare(id){state.compare.has(id)?state.compare.delete(id):(state.compare.size>=4?alert("Compare supports up to four pairings."):state.compare.add(id));persist();renderResults();renderCompare()}
+function toggleSave(id){state.shortlist.has(id)?state.shortlist.delete(id):state.shortlist.add(id);persist();renderResults();renderShortlist()}
+function focusPairing(id){
+  const d=findById(id);if(!d)return;state.activePairingId=id;
+  if($("schoolFilter").value!==d.target_school){$("schoolFilter").value=d.target_school;applyFilters()}
+  const c=coordinate("condo",d.condo);if(c&&state.map)state.map.setView([c.lat,c.lng],16);
+  renderResults()
 }
 function setView(name){
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===name));
-  $(`${name}View`).classList.add("active");
-  if(name==="map"){
-    ensureMap();
-    refreshMapSchoolFilter();
-    renderMap();
-    setTimeout(()=>state.map&&state.map.invalidateSize(),80);
-  }
+  document.querySelectorAll(".app-view").forEach(v=>v.classList.remove("active"));document.querySelectorAll(".topnav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===name));$(`${name}View`).classList.add("active");
+  if(name==="map"){ensureMap();setTimeout(()=>state.map&&state.map.invalidateSize(),100);renderMap()}if(name==="compare")renderCompare();if(name==="shortlist")renderShortlist()
 }
-function applyPreset(name){
-  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.preset===name));
-  $("tenureFilter").value="";$("topFilter").value="";$("sortFilter").value="overall_desc";
-  if(name==="admission")$("sortFilter").value="admission_desc";
-  if(name==="property")$("sortFilter").value="property_desc";
-  if(name==="newer"){$("topFilter").value="2018";$("sortFilter").value="top_desc"}
-  if(name==="freehold")$("tenureFilter").value="Freehold";
-  applyFilters();
+function mapStatus(text,type=""){const el=$("mapStatus");el.textContent=text;el.className=`map-status ${type}`.trim()}
+function showLoading(show,text="Loading map…"){$("mapLoadingMask").textContent=text;$("mapLoadingMask").classList.toggle("show",show)}
+function createBase(style){
+  const isFallback=style==="Fallback",url=isFallback?"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png":`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`;
+  const layer=L.tileLayer(url,{minZoom:10,maxZoom:19,keepBuffer:8,updateWhenIdle:true,updateWhenZooming:false,crossOrigin:true,attribution:isFallback?"© OpenStreetMap contributors":"OneMap © contributors | Singapore Land Authority"});
+  layer.on("loading",()=>showLoading(true,`Loading ${style} basemap…`));layer.on("load",()=>{showLoading(false);state.tileErrors=0;mapStatus(`${style==="Fallback"?"Fallback streets":`OneMap ${style}`} loaded.`,"ok")});
+  layer.on("tileerror",e=>{state.tileErrors++;const tile=e.tile;if(tile&&!tile.dataset.retried){tile.dataset.retried="1";const base=tile.src.split("?")[0];setTimeout(()=>tile.src=`${base}?r=${Date.now()}`,350);return}if(state.tileErrors>=6&&!state.fallbackUsed&&style!=="Fallback"){state.fallbackUsed=true;mapStatus("OneMap tiles are incomplete on this connection. Switching to fallback streets.","error");switchBase("Fallback",true)}});
+  return layer
 }
-function exportCsv(){
-  const fields=["target_school","condo","region","admission_risk","admission_chance_20","3_bed_cost","top_year","tenure","overall_score_100","alternative_schools_within_1km"];
-  const lines=[fields.join(",")].concat(state.filtered.map(d=>fields.map(f=>`"${String(d[f]??"").replaceAll('"','""')}"`).join(",")));
-  const blob=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href);
-}
-
-function setMapStatus(message,type=""){
-  const el=$("mapStatus");
-  if(!el)return;
-  el.textContent=message;
-  el.className=`map-status ${type}`.trim();
-}
-function coordinateKey(type,name){
-  return `${type}:${String(name||"").trim().toLowerCase()}`;
-}
-function getCoordinate(type,name){
-  return state.coordinates[coordinateKey(type,name)]||null;
-}
-function updateMapKpis(){
-  const mappedSchools=new Set();
-  const mappedCondos=new Set();
-  state.data.forEach(d=>{
-    if(getCoordinate("school",d.target_school))mappedSchools.add(d.target_school);
-    if(getCoordinate("condo",d.condo))mappedCondos.add(d.condo);
-  });
-  if($("mappedSchoolCount"))$("mappedSchoolCount").textContent=mappedSchools.size;
-  if($("mappedCondoCount"))$("mappedCondoCount").textContent=mappedCondos.size;
-  if($("cachedLocationCount"))$("cachedLocationCount").textContent=Object.keys(state.coordinates).length;
-}
-
-function showMapLoading(show,text="Loading OneMap…"){
-  const mask=$("mapLoadingMask");
-  if(!mask)return;
-  mask.textContent=text;
-  mask.classList.toggle("show",show);
-}
-function createOneMapLayer(style){
-  const layer=L.tileLayer(`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`,{
-    minZoom:10,maxZoom:19,
-    updateWhenIdle:true,
-    updateWhenZooming:false,
-    keepBuffer:6,
-    crossOrigin:true,
-    attribution:"OneMap © contributors | Singapore Land Authority"
-  });
-  layer.on("loading",()=>showMapLoading(true,`Loading OneMap ${style}…`));
-  layer.on("load",()=>{
-    showMapLoading(false);
-    state.tileErrors=0;
-    setMapStatus(`OneMap ${style} basemap loaded.`,"success");
-  });
-  layer.on("tileerror",event=>{
-    state.tileErrors++;
-    const tile=event.tile;
-    if(tile&&!tile.dataset.retryAttempted){
-      tile.dataset.retryAttempted="1";
-      const base=tile.src.split("?")[0];
-      setTimeout(()=>{tile.src=`${base}?retry=${Date.now()}`},400);
-      return;
-    }
-    if(state.tileErrors>=5&&!state.fallbackUsed){
-      state.fallbackUsed=true;
-      const fallback=style==="Original"?"GreyLite":"Original";
-      setMapStatus(`Some ${style} tiles failed. Switching to ${fallback}.`,"warn");
-      switchBaseMap(fallback,true);
-    }
-  });
-  return layer;
-}
-function switchBaseMap(style,automatic=false){
-  if(!state.map)return;
-  if(state.baseMapLayer)state.map.removeLayer(state.baseMapLayer);
-  state.baseMapStyle=style;
-  state.tileErrors=0;
-  if(!automatic)state.fallbackUsed=false;
-  localStorage.setItem("p1_basemap_style",style);
-  state.baseMapLayer=createOneMapLayer(style);
-  state.baseMapLayer.addTo(state.map);
-  if($("baseMapStyle"))$("baseMapStyle").value=style;
-}
+function switchBase(style,automatic=false){if(!state.map)return;if(state.baseLayer)state.map.removeLayer(state.baseLayer);state.baseStyle=style;state.tileErrors=0;if(!automatic)state.fallbackUsed=false;localStorage.setItem("p1_basemap_style",style);state.baseLayer=createBase(style).addTo(state.map);$("baseMapStyle").value=style}
 function ensureMap(){
-  if(state.map||!window.L||!$("oneMap"))return;
-  state.map=L.map("oneMap",{
-    zoomControl:true,
-    preferCanvas:true,
-    zoomSnap:1,
-    wheelPxPerZoomLevel:90
-  }).setView([1.3521,103.8198],11);
-  switchBaseMap(state.baseMapStyle);
-  state.mapLayer=L.layerGroup().addTo(state.map);
-  state.map.on("moveend zoomend",()=>{
-    if(state.baseMapLayer)state.baseMapLayer.redraw();
-  });
+  if(state.map||!window.L)return;state.map=L.map("oneMap",{preferCanvas:true,zoomControl:true,zoomSnap:1}).setView([1.3521,103.8198],11);switchBase(state.baseStyle);state.markerLayer=L.layerGroup().addTo(state.map);state.map.on("moveend zoomend",()=>state.baseLayer&&state.baseLayer.redraw())
 }
-function mapIcon(type){
-  const letter=type==="school"?"S":type==="condo"?"C":"A";
-  const size=type==="school"?29:type==="condo"?25:21;
-  return L.divIcon({
-    className:"",
-    html:`<div class="map-marker ${type}">${letter}</div>`,
-    iconSize:[size,size],
-    iconAnchor:[size/2,size/2]
-  });
-}
-function refreshMapSchoolFilter(){
-  const el=$("mapSchoolFilter");
-  if(!el)return;
-  const current=el.value;
-  const schools=[...new Set(state.filtered.map(d=>d.target_school))].sort();
-  el.innerHTML='<option value="">All visible target schools</option>'+
-    schools.map(s=>`<option value="${String(s).replaceAll('"','&quot;')}">${s}</option>`).join("");
-  if(schools.includes(current))el.value=current;
-  else{el.value="";state.selectedMapSchool=""}
-
-  const suggestions=[...new Set(state.filtered.flatMap(d=>[
-    d.target_school,d.condo,...(d.alternative_schools_list||[])
-  ]).filter(Boolean))].sort();
-  if($("mapSearchSuggestions")){
-    $("mapSearchSuggestions").innerHTML=suggestions.map(v=>`<option value="${String(v).replaceAll('"','&quot;')}"></option>`).join("");
-  }
-}
-function visibleMapPairings(){
-  const selected=$("mapSchoolFilter")?.value||"";
-  return selected?state.filtered.filter(d=>d.target_school===selected):state.filtered;
+function icon(type){const char=type==="school"?"S":type==="condo"?"C":"A",size=type==="school"?30:type==="condo"?25:21;return L.divIcon({className:"",html:`<div class="map-marker ${type}">${char}</div>`,iconSize:[size,size],iconAnchor:[size/2,size/2]})}
+function updateMapKpis(){
+  const schools=new Set(),condos=new Set();state.data.forEach(d=>{if(coordinate("school",d.target_school))schools.add(d.target_school);if(coordinate("condo",d.condo))condos.add(d.condo)});
+  $("mappedSchoolCount").textContent=schools.size;$("mappedCondoCount").textContent=condos.size;$("cachedLocationCount").textContent=Object.keys(state.coordinates).length
 }
 function renderMap(){
-  if(!$("mapView")?.classList.contains("active"))return;
-  ensureMap();
-  if(!state.map||!state.mapLayer)return;
-
-  state.mapLayer.clearLayers();
-  if(state.radiusLayer){state.map.removeLayer(state.radiusLayer);state.radiusLayer=null}
-
-  const selected=$("mapSchoolFilter").value;
-  state.selectedMapSchool=selected;
-  const items=visibleMapPairings();
-  const bounds=[];
-  const seenSchools=new Set(),seenCondos=new Set(),seenAlternatives=new Set();
-
-  items.forEach(d=>{
-    if(!seenSchools.has(d.target_school)){
-      seenSchools.add(d.target_school);
-      const c=getCoordinate("school",d.target_school);
-      if(c){
-        const marker=L.marker([c.lat,c.lng],{icon:mapIcon("school")})
-          .addTo(state.mapLayer)
-          .bindPopup(`<strong>${d.target_school}</strong><br>Target school`);
-        marker.on("click",()=>{
-          $("mapSchoolFilter").value=d.target_school;
-          state.selectedMapSchool=d.target_school;
-          renderMap();
-        });
-        bounds.push([c.lat,c.lng]);
-      }
-    }
-
-    if(!seenCondos.has(d.condo)){
-      seenCondos.add(d.condo);
-      const c=getCoordinate("condo",d.condo);
-      if(c){
-        const marker=L.marker([c.lat,c.lng],{icon:mapIcon("condo")})
-          .addTo(state.mapLayer)
-          .bindPopup(`<strong>${d.condo}</strong><br>${d.target_school}<br>${d["3_bed_cost"]}`);
-        marker.on("click",()=>renderMapResults(d.target_school,d.condo));
-        bounds.push([c.lat,c.lng]);
-      }
-    }
+  if(!$("mapView").classList.contains("active"))return;ensureMap();state.markerLayer.clearLayers();if(state.radius){state.map.removeLayer(state.radius);state.radius=null}
+  const bounds=[],seenSchool=new Set(),seenCondo=new Set(),school=$("schoolFilter").value;
+  state.filtered.forEach(d=>{
+    if(!seenSchool.has(d.target_school)){seenSchool.add(d.target_school);const c=coordinate("school",d.target_school);if(c){L.marker([c.lat,c.lng],{icon:icon("school")}).addTo(state.markerLayer).bindPopup(`<strong>${d.target_school}</strong><br>Target school`).on("click",()=>{$("schoolFilter").value=d.target_school;applyFilters()});bounds.push([c.lat,c.lng])}}
+    if(!seenCondo.has(d.condo)){seenCondo.add(d.condo);const c=coordinate("condo",d.condo);if(c){L.marker([c.lat,c.lng],{icon:icon("condo")}).addTo(state.markerLayer).bindPopup(`<strong>${d.condo}</strong><br>${d.target_school}<br>${d["3_bed_cost"]}`).on("click",()=>{state.activePairingId=idOf(d);renderResults();openDetails(d)});bounds.push([c.lat,c.lng])}}
   });
-
-  if(selected){
-    const schoolCoordinate=getCoordinate("school",selected);
-    if(schoolCoordinate){
-      state.radiusLayer=L.circle([schoolCoordinate.lat,schoolCoordinate.lng],{
-        radius:1000,color:"#1e638e",weight:2,fillColor:"#4a9ac5",fillOpacity:.10
-      }).addTo(state.map);
-      bounds.push([schoolCoordinate.lat,schoolCoordinate.lng]);
-    }
-
-    if($("showAlternativeSchools").checked){
-      const alternatives=[...new Set(items.flatMap(d=>d.alternative_schools_list||[]))];
-      alternatives.forEach(name=>{
-        if(seenAlternatives.has(name))return;
-        seenAlternatives.add(name);
-        const c=getCoordinate("alternative",name)||getCoordinate("school",name);
-        if(c){
-          L.marker([c.lat,c.lng],{icon:mapIcon("alternative")})
-            .addTo(state.mapLayer)
-            .bindPopup(`<strong>${name}</strong><br>Alternative school`);
-          bounds.push([c.lat,c.lng]);
-        }
-      });
-    }
+  if(school){
+    const c=coordinate("school",school);if(c){state.radius=L.circle([c.lat,c.lng],{radius:1000,color:"#1e638e",weight:2,fillColor:"#68a9ca",fillOpacity:.11}).addTo(state.map);bounds.push([c.lat,c.lng])}
+    if($("showAlternatives").checked){const names=[...new Set(state.filtered.flatMap(d=>d.alternative_schools_list||[]))];names.forEach(name=>{const a=coordinate("alternative",name)||coordinate("school",name);if(a){L.marker([a.lat,a.lng],{icon:icon("alternative")}).addTo(state.markerLayer).bindPopup(`<strong>${name}</strong><br>Alternative school`);bounds.push([a.lat,a.lng])}})}
   }
-
-  renderMapResults(selected);
-
-  if(bounds.length){
-    state.map.fitBounds(bounds,{padding:[35,35],maxZoom:selected?15:13});
-    setMapStatus(`${bounds.length} mapped locations shown.`, "success");updateMapKpis();
-  }else{
-    state.map.setView([1.3521,103.8198],11);
-    setMapStatus("No cached coordinates are available for the current selection. Open OneMap setup to geocode them.","error");
-  }
+  updateMapKpis();
+  if(bounds.length){state.map.fitBounds(bounds,{padding:[45,45],maxZoom:school?15:13});mapStatus(`${bounds.length} mapped locations shown.`,"ok")}
+  else{state.map.setView([1.3521,103.8198],11);mapStatus("Basemap is ready. Open OneMap setup to geocode schools and condos.","ok")}
 }
-function renderMapResults(school="",condo=""){
-  const box=$("mapResults");
-  if(!box)return;
-  let items=school?state.filtered.filter(d=>d.target_school===school):state.filtered;
-  if(condo)items=items.filter(d=>d.condo===condo);
-
-  box.innerHTML=`<h3>${school||"Visible pairings"}</h3>
-    <p>${items.length} pairing${items.length===1?"":"s"} in the current map selection.</p>
-    ${items.slice(0,30).map(d=>`<div class="map-result ${state.selectedMapResultId===idOf(d)?"active":""}" data-id="${idOf(d)}">
-      <strong>${safe(d.condo)}</strong>
-      <div class="result-sub">${safe(d.target_school)} · ${safe(d["3_bed_cost"])}</div>
-      <div class="result-score">${safe(d.overall_score_100)}/100</div>
-    </div>`).join("")}
-    <div class="map-legend">
-      <span><i class="legend-dot school"></i>Target school</span>
-      <span><i class="legend-dot condo"></i>Condo</span>
-      <span><i class="legend-dot alternative"></i>Alternative school</span>
-    </div>`;
-  box.querySelectorAll(".map-result").forEach(el=>el.onclick=()=>{
-    state.selectedMapResultId=el.dataset.id;
-    const d=findById(el.dataset.id);
-    const c=getCoordinate("condo",d.condo);
-    if(c&&state.map)state.map.setView([c.lat,c.lng],16);
-    renderMapResults(school,condo);
-  });
+function detailItem(l,v){return`<div class="detail-item"><small>${l}</small><strong>${safe(v)}</strong></div>`}
+function sourceLink(l,u){return u&&/^https?:/.test(u)?`<a href="${u}" target="_blank" rel="noopener">${l}</a>`:""}
+function openDetails(d){
+  const id=idOf(d),note=state.notes[id]||"";$("detailContent").innerHTML=`<div class="detail-head"><h2>${safe(d.target_school)}</h2><p>${safe(d.condo)}</p></div>
+  <div class="detail-grid">${detailItem("Overall",`${safe(d.overall_score_100)}/100`)}${detailItem("Admission",`${safe(d.admission_chance_20)}/20`)}${detailItem("Risk",d.admission_risk)}${detailItem("Property",`${safe(d.property_investment_20)}/20`)}${detailItem("3-bed cost",d["3_bed_cost"])}${detailItem("TOP",d.top_year)}${detailItem("Tenure",d.tenure)}${detailItem("PSF",d.estimated_psf)}${detailItem("Transit",d.transit_mrt)}${detailItem("Distance",d.estimated_evidenced_distance)}</div>
+  <div class="detail-section"><h3>Alternative schools within 1 km</h3><p>${(d.alternative_schools_list||[]).join(" · ")||"None listed"}</p></div>
+  <div class="detail-section"><h3>My note</h3><textarea id="noteInput" class="notes-input">${note}</textarea><button id="saveNoteBtn" class="btn primary">Save note</button></div>
+  <div class="detail-section sources"><h3>Sources</h3>${sourceLink("Distance",d.distance_source)}${sourceLink("P1 evidence",d.p1_source)}${sourceLink("Property",d.property_source)}</div>`;
+  $("saveNoteBtn").onclick=()=>{state.notes[id]=$("noteInput").value;persist();$("saveNoteBtn").textContent="Saved"};$("detailDrawer").classList.add("open")
 }
-function findMapLocation(){
-  const value=$("mapSearchInput").value.trim();
-  if(!value)return;
-  const pairing=state.filtered.find(d=>d.condo===value||d.target_school===value||(d.alternative_schools_list||[]).includes(value));
-  const candidates=[
-    ["condo",value],
-    ["school",value],
-    ["alternative",value]
-  ];
-  for(const[type,name]of candidates){
-    const c=getCoordinate(type,name);
-    if(c&&state.map){
-      state.map.setView([c.lat,c.lng],16);
-      setMapStatus(`${value} located on the map.`,"success");
-      if(pairing){
-        state.selectedMapResultId=idOf(pairing);
-        renderMapResults(pairing.target_school,pairing.condo===value?pairing.condo:"");
-      }
-      return;
-    }
-  }
-  setMapStatus(`${value} has not been geocoded yet. Use OneMap setup.`,"warn");
+function closeDrawer(){$("detailDrawer").classList.remove("open")}
+function standaloneCard(d){return`<article class="standalone-card"><h3>${safe(d.target_school)}</h3><div class="condo-name">${safe(d.condo)}</div><div class="metric"><span>Overall</span><strong>${safe(d.overall_score_100)}/100</strong></div><div class="metric"><span>Admission</span><strong>${safe(d.admission_chance_20)}/20</strong></div><div class="metric"><span>Risk</span><strong>${safe(d.admission_risk)}</strong></div><div class="metric"><span>Property</span><strong>${safe(d.property_investment_20)}/20</strong></div><div class="metric"><span>3-bed cost</span><strong>${safe(d["3_bed_cost"])}</strong></div><div class="metric"><span>TOP</span><strong>${safe(d.top_year)}</strong></div><button class="btn secondary details" data-id="${idOf(d)}">Details</button></article>`}
+function renderCompare(){const items=[...state.compare].map(findById).filter(Boolean);$("compareContainer").innerHTML=items.length?items.map(standaloneCard).join(""):"<p>No pairings selected.</p>";$("compareContainer").querySelectorAll(".details").forEach(b=>b.onclick=()=>openDetails(findById(b.dataset.id)))}
+function renderShortlist(){const items=[...state.shortlist].map(findById).filter(Boolean);$("shortlistContainer").innerHTML=items.length?items.map(standaloneCard).join(""):"<p>Your shortlist is empty.</p>";$("shortlistContainer").querySelectorAll(".details").forEach(b=>b.onclick=()=>openDetails(findById(b.dataset.id)))}
+async function searchOneMap(name,token){
+  const url=`https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${encodeURIComponent(name)}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
+  const response=await fetch(url,{headers:{Authorization:token}});if(!response.ok)throw new Error(`OneMap Search HTTP ${response.status}`);const payload=await response.json(),results=payload.results||[];if(!results.length)return null;
+  const lower=name.toLowerCase(),choice=results.find(r=>String(r.SEARCHVAL||"").toLowerCase()===lower)||results.find(r=>String(r.SEARCHVAL||"").toLowerCase().includes(lower))||results[0];const lat=Number(choice.LATITUDE),lng=Number(choice.LONGITUDE);return Number.isFinite(lat)&&Number.isFinite(lng)?{lat,lng,label:choice.SEARCHVAL,address:choice.ADDRESS}:null
 }
-function clearMapSearch(){
-  $("mapSearchInput").value="";
-  state.selectedMapResultId="";
-  renderMap();
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
+function tasks(scope){const src=scope==="visible"?state.filtered:state.data,out=[];[...new Set(src.map(d=>d.target_school))].forEach(n=>out.push(["school",n]));[...new Set(src.map(d=>d.condo))].forEach(n=>out.push(["condo",n]));[...new Set(src.flatMap(d=>d.alternative_schools_list||[]))].forEach(n=>out.push(["alternative",n]));return out}
+async function runQueue(list){
+  const token=($("tokenInput").value||state.token).trim();if(!token){alert("Paste a valid OneMap token.");return}state.token=token;sessionStorage.setItem("p1_onemap_token",token);state.queue=[...list];persist();let found=0,failed=0,total=state.queue.length;
+  try{while(state.queue.length){const[type,name]=state.queue[0],k=key(type,name);$("setupProgress").textContent=`Geocoding ${total-state.queue.length+1} of ${total}: ${name}`;if(!state.coordinates[k]){try{const result=await searchOneMap(name,token);if(result){state.coordinates[k]=result;found++}else failed++}catch(err){if(/401|403|token/i.test(err.message))throw err;failed++}}state.queue.shift();persist();updateMapKpis();await delay(160)}
+    $("setupProgress").textContent=`Completed: ${found} new locations; ${failed} not found.`;$("setupDialog").close();renderMap()
+  }catch(err){$("setupProgress").textContent=`${err.message}. ${state.queue.length} locations remain. Use Resume after refreshing the token.`}
 }
-async function oneMapSearch(name,token){
-  const endpoint="https://www.onemap.gov.sg/api/common/elastic/search";
-  const url=`${endpoint}?searchVal=${encodeURIComponent(name)}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
-  const response=await fetch(url,{headers:{Authorization:token}});
-  if(!response.ok)throw new Error(`OneMap Search returned HTTP ${response.status}`);
-  const payload=await response.json();
-  if(payload.error)throw new Error(payload.error);
-  const results=payload.results||[];
-  if(!results.length)return null;
-
-  const lower=String(name).toLowerCase();
-  const selected=results.find(r=>String(r.SEARCHVAL||"").toLowerCase()===lower)
-    ||results.find(r=>String(r.SEARCHVAL||"").toLowerCase().includes(lower))
-    ||results[0];
-
-  const lat=Number(selected.LATITUDE),lng=Number(selected.LONGITUDE);
-  if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
-  return{
-    lat,lng,
-    searchValue:selected.SEARCHVAL||name,
-    address:selected.ADDRESS||"",
-    postalCode:selected.POSTAL||""
-  };
-}
-const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-function collectGeocodeTasks(scope="all"){
-  const source=scope==="visible"?state.filtered:state.data;
-  const tasks=[];
-  [...new Set(source.map(d=>d.target_school))].forEach(name=>tasks.push(["school",name]));
-  [...new Set(source.map(d=>d.condo))].forEach(name=>tasks.push(["condo",name]));
-  [...new Set(source.flatMap(d=>d.alternative_schools_list||[]))].forEach(name=>tasks.push(["alternative",name]));
-  return tasks;
-}
-async function runGeocodeQueue(tasks){
-  const token=($("tokenInput").value||state.oneMapToken||"").trim();
-  if(!token){alert("Paste a current OneMap access token first.");return}
-
-  state.oneMapToken=token;
-  sessionStorage.setItem("p1_onemap_token",token);
-  state.geocodeQueue=[...tasks];
-  persist();
-
-  let found=0,failed=0,total=state.geocodeQueue.length;
-  setMapStatus(`Preparing ${total} unique locations…`,"busy");
-
-  try{
-    while(state.geocodeQueue.length){
-      const[type,name]=state.geocodeQueue[0];
-      const key=coordinateKey(type,name);
-
-      if(state.coordinates[key]){
-        state.geocodeQueue.shift();
-        persist();
-        continue;
-      }
-
-      setMapStatus(`Geocoding ${total-state.geocodeQueue.length+1} of ${total}: ${name}`,"busy");
-      try{
-        const result=await oneMapSearch(name,token);
-        if(result){state.coordinates[key]=result;found++}
-        else failed++;
-      }catch(error){
-        if(/401|403|token|Forbidden/i.test(error.message))throw error;
-        failed++;
-      }
-
-      state.geocodeQueue.shift();
-      persist();
-      updateMapKpis();
-      await delay(160);
-    }
-
-    $("tokenDialog").close();
-    setMapStatus(`Geocoding completed: ${found} new locations found; ${failed} not found.`,"success");
-    refreshMapSchoolFilter();
-    renderMap();
-  }catch(error){
-    persist();
-    setMapStatus(`${error.message}. ${state.geocodeQueue.length} locations remain in the queue.`,"failure");
-  }
-}
-async function geocode(scope){
-  await runGeocodeQueue(collectGeocodeTasks(scope));
-}
-async function resumeGeocoding(){
-  if(!state.geocodeQueue.length){
-    setMapStatus("No incomplete geocoding queue is available.","info");
-    return;
-  }
-  await runGeocodeQueue(state.geocodeQueue);
-}
-function exportCoordinateCache(){
-  const blob=new Blob([JSON.stringify(state.coordinates,null,2)],{type:"application/json"});
-  const link=document.createElement("a");
-  link.href=URL.createObjectURL(blob);
-  link.download="onemap-coordinate-cache.json";
-  link.click();
-  URL.revokeObjectURL(link.href);
-}
-async function importCoordinateCache(file){
-  if(!file)return;
-  try{
-    const imported=JSON.parse(await file.text());
-    if(!imported||typeof imported!=="object"||Array.isArray(imported))throw new Error("Invalid coordinate file");
-    state.coordinates={...state.coordinates,...imported};
-    persist();updateMapKpis();
-    setMapStatus(`${Object.keys(state.coordinates).length} cached locations available.`,"success");
-    renderMap();
-  }catch(error){
-    alert(`Could not import coordinate cache: ${error.message}`);
-  }
-}
-
+function exportCache(){const blob=new Blob([JSON.stringify(state.coordinates,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="p1-onemap-coordinates.json";a.click();URL.revokeObjectURL(a.href)}
+async function importCache(file){if(!file)return;try{const obj=JSON.parse(await file.text());state.coordinates={...state.coordinates,...obj};persist();updateMapKpis();renderMap();$("setupProgress").textContent=`Imported ${Object.keys(obj).length} cached locations.`}catch(e){alert("Invalid coordinate cache file.")}}
+function exportCsv(){const fields=["target_school","condo","region","admission_risk","admission_chance_20","3_bed_cost","top_year","tenure","overall_score_100"],lines=[fields.join(",")].concat(state.filtered.map(d=>fields.map(f=>`"${String(d[f]??"").replaceAll('"','""')}"`).join(","))),blob=new Blob([lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href)}
 async function init(){
-  state.data=await(await fetch("data/pairings.json?v=2.2.0")).json();
-  state.filtered=[...state.data];
-  populateSelect("regionFilter",unique("region"));
-  populateSelect("categoryFilter",unique("school_category"));
-  populateSelect("riskFilter",unique("admission_risk"));
-  populateSelect("tenureFilter",unique("tenure"));
-  populateSearchSuggestions();
-
-  ["searchInput","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","scoreFilter","sortFilter","priceMin","priceMax"].forEach(id=>{
-    $(id).addEventListener("input",()=>{if(id==="scoreFilter")$("scoreValue").textContent=$(id).value;applyFilters()});
-  });
-  document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
-  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>applyPreset(c.dataset.preset));
-
-  $("cardModeBtn").onclick=()=>{$("cardsContainer").classList.remove("hidden");$("tableContainer").classList.add("hidden");$("cardModeBtn").classList.add("active");$("tableModeBtn").classList.remove("active")};
-  $("tableModeBtn").onclick=()=>{$("cardsContainer").classList.add("hidden");$("tableContainer").classList.remove("hidden");$("tableModeBtn").classList.add("active");$("cardModeBtn").classList.remove("active")};
-  $("resetBtn").onclick=()=>{
-    ["searchInput","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter"].forEach(id=>$(id).value="");
-    $("scoreFilter").value=0;$("scoreValue").textContent="0";$("priceMin").value=1000000;$("priceMax").value=3000000;
-    applyPreset("overall");
-  };
-  $("exportBtn").onclick=exportCsv;
-  $("clearCompareBtn").onclick=()=>{state.compare.clear();persist();renderAll()};
-  $("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderAll()};
-  $("closeDrawer").onclick=closeDrawer;$("drawerBackdrop").onclick=closeDrawer;
-  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDrawer()});
-
-  $("mapSetupBtn").onclick=()=>{
-    $("tokenInput").value=state.oneMapToken;
-    $("tokenDialog").showModal();
-  };
-  $("closeTokenDialog").onclick=()=>$("tokenDialog").close();
-  $("saveTokenBtn").onclick=()=>{
-    state.oneMapToken=$("tokenInput").value.trim();
-    sessionStorage.setItem("p1_onemap_token",state.oneMapToken);
-    setMapStatus("Token saved for this browser session. Choose a geocoding option.","ok");
-  };
-  $("geocodeVisibleBtn").onclick=()=>geocode("visible");
-  $("geocodeAllBtn").onclick=()=>geocode("all");
-  $("exportCoordinatesBtn").onclick=exportCoordinateCache;
-  $("importCoordinatesInput").onchange=e=>importCoordinateCache(e.target.files[0]);
-  $("clearCoordinatesBtn").onclick=()=>{
-    state.coordinates={};state.geocodeQueue=[];
-    persist();updateMapKpis();
-    setMapStatus("Cached coordinates cleared.","ok");
-    renderMap();
-  };
-  $("mapSchoolFilter").onchange=()=>{
-    state.selectedMapSchool=$("mapSchoolFilter").value;
-    renderMap();
-  };
-  $("showAlternativeSchools").onchange=renderMap;
-  $("baseMapStyle").value=state.baseMapStyle;
-  $("baseMapStyle").onchange=()=>{
-    state.fallbackUsed=false;
-    switchBaseMap($("baseMapStyle").value);
-  };
-  $("reloadBaseMapBtn").onclick=()=>{
-    state.fallbackUsed=false;
-    state.tileErrors=0;
-    switchBaseMap(state.baseMapStyle);
-    setTimeout(()=>state.map&&state.map.invalidateSize(),120);
-  };
-  $("mapSearchBtn").onclick=findMapLocation;
-  $("clearMapSearchBtn").onclick=clearMapSearch;
-  $("mapSearchInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();findMapLocation()}};
-  $("resumeGeocodeBtn").onclick=resumeGeocoding;
-  $("fitMarkersBtn").onclick=renderMap;
-
-  updateCounts();updatePriceRange();updateMapKpis();applyFilters();
+  state.data=await(await fetch("data/pairings.json?v=4.0.0")).json();state.filtered=[...state.data];
+  populate("schoolFilter",unique("target_school"));populate("regionFilter",unique("region"));populate("categoryFilter",unique("school_category"));populate("riskFilter",unique("admission_risk"));populate("tenureFilter",unique("tenure"));populateSuggestions();
+  ["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","sortFilter","priceMin","priceMax"].forEach(id=>$(id).addEventListener("input",applyFilters));
+  document.querySelectorAll(".topnav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
+  $("resetFiltersBtn").onclick=()=>{["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter"].forEach(id=>$(id).value="");$("sortFilter").value="overall_desc";$("priceMin").value=1e6;$("priceMax").value=3e6;applyFilters()};
+  $("toggleResultsBtn").onclick=()=>{state.compact=!state.compact;$("toggleResultsBtn").textContent=state.compact?"Expanded":"Compact";renderResults()};
+  $("fitMarkersBtn").onclick=renderMap;$("showAlternatives").onchange=renderMap;$("baseMapStyle").value=state.baseStyle;$("baseMapStyle").onchange=()=>{state.fallbackUsed=false;switchBase($("baseMapStyle").value)};$("reloadMapBtn").onclick=()=>{state.fallbackUsed=false;switchBase(state.baseStyle);setTimeout(()=>state.map.invalidateSize(),100)};
+  $("oneMapSetupBtn").onclick=()=>{$("tokenInput").value=state.token;$("setupDialog").showModal()};$("closeSetupDialog").onclick=()=>$("setupDialog").close();$("saveTokenBtn").onclick=()=>{state.token=$("tokenInput").value.trim();sessionStorage.setItem("p1_onemap_token",state.token);$("setupProgress").textContent="Token saved for this session."};$("geocodeVisibleBtn").onclick=()=>runQueue(tasks("visible"));$("geocodeAllBtn").onclick=()=>runQueue(tasks("all"));$("resumeGeocodeBtn").onclick=()=>state.queue.length?runQueue(state.queue):$("setupProgress").textContent="No incomplete queue.";$("exportCoordinatesBtn").onclick=exportCache;$("importCoordinatesInput").onchange=e=>importCache(e.target.files[0]);$("clearCoordinatesBtn").onclick=()=>{state.coordinates={};state.queue=[];persist();updateMapKpis();renderMap();$("setupProgress").textContent="Coordinate cache cleared."};
+  $("closeDrawer").onclick=closeDrawer;$("drawerBackdrop").onclick=closeDrawer;$("clearCompareBtn").onclick=()=>{state.compare.clear();persist();renderCompare();renderResults()};$("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderShortlist();renderResults()};$("exportBtn").onclick=exportCsv;
+  persist();updatePrice();ensureMap();updateMapKpis();applyFilters()
 }
-init().catch(err=>document.body.innerHTML=`<main class="panel"><h1>Unable to load data</h1><p>${err.message}</p><p>Use GitHub Pages or a local HTTP server.</p></main>`);
+init().catch(err=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load application</h1><p>${err.message}</p></main>`);

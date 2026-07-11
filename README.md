@@ -1,24 +1,24 @@
-# Primary School × Condo Pairing — Version 3.1
+# P1 Home Intelligence — Version 4.0
 
-Version 3.1 is the new stable OneMap release.
+Version 4.0 is a map-first redesign of the Primary School × Condo Pairing application.
 
-## Main improvements
+## Main changes
 
-- OneMap Original and GreyLite basemap selector
-- Automatic tile retry
-- Automatic fallback between basemap styles after repeated tile failures
-- Larger mobile tile buffer
-- Search schools, condos and alternative schools directly on the map
-- Map counters for cached schools, condos and total locations
-- Resume incomplete geocoding after interruption or token expiry
-- Export and import coordinate cache JSON
-- Current filters continue to control the map results
-- 1 km circle around a selected target school
-- Clickable result panel linked to map zoom
+- Map-first desktop interface with a persistent filter and ranked-results sidebar
+- Mobile layout that stacks filters and map cleanly
+- OneMap Original and GreyLite basemaps
+- Automatic retry of failed OneMap tiles
+- Automatic fallback to OpenStreetMap street tiles when repeated OneMap tile failures occur
+- Target-school, condo and alternative-school markers
+- 1 km radius around a selected target school
+- Filters, ranked results and map remain synchronised
+- Details drawer, compare, shortlist, notes and CSV export retained
+- OneMap geocoding cache can be exported and imported
+- Interrupted geocoding can be resumed
 
-## Deploy
+## Deploy to GitHub Pages
 
-Replace these files in the existing GitHub repository:
+Replace these files in the repository:
 
 - `index.html`
 - `styles.css`
@@ -26,16 +26,16 @@ Replace these files in the existing GitHub repository:
 - `README.md`
 - `data/pairings.json`
 
-Commit, wait for deployment, then use `Ctrl + F5`.
+Commit the files, wait for GitHub Pages to redeploy, then force-refresh the browser.
 
-## First use
+## OneMap setup
 
-1. Open **OneMap**.
-2. Confirm the basemap loads.
-3. Open **OneMap setup**.
-4. Paste a valid temporary token.
-5. Choose **Geocode visible data** for a small test.
-6. Use **Geocode all data** when ready.
-7. Export the coordinate cache as a backup.
+The basemap does not need a token. A token is required only for the OneMap Search API used to convert school and condo names into coordinates.
 
-The token is stored only in session storage. It is never embedded in the public repository.
+1. Select **OneMap setup**.
+2. Paste a current temporary token.
+3. Select **Geocode visible** for a small test or **Geocode all**.
+4. Export the completed coordinate cache.
+5. Import that cache on another browser or device.
+
+Never commit a token into the GitHub repository.
