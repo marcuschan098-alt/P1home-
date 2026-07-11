@@ -35,3 +35,8 @@ python -m http.server 8000
 ```
 
 Then open `http://localhost:8000`.
+
+
+## Hotfix 2.1
+
+This package adds cache-busting to `index.html` and makes the JavaScript tolerant of a temporarily mixed deployment while GitHub Pages refreshes. Replace all files together.

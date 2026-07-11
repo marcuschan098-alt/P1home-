@@ -161,15 +161,22 @@ async function init(){
   state.data=await(await fetch("data/pairings.json")).json();state.filtered=[...state.data];
   populateSelect("regionFilter",unique("region"));populateSelect("categoryFilter",unique("school_category"));
   populateSelect("riskFilter",unique("admission_risk"));populateSelect("tenureFilter",unique("tenure"));
-  ["searchInput","budgetFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","scoreFilter","sortFilter"].forEach(id=>$(id).addEventListener("input",()=>{if(id==="scoreFilter")$("scoreValue").textContent=$(id).value;applyFilters()}));
+  ["searchInput","budgetFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","scoreFilter","sortFilter"].forEach(id=>{
+    const el=$(id);
+    if(!el) return;
+    el.addEventListener("input",()=>{
+      if(id==="scoreFilter" && $("scoreValue")) $("scoreValue").textContent=el.value;
+      applyFilters();
+    });
+  });
   document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
   document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>applyPreset(c.dataset.preset));
-  $("cardModeBtn").onclick=()=>{$("cardsContainer").classList.remove("hidden");$("tableContainer").classList.add("hidden");$("cardModeBtn").classList.add("active");$("tableModeBtn").classList.remove("active")};
-  $("tableModeBtn").onclick=()=>{$("cardsContainer").classList.add("hidden");$("tableContainer").classList.remove("hidden");$("tableModeBtn").classList.add("active");$("cardModeBtn").classList.remove("active")};
-  $("resetBtn").onclick=()=>{["searchInput","budgetFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter"].forEach(id=>$(id).value="");$("scoreFilter").value=0;$("scoreValue").textContent="0";applyPreset("overall")};
-  $("exportBtn").onclick=exportCsv;$("closeDialog").onclick=()=>$("detailDialog").close();
-  $("clearCompareBtn").onclick=()=>{state.compare.clear();persist();renderCompare();renderExplore()};
-  $("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderShortlist();renderExplore()};
+  if($("cardModeBtn")) $("cardModeBtn").onclick=()=>{$("cardsContainer").classList.remove("hidden");$("tableContainer").classList.add("hidden");$("cardModeBtn").classList.add("active");$("tableModeBtn").classList.remove("active")};
+  if($("tableModeBtn")) $("tableModeBtn").onclick=()=>{$("cardsContainer").classList.add("hidden");$("tableContainer").classList.remove("hidden");$("tableModeBtn").classList.add("active");$("cardModeBtn").classList.remove("active")};
+  if($("resetBtn")) $("resetBtn").onclick=()=>{["searchInput","budgetFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter"].forEach(id=>$(id).value="");$("scoreFilter").value=0;$("scoreValue").textContent="0";applyPreset("overall")};
+  if($("exportBtn")) $("exportBtn").onclick=exportCsv; if($("closeDialog")) $("closeDialog").onclick=()=>$("detailDialog").close();
+  if($("clearCompareBtn")) $("clearCompareBtn").onclick=()=>{state.compare.clear();persist();renderCompare();renderExplore()};
+  if($("clearShortlistBtn")) $("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderShortlist();renderExplore()};
   updateCounts();applyFilters();renderCompare();renderShortlist()
 }
 init().catch(err=>document.body.innerHTML=`<main class="panel"><h1>Unable to load data</h1><p>${err.message}</p><p>Use GitHub Pages or a local HTTP server.</p></main>`);
