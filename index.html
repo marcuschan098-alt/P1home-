@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Singapore primary school and condo pairing decision tool">
-  <title>Primary School × Condo Pairing — Version 2</title>
+  <title>Primary School × Condo Pairing — Version 2.1</title>
   <link rel="stylesheet" href="styles.css?v=2.1">
 </head>
 <body>
@@ -48,7 +48,7 @@
 
         <div class="quick-views">
           <button data-preset="overall" class="chip active">Best overall</button>
-          <button data-preset="under2m" class="chip">Best under S$2M</button>
+          
           <button data-preset="admission" class="chip">Highest admission chance</button>
           <button data-preset="property" class="chip">Best property score</button>
           <button data-preset="newer" class="chip">Newer projects</button>
@@ -59,17 +59,24 @@
           <label>Search
             <input id="searchInput" type="search" placeholder="School, condo or alternative school">
           </label>
-          <label>Maximum 3-bed budget
-            <select id="budgetFilter">
-              <option value="">Any budget</option>
-              <option value="1500000">S$1.5M</option>
-              <option value="1800000">S$1.8M</option>
-              <option value="2000000">S$2.0M</option>
-              <option value="2200000">S$2.2M</option>
-              <option value="2500000">S$2.5M</option>
-              <option value="3000000">S$3.0M</option>
-            </select>
-          </label>
+          
+        <div class="price-range-filter">
+          <div class="price-range-header">
+            <div>
+              <strong>Estimated 3-bedroom property value</strong>
+              <small>Show pairings whose estimated range overlaps your selected range.</small>
+            </div>
+            <output id="priceRangeLabel">S$1.00M – S$3.00M</output>
+          </div>
+          <div class="dual-range">
+            <div class="range-track"></div>
+            <div id="rangeFill" class="range-fill"></div>
+            <input id="priceMin" type="range" min="1000000" max="3000000" step="50000" value="1000000" aria-label="Minimum property price">
+            <input id="priceMax" type="range" min="1000000" max="3000000" step="50000" value="3000000" aria-label="Maximum property price">
+          </div>
+          <div class="price-range-limits"><span>S$1.00M</span><span>S$3.00M</span></div>
+        </div>
+
           <label>Region
             <select id="regionFilter"><option value="">All regions</option></select>
           </label>
@@ -196,7 +203,7 @@
   </dialog>
 
   <footer>
-    <p>Version 2 · Static GitHub Pages application · Data from Pairings Master V6</p>
+    <p>Version 2.1 · Static GitHub Pages application · Data from Pairings Master V6</p>
   </footer>
 
   <script src="app.js?v=2.1"></script>
