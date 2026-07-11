@@ -1,6 +1,6 @@
-# P1 Home Intelligence — Version 4.1
+# P1 Home Intelligence — Version 4.1.1
 
-Version 4.1 replaces the experimental basemap handling with the official OneMap Default XYZ configuration.
+Version 4.1.1 replaces the experimental basemap handling with the official OneMap Default XYZ configuration.
 
 ## Map foundation
 
@@ -44,3 +44,12 @@ Commit the changes, wait for GitHub Pages deployment, then force-refresh the pag
 The basemap itself does not require a token. A temporary OneMap access token is required only for the Search API that converts school and condo names into latitude and longitude.
 
 Do not commit the token into GitHub.
+
+
+## Version 4.1.1 details-panel fix
+
+- Details panel is now non-modal.
+- Removed the full-screen backdrop.
+- The map remains visible and clickable outside the panel.
+- Only the right-side details panel captures pointer input.
+- Escape or the close button dismisses the panel.

@@ -93,3 +93,51 @@ main{height:calc(100% - 72px)}
   .map-attribution.official{right:8px;bottom:58px}
   .map-legend{left:8px;right:8px;bottom:8px}
 }
+
+
+/* Version 4.1.1 — non-modal interactive details panel */
+.detail-drawer{
+  position:fixed;
+  inset:72px 0 0 auto;
+  z-index:2000;
+  display:none;
+  width:min(520px,46vw);
+  pointer-events:none;
+}
+.detail-drawer.open{
+  display:block;
+}
+.drawer-panel{
+  position:absolute;
+  inset:0 0 0 auto;
+  width:100%;
+  height:100%;
+  overflow:auto;
+  background:#fff;
+  padding:25px;
+  box-shadow:-16px 0 34px rgba(0,0,0,.18);
+  border-left:1px solid var(--line);
+  pointer-events:auto;
+}
+.drawer-backdrop{
+  display:none !important;
+}
+body.drawer-open{
+  overflow:hidden;
+}
+@media(max-width:950px){
+  .detail-drawer{
+    inset:72px 0 0 auto;
+    width:min(480px,68vw);
+  }
+}
+@media(max-width:580px){
+  .detail-drawer{
+    inset:118px 0 0 auto;
+    width:78vw;
+    min-width:280px;
+  }
+  .drawer-panel{
+    padding:18px;
+  }
+}
