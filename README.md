@@ -1,20 +1,23 @@
-# Primary School × Condo Pairing — Version 2
+# Primary School × Condo Pairing — OneMap and Price Range Update
 
-Version 2 adds:
+This focused update adds:
 
-- Card-first browsing
-- Quick decision views
-- Shortlist saved in the browser
-- Personal notes saved in the browser
-- Side-by-side comparison for up to four pairings
-- Regional schematic map
-- Table mode
-- CSV export
-- Responsive mobile layout
+1. **OneMap basemap**
+   - Uses OneMap GreyLite map tiles.
+   - Schools and condos are geocoded through the OneMap Search API.
+   - Selecting a target school draws a 1 km radius.
+   - Condo, target-school and alternative-school markers are displayed.
+   - The access token is entered in the browser and stored only in session storage.
+   - Geocoded coordinates are cached in local storage.
 
-## Replace the existing GitHub Pages site
+2. **Dual-ended estimated 3-bedroom price slider**
+   - Range: S$1,000,000 to S$3,000,000.
+   - Step: S$50,000.
+   - A pairing remains visible when its estimated price interval overlaps the selected range.
 
-Upload and replace these files in your existing repository:
+## Replace the existing GitHub Pages files
+
+Upload and replace:
 
 - `index.html`
 - `styles.css`
@@ -22,21 +25,23 @@ Upload and replace these files in your existing repository:
 - `data/pairings.json`
 - `README.md`
 
-GitHub Pages will rebuild automatically after the files are committed.
+Commit the changes, wait for GitHub Pages to redeploy, then force-refresh with `Ctrl + F5`.
 
-## Important map note
+## First-time OneMap setup
 
-The map is a regional schematic, not an exact geographic map. Exact school and condo coordinates should only be added after they have been properly researched and verified.
+1. Open the **OneMap** tab.
+2. Select **OneMap setup**.
+3. Paste a current temporary OneMap access token.
+4. Select **Geocode schools and condos**.
+5. Wait for the progress message to finish.
 
-## Test locally
+The token is not placed in the repository. Only coordinates are cached in the browser.
 
-```bash
-python -m http.server 8000
-```
+## Security
 
-Then open `http://localhost:8000`.
+Do not commit an access token to GitHub. OneMap tokens expire and should remain private.
 
+## OneMap attribution
 
-## Hotfix 2.1
-
-This package adds cache-busting to `index.html` and makes the JavaScript tolerant of a temporarily mixed deployment while GitHub Pages refreshes. Replace all files together.
+The app uses the official GreyLite tile endpoint and displays:
+`OneMap © contributors | Singapore Land Authority`.

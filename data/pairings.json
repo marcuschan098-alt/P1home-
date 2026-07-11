@@ -47,9 +47,7 @@
       "Peiying Primary School",
       "Jiemin Primary School"
     ],
-    "id": "P001",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P001"
   },
   {
     "pairing_id": "P002",
@@ -99,9 +97,7 @@
       "Greenwood Primary School",
       "Evergreen Primary School"
     ],
-    "id": "P002",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P002"
   },
   {
     "pairing_id": "P003",
@@ -151,9 +147,7 @@
       "Xishan Primary School",
       "Northland Primary School"
     ],
-    "id": "P003",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P003"
   },
   {
     "pairing_id": "P004",
@@ -203,9 +197,7 @@
       "Xishan Primary School",
       "North View Primary School"
     ],
-    "id": "P004",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P004"
   },
   {
     "pairing_id": "P005",
@@ -255,9 +247,7 @@
       "Greenwood Primary School",
       "Woodlands Ring Primary School"
     ],
-    "id": "P005",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P005"
   },
   {
     "pairing_id": "P006",
@@ -307,9 +297,7 @@
       "Sembawang Primary School",
       "Endeavour Primary School"
     ],
-    "id": "P006",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P006"
   },
   {
     "pairing_id": "P007",
@@ -359,9 +347,7 @@
       "Huamin Primary School",
       "Peiying Primary School"
     ],
-    "id": "P007",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P007"
   },
   {
     "pairing_id": "P008",
@@ -411,9 +397,7 @@
       "Anchor Green Primary School",
       "Springdale Primary School"
     ],
-    "id": "P008",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P008"
   },
   {
     "pairing_id": "P009",
@@ -463,9 +447,7 @@
       "Sembawang Primary School",
       "Endeavour Primary School"
     ],
-    "id": "P009",
-    "map_x": 50,
-    "map_y": 18
+    "id": "P009"
   },
   {
     "pairing_id": "P010",
@@ -515,9 +497,7 @@
       "Teck Whye Primary School",
       "West View Primary School"
     ],
-    "id": "P010",
-    "map_x": 28,
-    "map_y": 28
+    "id": "P010"
   },
   {
     "pairing_id": "P011",
@@ -567,9 +547,7 @@
       "Teck Whye Primary School",
       "Concord Primary School"
     ],
-    "id": "P011",
-    "map_x": 28,
-    "map_y": 28
+    "id": "P011"
   },
   {
     "pairing_id": "P012",
@@ -619,9 +597,7 @@
       "Tampines Primary School",
       "Junyuan Primary School"
     ],
-    "id": "P012",
-    "map_x": 78,
-    "map_y": 55
+    "id": "P012"
   },
   {
     "pairing_id": "P013",
@@ -671,9 +647,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P013",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P013"
   },
   {
     "pairing_id": "P014",
@@ -723,9 +697,7 @@
       "Shuqun Primary School",
       "Fuhua Primary School"
     ],
-    "id": "P014",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P014"
   },
   {
     "pairing_id": "P015",
@@ -775,9 +747,7 @@
       "Teck Whye Primary School",
       "Concord Primary School"
     ],
-    "id": "P015",
-    "map_x": 28,
-    "map_y": 28
+    "id": "P015"
   },
   {
     "pairing_id": "P016",
@@ -828,9 +798,7 @@
       "Junyuan Primary School",
       "Gongshang Primary School"
     ],
-    "id": "P016",
-    "map_x": 78,
-    "map_y": 55
+    "id": "P016"
   },
   {
     "pairing_id": "P017",
@@ -880,9 +848,7 @@
       "Lianhua Primary School",
       "Dazhong Primary School"
     ],
-    "id": "P017",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P017"
   },
   {
     "pairing_id": "P018",
@@ -932,9 +898,7 @@
       "Keming Primary School",
       "Lianhua Primary School"
     ],
-    "id": "P018",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P018"
   },
   {
     "pairing_id": "P019",
@@ -984,9 +948,7 @@
       "Anchor Green Primary School",
       "Springdale Primary School"
     ],
-    "id": "P019",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P019"
   },
   {
     "pairing_id": "P020",
@@ -1036,9 +998,7 @@
       "Lakeside Primary School",
       "Jurong Primary School"
     ],
-    "id": "P020",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P020"
   },
   {
     "pairing_id": "P021",
@@ -1088,9 +1048,7 @@
       "Pei Tong Primary School",
       "New Town Primary School"
     ],
-    "id": "P021",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P021"
   },
   {
     "pairing_id": "P022",
@@ -1140,9 +1098,7 @@
       "Jurong Primary School",
       "Bukit View Primary School"
     ],
-    "id": "P022",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P022"
   },
   {
     "pairing_id": "P023",
@@ -1191,9 +1147,7 @@
       "Cedar Primary School",
       "St. Gabriel's Primary School"
     ],
-    "id": "P023",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P023"
   },
   {
     "pairing_id": "P024",
@@ -1243,9 +1197,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P024",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P024"
   },
   {
     "pairing_id": "P025",
@@ -1295,9 +1247,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P025",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P025"
   },
   {
     "pairing_id": "P026",
@@ -1347,9 +1297,7 @@
       "Gan Eng Seng Primary School",
       "Zhangde Primary School"
     ],
-    "id": "P026",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P026"
   },
   {
     "pairing_id": "P027",
@@ -1399,9 +1347,7 @@
       "Lakeside Primary School",
       "Shuqun Primary School"
     ],
-    "id": "P027",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P027"
   },
   {
     "pairing_id": "P028",
@@ -1451,9 +1397,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P028",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P028"
   },
   {
     "pairing_id": "P029",
@@ -1503,9 +1447,7 @@
       "Yangzheng Primary School",
       "St. Andrew's Junior School"
     ],
-    "id": "P029",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P029"
   },
   {
     "pairing_id": "P030",
@@ -1555,9 +1497,7 @@
       "Pei Tong Primary School",
       "New Town Primary School"
     ],
-    "id": "P030",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P030"
   },
   {
     "pairing_id": "P031",
@@ -1607,9 +1547,7 @@
       "Yangzheng Primary School",
       "St. Andrew's Junior School"
     ],
-    "id": "P031",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P031"
   },
   {
     "pairing_id": "P032",
@@ -1659,9 +1597,7 @@
       "Gan Eng Seng Primary School",
       "Blangah Rise Primary School"
     ],
-    "id": "P032",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P032"
   },
   {
     "pairing_id": "P033",
@@ -1711,9 +1647,7 @@
       "Keming Primary School",
       "Lianhua Primary School"
     ],
-    "id": "P033",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P033"
   },
   {
     "pairing_id": "P034",
@@ -1763,9 +1697,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P034",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P034"
   },
   {
     "pairing_id": "P035",
@@ -1814,9 +1746,7 @@
       "Yangzheng Primary School",
       "St. Gabriel's Primary School"
     ],
-    "id": "P035",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P035"
   },
   {
     "pairing_id": "P036",
@@ -1865,9 +1795,7 @@
       "Bukit Timah Primary School",
       "Henry Park Primary School"
     ],
-    "id": "P036",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P036"
   },
   {
     "pairing_id": "P037",
@@ -1917,9 +1845,7 @@
       "Pei Tong Primary School",
       "Clementi Primary School"
     ],
-    "id": "P037",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P037"
   },
   {
     "pairing_id": "P038",
@@ -1969,9 +1895,7 @@
       "Cedar Primary School",
       "Pei Chun Public School"
     ],
-    "id": "P038",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P038"
   },
   {
     "pairing_id": "P039",
@@ -2021,9 +1945,7 @@
       "Keming Primary School",
       "Lianhua Primary School"
     ],
-    "id": "P039",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P039"
   },
   {
     "pairing_id": "P040",
@@ -2072,9 +1994,7 @@
       "New Town Primary School",
       "Queenstown Primary School"
     ],
-    "id": "P040",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P040"
   },
   {
     "pairing_id": "P041",
@@ -2124,9 +2044,7 @@
       "Clementi Primary School",
       "Pei Tong Primary School"
     ],
-    "id": "P041",
-    "map_x": 24,
-    "map_y": 55
+    "id": "P041"
   },
   {
     "pairing_id": "P042",
@@ -2175,9 +2093,7 @@
       "New Town Primary School",
       "Queenstown Primary School"
     ],
-    "id": "P042",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P042"
   },
   {
     "pairing_id": "P043",
@@ -2226,9 +2142,7 @@
       "Geylang Methodist School (Primary)",
       "MacPherson Primary School"
     ],
-    "id": "P043",
-    "map_x": 78,
-    "map_y": 55
+    "id": "P043"
   },
   {
     "pairing_id": "P044",
@@ -2278,9 +2192,7 @@
       "Canossa Catholic Primary School",
       "MacPherson Primary School"
     ],
-    "id": "P044",
-    "map_x": 78,
-    "map_y": 55
+    "id": "P044"
   },
   {
     "pairing_id": "P045",
@@ -2328,9 +2240,7 @@
     "alternative_schools_list": [
       "Zhangde Primary School"
     ],
-    "id": "P045",
-    "map_x": 50,
-    "map_y": 80
+    "id": "P045"
   },
   {
     "pairing_id": "P046",
@@ -2379,9 +2289,7 @@
       "Blangah Rise Primary School",
       "Zhangde Primary School"
     ],
-    "id": "P046",
-    "map_x": 50,
-    "map_y": 80
+    "id": "P046"
   },
   {
     "pairing_id": "P047",
@@ -2431,9 +2339,7 @@
       "Montfort Junior School",
       "Xinmin Primary School"
     ],
-    "id": "P047",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P047"
   },
   {
     "pairing_id": "P048",
@@ -2483,9 +2389,7 @@
       "Montfort Junior School",
       "Xinmin Primary School"
     ],
-    "id": "P048",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P048"
   },
   {
     "pairing_id": "P049",
@@ -2535,9 +2439,7 @@
       "Montfort Junior School",
       "Xinmin Primary School"
     ],
-    "id": "P049",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P049"
   },
   {
     "pairing_id": "P050",
@@ -2587,9 +2489,7 @@
       "Montfort Junior School",
       "Xinmin Primary School"
     ],
-    "id": "P050",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P050"
   },
   {
     "pairing_id": "P051",
@@ -2639,9 +2539,7 @@
       "Kuo Chuan Presbyterian Primary School",
       "Townsville Primary School"
     ],
-    "id": "P051",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P051"
   },
   {
     "pairing_id": "P052",
@@ -2691,9 +2589,7 @@
       "Kuo Chuan Presbyterian Primary School",
       "Townsville Primary School"
     ],
-    "id": "P052",
-    "map_x": 50,
-    "map_y": 55
+    "id": "P052"
   },
   {
     "pairing_id": "P053",
@@ -2743,9 +2639,7 @@
       "Serangoon Garden South School",
       "Hougang Primary School"
     ],
-    "id": "P053",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P053"
   },
   {
     "pairing_id": "P054",
@@ -2795,9 +2689,7 @@
       "Serangoon Garden South School",
       "Hougang Primary School"
     ],
-    "id": "P054",
-    "map_x": 72,
-    "map_y": 30
+    "id": "P054"
   },
   {
     "pairing_id": "P055",
@@ -2845,8 +2737,6 @@
     "alternative_schools_list": [
       "Tanjong Katong Primary School"
     ],
-    "id": "P055",
-    "map_x": 78,
-    "map_y": 55
+    "id": "P055"
   }
 ]
