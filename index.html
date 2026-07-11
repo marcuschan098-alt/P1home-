@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Singapore primary school and condo pairing intelligence platform">
   <meta name="theme-color" content="#173b57">
-  <title>P1 Home Intelligence — Version 4.0.1</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIINfQ3ynhDMCeSOU5tLkMZqSxj7wZ0u7w8=" crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=4.0.1">
+  <title>P1 Home Intelligence — Version 4.1</title>
+  <link rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin="">
+  <link rel="stylesheet" href="styles.css?v=4.1.0">
 </head>
 <body>
   <header class="topbar">
@@ -22,7 +24,7 @@
       <button class="topnav-btn" data-view="shortlist">Shortlist <span id="shortlistCount">0</span></button>
     </nav>
     <div class="top-actions">
-      <button id="oneMapSetupBtn" class="btn secondary">OneMap setup</button>
+      <button id="oneMapSetupBtn" class="btn secondary">Coordinate setup</button>
       <button id="exportBtn" class="btn primary">Export CSV</button>
     </div>
   </header>
@@ -124,13 +126,8 @@
 
         <section class="map-panel">
           <div class="map-toolbar">
-            <div id="mapStatus" class="map-status">Loading OneMap…</div>
+            <div id="mapStatus" class="map-status">Loading OneMap Default…</div>
             <div class="map-tools">
-              <select id="baseMapStyle" aria-label="Basemap style">
-                <option value="Original">OneMap Original</option>
-                <option value="GreyLite">OneMap GreyLite</option>
-                <option value="Fallback">Reliable streets fallback</option>
-              </select>
               <label class="inline-check"><input id="showAlternatives" type="checkbox" checked> Alternatives</label>
               <button id="reloadMapBtn" class="btn small secondary">Reload</button>
             </div>
@@ -152,12 +149,9 @@
             <span><i class="legend radius"></i>1 km radius</span>
           </div>
 
-          <div id="mapSourceNote" class="map-source-note">
-            OneMap location data · automatic street fallback if mobile tiles fail
-          </div>
-          <div class="map-attribution">
-            <a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener">OneMap</a>
-            © contributors | Singapore Land Authority
+          <div class="map-attribution official">
+            <img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" alt="OneMap logo">
+            <span><a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener">OneMap</a> © contributors | <a href="https://www.sla.gov.sg/" target="_blank" rel="noopener">Singapore Land Authority</a></span>
           </div>
         </section>
       </div>
@@ -194,7 +188,7 @@
 
   <dialog id="setupDialog" class="setup-dialog">
     <button id="closeSetupDialog" class="drawer-close">×</button>
-    <h2>OneMap coordinate setup</h2>
+    <h2>Coordinate setup</h2>
     <p>The basemap does not require a token. A temporary OneMap token is required only to geocode school and condo names.</p>
     <label>Temporary access token
       <textarea id="tokenInput" placeholder="Paste a current OneMap token"></textarea>
@@ -215,6 +209,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=4.0.1"></script>
+  <script src="app.js?v=4.1.0"></script>
 </body>
 </html>

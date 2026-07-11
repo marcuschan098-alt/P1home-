@@ -1,24 +1,35 @@
-# P1 Home Intelligence — Version 4.0.1
+# P1 Home Intelligence — Version 4.1
 
-Version 4.0.1 is a map-first redesign of the Primary School × Condo Pairing application.
+Version 4.1 replaces the experimental basemap handling with the official OneMap Default XYZ configuration.
 
-## Main changes
+## Map foundation
 
-- Map-first desktop interface with a persistent filter and ranked-results sidebar
-- Mobile layout that stacks filters and map cleanly
-- OneMap Original and GreyLite basemaps
-- Automatic retry of failed OneMap tiles
-- Automatic fallback to OpenStreetMap street tiles when repeated OneMap tile failures occur
+- Official Leaflet 1.9.4 CSS and JavaScript
+- Correct Leaflet CSS integrity hash
+- Official OneMap Default XYZ endpoint
+- `detectRetina: true`
+- `minZoom: 11`
+- `maxZoom: 19`
+- Official OneMap logo and attribution
+- Simplified reload behaviour
+- No experimental fallback or automatic tile switching
+
+## Existing functionality retained
+
+- Map-first interface
 - Target-school, condo and alternative-school markers
-- 1 km radius around a selected target school
-- Filters, ranked results and map remain synchronised
-- Details drawer, compare, shortlist, notes and CSV export retained
-- OneMap geocoding cache can be exported and imported
-- Interrupted geocoding can be resumed
+- 1 km school radius
+- Price slider and filters
+- Ranked results
+- Compare and shortlist
+- Notes
+- Coordinate cache import/export
+- Resume geocoding
+- CSV export
 
-## Deploy to GitHub Pages
+## Deploy
 
-Replace these files in the repository:
+Replace these files in your GitHub repository:
 
 - `index.html`
 - `styles.css`
@@ -26,25 +37,10 @@ Replace these files in the repository:
 - `README.md`
 - `data/pairings.json`
 
-Commit the files, wait for GitHub Pages to redeploy, then force-refresh the browser.
+Commit the changes, wait for GitHub Pages deployment, then force-refresh the page.
 
-## OneMap setup
+## Coordinate setup
 
-The basemap does not need a token. A token is required only for the OneMap Search API used to convert school and condo names into coordinates.
+The basemap itself does not require a token. A temporary OneMap access token is required only for the Search API that converts school and condo names into latitude and longitude.
 
-1. Select **OneMap setup**.
-2. Paste a current temporary token.
-3. Select **Geocode visible** for a small test or **Geocode all**.
-4. Export the completed coordinate cache.
-5. Import that cache on another browser or device.
-
-Never commit a token into the GitHub repository.
-
-
-## Version 4.0.1 mobile tile fix
-
-- Removed the unnecessary `crossOrigin` setting from map tiles.
-- Switches to the reliable street basemap immediately after the first failed OneMap tile.
-- Keeps OneMap as the source for school and condo geocoding.
-- Stops forced tile redraws that created extra requests on mobile.
-- Stacks controls above a full-width map on screens below 1200 px.
+Do not commit the token into GitHub.

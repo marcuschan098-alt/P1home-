@@ -55,18 +55,28 @@ main{height:calc(100% - 72px)}
 }
 
 
-/* Version 4.0.1 — mobile map reliability */
-.map-source-note{
-  position:absolute;
-  right:14px;
-  bottom:43px;
-  z-index:500;
-  background:rgba(255,255,255,.94);
-  border-radius:7px;
-  padding:5px 8px;
-  font-size:.6rem;
-  color:var(--muted);
-  box-shadow:0 2px 8px rgba(0,0,0,.10);
+/* Version 4.1 — official OneMap Default basemap */
+.map-attribution.official{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  max-width:min(460px,80vw);
+}
+.map-attribution.official img{
+  width:34px;
+  height:auto;
+  display:block;
+}
+.map-attribution.official span{
+  line-height:1.2;
+}
+.map-attribution.official a{
+  color:var(--blue);
+  font-weight:850;
+  text-decoration:none;
+}
+.map-tools{
+  align-items:center;
 }
 @media(max-width:1200px){
   body{overflow:auto}
@@ -79,8 +89,7 @@ main{height:calc(100% - 72px)}
 @media(max-width:580px){
   .map-panel{height:68vh;min-height:500px}
   .map-toolbar{left:8px;right:8px;top:8px}
-  .map-kpis{left:8px;top:112px}
+  .map-kpis{left:8px;top:60px}
+  .map-attribution.official{right:8px;bottom:58px}
   .map-legend{left:8px;right:8px;bottom:8px}
-  .map-attribution{right:8px;bottom:62px}
-  .map-source-note{right:8px;bottom:86px}
 }

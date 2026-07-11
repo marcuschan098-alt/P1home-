@@ -8,8 +8,7 @@ const state={
   queue:JSON.parse(localStorage.getItem("p1_geocode_queue")||"[]"),
   token:sessionStorage.getItem("p1_onemap_token")||"",
   map:null,markerLayer:null,radius:null,baseLayer:null,
-  baseStyle:localStorage.getItem("p1_basemap_style")||"Original",
-  tileErrors:0,fallbackUsed:false,activePairingId:"",compact:false
+  activePairingId:"",compact:false
 };
 const $=id=>document.getElementById(id);
 const safe=v=>(v===null||v===undefined||v==="")?"—":v;
@@ -95,59 +94,58 @@ function setView(name){
 }
 function mapStatus(text,type=""){const el=$("mapStatus");el.textContent=text;el.className=`map-status ${type}`.trim()}
 function showLoading(show,text="Loading map…"){$("mapLoadingMask").textContent=text;$("mapLoadingMask").classList.toggle("show",show)}
-function createBase(style){
-  const isFallback=style==="Fallback";
-  const url=isFallback
-    ?"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    :`https://www.onemap.gov.sg/maps/tiles/${style}/{z}/{x}/{y}.png`;
-
-  const options={
-    minZoom:10,
-    maxZoom:19,
-    keepBuffer:6,
-    updateWhenIdle:true,
-    updateWhenZooming:false,
-    attribution:isFallback
-      ?"© OpenStreetMap contributors"
-      :"OneMap © contributors | Singapore Land Authority"
-  };
-
-  // Deliberately omit crossOrigin. It is unnecessary for display-only tiles
-  // and can cause tile images to be rejected when CORS headers are inconsistent.
-  const layer=L.tileLayer(url,options);
+function createBase(){
+  const layer=L.tileLayer(
+    "https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",
+    {
+      detectRetina:true,
+      minZoom:11,
+      maxZoom:19,
+      attribution:"OneMap © contributors | Singapore Land Authority"
+    }
+  );
 
   layer.on("loading",()=>{
-    showLoading(true,`Loading ${isFallback?"street":`OneMap ${style}`} basemap…`);
+    showLoading(true,"Loading OneMap Default…");
+    mapStatus("Loading OneMap Default basemap…","busy");
   });
 
   layer.on("load",()=>{
     showLoading(false);
-    if(isFallback){
-      mapStatus("Reliable street basemap loaded. OneMap remains the source for geocoded locations.","ok");
-    }else{
-      mapStatus(`OneMap ${style} basemap loaded. Monitoring tile completeness…`,"ok");
-    }
+    mapStatus("OneMap Default basemap loaded.","ok");
   });
 
   layer.on("tileerror",()=>{
-    state.tileErrors++;
-
-    // A single missing tile produces a broken checkerboard on mobile.
-    // Fall back immediately instead of waiting for several failures.
-    if(!isFallback&&!state.fallbackUsed){
-      state.fallbackUsed=true;
-      showLoading(true,"OneMap tile failed. Switching to reliable street basemap…");
-      mapStatus("A OneMap tile failed on this connection. Switching to the reliable street basemap.","error");
-      setTimeout(()=>switchBase("Fallback",true),150);
-    }
+    showLoading(false);
+    mapStatus("A OneMap tile failed to load. Tap Reload to retry the official basemap.","error");
   });
 
   return layer;
 }
-function switchBase(style,automatic=false){if(!state.map)return;if(state.baseLayer)state.map.removeLayer(state.baseLayer);state.baseStyle=style;state.tileErrors=0;if(!automatic)state.fallbackUsed=false;localStorage.setItem("p1_basemap_style",style);state.baseLayer=createBase(style).addTo(state.map);$("baseMapStyle").value=style}
-function ensureMap(){
-  if(state.map||!window.L)return;state.map=L.map("oneMap",{preferCanvas:true,zoomControl:true,zoomSnap:1}).setView([1.3521,103.8198],11);switchBase(state.baseStyle);state.markerLayer=L.layerGroup().addTo(state.map);state.map.on("resize",()=>state.map.invalidateSize())
+
+function reloadBase(){
+  if(!state.map)return;
+  if(state.baseLayer)state.map.removeLayer(state.baseLayer);
+  state.baseLayer=createBase().addTo(state.map);
+  setTimeout(()=>state.map.invalidateSize(true),120);
 }
+
+function ensureMap(){
+  if(state.map||!window.L)return;
+  state.map=L.map("oneMap",{
+    preferCanvas:true,
+    zoomControl:true,
+    zoomSnap:1
+  }).setView([1.3521,103.8198],11);
+
+  state.baseLayer=createBase().addTo(state.map);
+  state.markerLayer=L.layerGroup().addTo(state.map);
+
+  state.map.whenReady(()=>{
+    setTimeout(()=>state.map.invalidateSize(true),80);
+  });
+}
+
 function icon(type){const char=type==="school"?"S":type==="condo"?"C":"A",size=type==="school"?30:type==="condo"?25:21;return L.divIcon({className:"",html:`<div class="map-marker ${type}">${char}</div>`,iconSize:[size,size],iconAnchor:[size/2,size/2]})}
 function updateMapKpis(){
   const schools=new Set(),condos=new Set();state.data.forEach(d=>{if(coordinate("school",d.target_school))schools.add(d.target_school);if(coordinate("condo",d.condo))condos.add(d.condo)});
@@ -166,7 +164,7 @@ function renderMap(){
   }
   updateMapKpis();
   if(bounds.length){state.map.fitBounds(bounds,{padding:[45,45],maxZoom:school?15:13});mapStatus(`${bounds.length} mapped locations shown.`,"ok")}
-  else{state.map.setView([1.3521,103.8198],11);mapStatus("Basemap is ready. Open OneMap setup to geocode schools and condos.","ok")}
+  else{state.map.setView([1.3521,103.8198],11);mapStatus("OneMap Default is ready. Open Coordinate setup to geocode schools and condos.","ok")}
 }
 function detailItem(l,v){return`<div class="detail-item"><small>${l}</small><strong>${safe(v)}</strong></div>`}
 function sourceLink(l,u){return u&&/^https?:/.test(u)?`<a href="${u}" target="_blank" rel="noopener">${l}</a>`:""}
@@ -184,13 +182,13 @@ function renderCompare(){const items=[...state.compare].map(findById).filter(Boo
 function renderShortlist(){const items=[...state.shortlist].map(findById).filter(Boolean);$("shortlistContainer").innerHTML=items.length?items.map(standaloneCard).join(""):"<p>Your shortlist is empty.</p>";$("shortlistContainer").querySelectorAll(".details").forEach(b=>b.onclick=()=>openDetails(findById(b.dataset.id)))}
 async function searchOneMap(name,token){
   const url=`https://www.onemap.gov.sg/api/common/elastic/search?searchVal=${encodeURIComponent(name)}&returnGeom=Y&getAddrDetails=Y&pageNum=1`;
-  const response=await fetch(url,{headers:{Authorization:token}});if(!response.ok)throw new Error(`OneMap Search HTTP ${response.status}`);const payload=await response.json(),results=payload.results||[];if(!results.length)return null;
+  const response=await fetch(url,{headers:{Authorization:`Bearer ${token}`}});if(!response.ok)throw new Error(`OneMap Search HTTP ${response.status}`);const payload=await response.json(),results=payload.results||[];if(!results.length)return null;
   const lower=name.toLowerCase(),choice=results.find(r=>String(r.SEARCHVAL||"").toLowerCase()===lower)||results.find(r=>String(r.SEARCHVAL||"").toLowerCase().includes(lower))||results[0];const lat=Number(choice.LATITUDE),lng=Number(choice.LONGITUDE);return Number.isFinite(lat)&&Number.isFinite(lng)?{lat,lng,label:choice.SEARCHVAL,address:choice.ADDRESS}:null
 }
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 function tasks(scope){const src=scope==="visible"?state.filtered:state.data,out=[];[...new Set(src.map(d=>d.target_school))].forEach(n=>out.push(["school",n]));[...new Set(src.map(d=>d.condo))].forEach(n=>out.push(["condo",n]));[...new Set(src.flatMap(d=>d.alternative_schools_list||[]))].forEach(n=>out.push(["alternative",n]));return out}
 async function runQueue(list){
-  const token=($("tokenInput").value||state.token).trim();if(!token){alert("Paste a valid OneMap token.");return}state.token=token;sessionStorage.setItem("p1_onemap_token",token);state.queue=[...list];persist();let found=0,failed=0,total=state.queue.length;
+  const token=($("tokenInput").value||state.token).trim();if(!token){alert("Paste a valid OneMap token for geocoding.");return}state.token=token;sessionStorage.setItem("p1_onemap_token",token);state.queue=[...list];persist();let found=0,failed=0,total=state.queue.length;
   try{while(state.queue.length){const[type,name]=state.queue[0],k=key(type,name);$("setupProgress").textContent=`Geocoding ${total-state.queue.length+1} of ${total}: ${name}`;if(!state.coordinates[k]){try{const result=await searchOneMap(name,token);if(result){state.coordinates[k]=result;found++}else failed++}catch(err){if(/401|403|token/i.test(err.message))throw err;failed++}}state.queue.shift();persist();updateMapKpis();await delay(160)}
     $("setupProgress").textContent=`Completed: ${found} new locations; ${failed} not found.`;$("setupDialog").close();renderMap()
   }catch(err){$("setupProgress").textContent=`${err.message}. ${state.queue.length} locations remain. Use Resume after refreshing the token.`}
@@ -199,13 +197,13 @@ function exportCache(){const blob=new Blob([JSON.stringify(state.coordinates,nul
 async function importCache(file){if(!file)return;try{const obj=JSON.parse(await file.text());state.coordinates={...state.coordinates,...obj};persist();updateMapKpis();renderMap();$("setupProgress").textContent=`Imported ${Object.keys(obj).length} cached locations.`}catch(e){alert("Invalid coordinate cache file.")}}
 function exportCsv(){const fields=["target_school","condo","region","admission_risk","admission_chance_20","3_bed_cost","top_year","tenure","overall_score_100"],lines=[fields.join(",")].concat(state.filtered.map(d=>fields.map(f=>`"${String(d[f]??"").replaceAll('"','""')}"`).join(","))),blob=new Blob([lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href)}
 async function init(){
-  state.data=await(await fetch("data/pairings.json?v=4.0.0")).json();state.filtered=[...state.data];
+  state.data=await(await fetch("data/pairings.json?v=4.1.0")).json();state.filtered=[...state.data];
   populate("schoolFilter",unique("target_school"));populate("regionFilter",unique("region"));populate("categoryFilter",unique("school_category"));populate("riskFilter",unique("admission_risk"));populate("tenureFilter",unique("tenure"));populateSuggestions();
   ["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","sortFilter","priceMin","priceMax"].forEach(id=>$(id).addEventListener("input",applyFilters));
   document.querySelectorAll(".topnav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
   $("resetFiltersBtn").onclick=()=>{["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter"].forEach(id=>$(id).value="");$("sortFilter").value="overall_desc";$("priceMin").value=1e6;$("priceMax").value=3e6;applyFilters()};
   $("toggleResultsBtn").onclick=()=>{state.compact=!state.compact;$("toggleResultsBtn").textContent=state.compact?"Expanded":"Compact";renderResults()};
-  $("fitMarkersBtn").onclick=renderMap;$("showAlternatives").onchange=renderMap;$("baseMapStyle").value=state.baseStyle;$("baseMapStyle").onchange=()=>{state.fallbackUsed=false;switchBase($("baseMapStyle").value)};$("reloadMapBtn").onclick=()=>{state.fallbackUsed=false;switchBase(state.baseStyle);setTimeout(()=>state.map.invalidateSize(),100)};
+  $("fitMarkersBtn").onclick=renderMap;$("showAlternatives").onchange=renderMap;$("reloadMapBtn").onclick=reloadBase;
   $("oneMapSetupBtn").onclick=()=>{$("tokenInput").value=state.token;$("setupDialog").showModal()};$("closeSetupDialog").onclick=()=>$("setupDialog").close();$("saveTokenBtn").onclick=()=>{state.token=$("tokenInput").value.trim();sessionStorage.setItem("p1_onemap_token",state.token);$("setupProgress").textContent="Token saved for this session."};$("geocodeVisibleBtn").onclick=()=>runQueue(tasks("visible"));$("geocodeAllBtn").onclick=()=>runQueue(tasks("all"));$("resumeGeocodeBtn").onclick=()=>state.queue.length?runQueue(state.queue):$("setupProgress").textContent="No incomplete queue.";$("exportCoordinatesBtn").onclick=exportCache;$("importCoordinatesInput").onchange=e=>importCache(e.target.files[0]);$("clearCoordinatesBtn").onclick=()=>{state.coordinates={};state.queue=[];persist();updateMapKpis();renderMap();$("setupProgress").textContent="Coordinate cache cleared."};
   $("closeDrawer").onclick=closeDrawer;$("drawerBackdrop").onclick=closeDrawer;$("clearCompareBtn").onclick=()=>{state.compare.clear();persist();renderCompare();renderResults()};$("clearShortlistBtn").onclick=()=>{state.shortlist.clear();persist();renderShortlist();renderResults()};$("exportBtn").onclick=exportCsv;
   persist();updatePrice();ensureMap();updateMapKpis();applyFilters()
