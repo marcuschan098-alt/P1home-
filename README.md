@@ -1,24 +1,28 @@
-# P1 Home Intelligence — Version 4.2
+# P1 Home Intelligence — Version 4.2.1
 
-Version 4.2 adds the Singapore-ready platform foundation while preserving the stable Version 4.1.1 user experience.
+Version 4.2.1 adds backward-compatible and fault-tolerant data loading.
 
-## Data architecture
-- `data/schools.json`
-- `data/condos.json`
-- `data/pairings.json` (normalised references)
-- `data/pairings-expanded.json` (stable current UI compatibility)
-- `data/coordinates.json`
-- `data/manifest.json`
+## Reliability changes
 
-## Coverage levels
-- Curated: full evidence and scoring
-- Basic: core property and map data
-- Mapped: location only, without invented scores
+- The public application requires only `data/pairings.json`, matching the earlier deployment structure.
+- `schools.json`, `condos.json`, `platform-pairings.json`, `coordinates.json`, and `manifest.json` are optional platform files.
+- Missing optional files no longer stop the public app from loading.
+- HTML or 404 responses are detected and reported clearly instead of producing `Unexpected token '<'`.
+- Corrupt Admin Mode local-storage data falls back safely to repository data.
 
-## Hidden Admin Mode
-Open with `Ctrl + Shift + A` on a keyboard or append `#admin` to the site URL. This is an interface-hiding mechanism, not secure authentication, because GitHub Pages is static hosting.
+## Recommended deployment
 
-Admin tools include data health, coordinate setup, adding map-only schools or condos, building local pairings, and exporting a platform bundle.
+Upload all files and folders in this package to the repository root. In particular, upload the entire `data` folder.
 
-## Deploy
-Replace the repository contents with this package, preserving the `data` folder. Commit and force-refresh after GitHub Pages deploys.
+For the smallest emergency update, these files restore the public application:
+
+- `index.html`
+- `styles.css`
+- `app.js`
+- `data/pairings.json`
+
+The other data files enable the Version 4.2 Admin Mode and platform architecture.
+
+## Admin Mode
+
+Open the site with `#admin` at the end of the URL, or press `Ctrl + Shift + A` on a keyboard.

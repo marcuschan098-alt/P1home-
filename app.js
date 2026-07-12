@@ -196,8 +196,24 @@ async function runQueue(list){
 function exportCache(){const blob=new Blob([JSON.stringify(state.coordinates,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="p1-onemap-coordinates.json";a.click();URL.revokeObjectURL(a.href)}
 async function importCache(file){if(!file)return;try{const obj=JSON.parse(await file.text());state.coordinates={...state.coordinates,...obj};persist();updateMapKpis();renderMap();$("setupProgress").textContent=`Imported ${Object.keys(obj).length} cached locations.`}catch(e){alert("Invalid coordinate cache file.")}}
 function exportCsv(){const fields=["target_school","condo","region","admission_risk","admission_chance_20","3_bed_cost","top_year","tenure","overall_score_100"],lines=[fields.join(",")].concat(state.filtered.map(d=>fields.map(f=>`"${String(d[f]??"").replaceAll('"','""')}"`).join(","))),blob=new Blob([lines.join("\n")],{type:"text/csv"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="filtered-pairings.csv";a.click();URL.revokeObjectURL(a.href)}
+async function fetchJsonRequired(url){
+  const response=await fetch(url,{cache:"no-store"});
+  if(!response.ok)throw new Error(`Required data file unavailable: ${url} (HTTP ${response.status})`);
+  const text=await response.text();
+  try{return JSON.parse(text)}catch{
+    throw new Error(`Required data file returned HTML instead of JSON: ${url}`);
+  }
+}
+async function fetchJsonOptional(url,fallback){
+  try{
+    const response=await fetch(url,{cache:"no-store"});
+    if(!response.ok)return fallback;
+    const text=await response.text();
+    return JSON.parse(text);
+  }catch{return fallback}
+}
 async function init(){
-  state.data=await(await fetch("data/pairings-expanded.json?v=4.2.0")).json();state.filtered=[...state.data];
+  state.data=await fetchJsonRequired("data/pairings.json?v=4.2.1");state.filtered=[...state.data];
   populate("schoolFilter",unique("target_school"));populate("regionFilter",unique("region"));populate("categoryFilter",unique("school_category"));populate("riskFilter",unique("admission_risk"));populate("tenureFilter",unique("tenure"));populateSuggestions();
   ["globalSearch","schoolFilter","regionFilter","categoryFilter","riskFilter","tenureFilter","topFilter","sortFilter","priceMin","priceMax"].forEach(id=>$(id).addEventListener("input",applyFilters));
   document.querySelectorAll(".topnav-btn").forEach(b=>b.onclick=()=>setView(b.dataset.view));
@@ -211,22 +227,25 @@ async function init(){
 init().catch(err=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load application</h1><p>${err.message}</p></main>`);
 
 
-/* Version 4.2 platform foundation and hidden Admin Mode */
+/* Version 4.2.1 platform foundation and hidden Admin Mode */
 const platform={schools:[],condos:[],pairings:[],manifest:{},coordinates:{}};
 async function loadPlatformData(){
   const [s,c,p,m,co]=await Promise.all([
-    fetch('data/schools.json?v=4.2.0').then(r=>r.json()),
-    fetch('data/condos.json?v=4.2.0').then(r=>r.json()),
-    fetch('data/pairings.json?v=4.2.0').then(r=>r.json()),
-    fetch('data/manifest.json?v=4.2.0').then(r=>r.json()),
-    fetch('data/coordinates.json?v=4.2.0').then(r=>r.json())
+    fetchJsonOptional('data/schools.json?v=4.2.1',[]),
+    fetchJsonOptional('data/condos.json?v=4.2.1',[]),
+    fetchJsonOptional('data/platform-pairings.json?v=4.2.1',[]),
+    fetchJsonOptional('data/manifest.json?v=4.2.1',{}),
+    fetchJsonOptional('data/coordinates.json?v=4.2.1',{})
   ]);
-  platform.schools=JSON.parse(localStorage.getItem('p1_platform_schools')||'null')||s;
-  platform.condos=JSON.parse(localStorage.getItem('p1_platform_condos')||'null')||c;
-  platform.pairings=JSON.parse(localStorage.getItem('p1_platform_pairings')||'null')||p;
+  platform.schools=safeLocalJson('p1_platform_schools',s);
+  platform.condos=safeLocalJson('p1_platform_condos',c);
+  platform.pairings=safeLocalJson('p1_platform_pairings',p);
   platform.manifest=m;
   platform.coordinates={...co,...(JSON.parse(localStorage.getItem('p1_onemap_coordinates')||'{}'))};
   renderAdminHealth(); refreshAdminBuilders();
+}
+function safeLocalJson(key,fallback){
+  try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback}catch{return fallback}
 }
 function platformSave(){
   localStorage.setItem('p1_platform_schools',JSON.stringify(platform.schools));
