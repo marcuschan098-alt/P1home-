@@ -29,5 +29,125 @@ async function searchOneMap(n){const r=await fetch(`https://www.onemap.gov.sg/ap
 async function runQueue(tasks){if(!state.token)return alert("Paste a OneMap token first.");state.queue=[...tasks];persist();let done=0;while(state.queue.length){const[t,n]=state.queue[0],k=key(t,n);$("progress").textContent=`${done+1}/${tasks.length}: ${n}`;if(!state.coordinates[k]){try{const x=await searchOneMap(n);if(x)state.coordinates[k]=x}catch(e){$("progress").textContent=e.message;persist();return}}state.queue.shift();done++;persist();await new Promise(r=>setTimeout(r,160))}$("progress").textContent=`Completed ${done} searches.`;renderKnowledge();apply()}
 function exportJson(name,obj){const a=document.createElement("a"),b=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});a.href=URL.createObjectURL(b);a.download=name;a.click();URL.revokeObjectURL(a.href)}function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v6-results.csv";a.click()}
 function activateAdmin(){sessionStorage.setItem("v6_admin","1");$("kbNav").classList.remove("hidden");setView("knowledge")}
-async function init(){[state.pairs,state.schools,state.developments]=await Promise.all([loadJson("data/pairings-expanded.json?v=6.0.0"),loadJson("data/schools-v6.json?v=6.0.0"),loadJson("data/developments-v6.json?v=6.0.0")]);const repoCoords=await loadJson("data/coordinates.json?v=6.0.0",{});state.coordinates={...repoCoords,...state.coordinates};if(!state.addresses.length)state.addresses=await loadJson("data/residential-address-points.json?v=6.0.0",[]);if(!state.kb.length)state.kb=await loadJson("data/distance-knowledge-base.json?v=6.0.0",[]);const uniq=(f)=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",uniq("target_school")],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;$("openSetup").onclick=()=>{$("token").value=state.token;$("setup").showModal()};$("closeSetup").onclick=()=>$("setup").close();$("saveToken").onclick=()=>{state.token=$("token").value.trim();sessionStorage.setItem("p1_onemap_token",state.token)};$("geocodeKnown").onclick=()=>runQueue([...state.schools.map(s=>["school",s.name]),...state.developments.map(d=>["condo",d.name])]);$("geocodeAddresses").onclick=()=>runQueue(state.addresses.map(a=>["address",a.query]));$("resume").onclick=()=>runQueue(state.queue);$("exportCoords").onclick=()=>exportJson("p1-v6-coordinates.json",state.coordinates);$("importCoords").onchange=async e=>{const o=JSON.parse(await e.target.files[0].text());state.coordinates={...state.coordinates,...o};persist();renderKnowledge();apply()};$("addAddress").onclick=addAddress;$("buildKB").onclick=buildKB;$("exportKB").onclick=()=>exportJson("p1-v6-distance-knowledge-base.json",state.kb);$("tolerance").onchange=()=>{state.tolerance=Number($("tolerance").value);persist()};$("exitAdmin").onclick=()=>setView("explore");document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a")activateAdmin();if(e.key==="Escape")$("drawer").classList.remove("open")});let taps=0,timer;$("brandTrigger").onclick=()=>{taps++;clearTimeout(timer);timer=setTimeout(()=>taps=0,1000);if(taps>=7)activateAdmin()};if(location.hash==="#admin"||sessionStorage.getItem("v6_admin")==="1")$("kbNav").classList.remove("hidden");persist();ensureMap();apply();renderKnowledge()}
+
+function entityInventory(){
+  const schools=(state.platform.schools||[]).map(x=>({type:"school",name:x.name||x.school_name||x.target_school}));
+  const condos=(state.platform.condos||[]).map(x=>({type:"condo",name:x.name||x.condo}));
+  const blocks=(state.residentialBlocks||[]).map(x=>({type:"block",name:x.address||x.postal||x.label}));
+  return [...schools,...condos,...blocks].filter(x=>x.name);
+}
+function coordinateRecordFor(item){return state.coordinates[key(item.type,item.name)]||null}
+function buildCoordinateIssues(){
+  const inventory=entityInventory(),issues=[],seen=new Map(),now=Date.now();
+  inventory.forEach(item=>{
+    const rec=coordinateRecordFor(item);
+    if(!rec){issues.push({...item,status:"missing",match:"—",checked:"—"});return}
+    if(rec.error){issues.push({...item,status:"failed",match:rec.error,checked:rec.checked_at||"—"});return}
+    const age=rec.checked_at?Math.floor((now-Date.parse(rec.checked_at))/86400000):9999;
+    if(age>180)issues.push({...item,status:"stale",match:rec.label||rec.address||"—",checked:rec.checked_at||"—"});
+    const fingerprint=`${Number(rec.lat).toFixed(6)},${Number(rec.lng).toFixed(6)}`;
+    if(seen.has(fingerprint))issues.push({...item,status:"duplicate",match:`Same point as ${seen.get(fingerprint)}`,checked:rec.checked_at||"—"});
+    else seen.set(fingerprint,item.name);
+  });
+  return issues;
+}
+function coordinateCoverage(){
+  const inv=entityInventory(),totals={school:0,condo:0,block:0},done={school:0,condo:0,block:0};
+  inv.forEach(x=>{totals[x.type]++;if(coordinateRecordFor(x))done[x.type]++});
+  const issues=buildCoordinateIssues();
+  return{totals,done,issues,missing:issues.filter(x=>x.status==="missing").length,failed:issues.filter(x=>x.status==="failed").length,duplicates:issues.filter(x=>x.status==="duplicate").length};
+}
+function renderCoordinateManager(){
+  if(!$("coordAuditBody"))return;
+  const c=coordinateCoverage();
+  $("coordSchoolsDone").textContent=`${c.done.school}/${c.totals.school}`;
+  $("coordCondosDone").textContent=`${c.done.condo}/${c.totals.condo}`;
+  $("coordBlocksDone").textContent=`${c.done.block}/${c.totals.block}`;
+  $("coordMissingCount").textContent=c.missing;
+  $("coordFailedCount").textContent=c.failed;
+  $("coordDuplicateCount").textContent=c.duplicates;
+  const rows=[
+    ["Schools",c.done.school,c.totals.school],
+    ["Condos",c.done.condo,c.totals.condo],
+    ["Residential blocks",c.done.block,c.totals.block]
+  ];
+  $("coverageProgress").innerHTML=rows.map(([label,done,total])=>`<div class="coverage-row"><header><span>${label}</span><span>${done}/${total}</span></header><progress max="${Math.max(total,1)}" value="${done}"></progress></div>`).join("");
+  const f=$("coordAuditFilter").value;
+  const filtered=c.issues.filter(x=>!f||x.status===f);
+  $("coordAuditBody").innerHTML=filtered.length?filtered.map(x=>`<tr><td>${x.type}</td><td>${safe(x.name)}</td><td><span class="coord-issue ${x.status}">${x.status}</span></td><td>${safe(x.match)}</td><td>${safe(x.checked)}</td><td><button class="btn small coord-retry" data-type="${x.type}" data-name="${String(x.name).replaceAll('"','&quot;')}">Queue</button></td></tr>`).join(""):'<tr><td colspan="6">No issues for this filter.</td></tr>';
+  document.querySelectorAll(".coord-retry").forEach(b=>b.onclick=()=>queueOne(b.dataset.type,b.dataset.name));
+  const complete=c.missing===0&&c.failed===0&&c.totals.school>0&&c.totals.condo>0;
+  $("readinessGate").className=`readiness-gate ${complete?"ready":""}`;
+  $("readinessGate").textContent=complete?"Coordinate coverage is ready for distance generation.":"Distance generation is locked until all required school and condo coordinates are present and failed records are resolved.";
+  $("generateDistanceDbBtn").disabled=!complete;
+}
+function queueOne(type,name){
+  if(!state.queue.some(x=>x[0]===type&&x[1]===name))state.queue.push([type,name]);
+  persist();renderCoordinateManager();
+}
+function buildMissingQueue(){
+  const issues=buildCoordinateIssues().filter(x=>x.status==="missing"||x.status==="failed");
+  state.queue=issues.map(x=>[x.type,x.name]);
+  persist();$("bulkProgressText").textContent=`Queued ${state.queue.length} missing or failed records.`;renderCoordinateManager();
+}
+function retryFailed(){
+  state.queue=[...state.failedQueue];
+  state.failedQueue=[];
+  persist();$("bulkProgressText").textContent=`Queued ${state.queue.length} failed records for retry.`;renderCoordinateManager();
+}
+async function runBulkQueue(){
+  const token=($("bulkTokenInput").value||state.token||"").trim();
+  if(!token){$("bulkProgressText").textContent="Paste a valid OneMap token.";return}
+  state.token=token;sessionStorage.setItem("p1_onemap_token",token);state.bulkPaused=false;
+  const total=state.queue.length,bar=$("bulkProgressBar");
+  if(!total){$("bulkProgressText").textContent="Queue is empty.";return}
+  while(state.queue.length&&!state.bulkPaused){
+    const [type,name]=state.queue[0];
+    const done=total-state.queue.length;
+    bar.value=Math.round(done/total*100);
+    $("bulkProgressText").textContent=`${done+1}/${total}: ${name}`;
+    try{
+      const result=await searchOneMap(name,token);
+      if(result)state.coordinates[key(type,name)]={...result,checked_at:new Date().toISOString(),source:"OneMap Search"};
+      else{
+        state.failedQueue.push([type,name]);
+        state.coordinates[key(type,name)]={error:"No result",checked_at:new Date().toISOString()};
+      }
+    }catch(err){
+      state.failedQueue.push([type,name]);
+      state.coordinates[key(type,name)]={error:err.message,checked_at:new Date().toISOString()};
+      if(/401|403|Failed to fetch/i.test(err.message)){persist();$("bulkProgressText").textContent=`Stopped: ${err.message}`;renderCoordinateManager();return}
+    }
+    state.queue.shift();persist();renderCoordinateManager();
+    await new Promise(r=>setTimeout(r,220));
+  }
+  bar.value=state.queue.length?Math.round((total-state.queue.length)/total*100):100;
+  $("bulkProgressText").textContent=state.bulkPaused?"Paused.":"Bulk geocoding complete.";
+  renderCoordinateManager();updateMapKpis();renderMap();
+}
+async function importJsonFile(file,kind){
+  if(!file)return;
+  try{
+    const obj=JSON.parse(await file.text());
+    if(kind==="schools")state.platform.schools=Array.isArray(obj)?obj:(obj.schools||[]);
+    if(kind==="condos")state.platform.condos=Array.isArray(obj)?obj:(obj.condos||[]);
+    if(kind==="blocks")state.residentialBlocks=Array.isArray(obj)?obj:(obj.blocks||[]);
+    if(kind==="coordinates")state.coordinates={...state.coordinates,...obj};
+    persist();$("importStatus").textContent=`Imported ${kind}.`;renderCoordinateManager();populateSuggestions();
+  }catch{$("importStatus").textContent=`Invalid ${kind} JSON.`}
+}
+function downloadJson(name,obj){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);
+}
+function exportIssueList(status){
+  downloadJson(`p1-${status}-coordinates.json`,buildCoordinateIssues().filter(x=>x.status===status));
+}
+function generateDistanceDatabase(){
+  if($("generateDistanceDbBtn").disabled)return;
+  buildKnowledgeBase();
+  alert("Distance database generated from the current validated coordinates.");
+}
+
+async function init(){[state.pairs,state.schools,state.developments]=await Promise.all([loadJson("data/pairings-expanded.json?v=6.1.0"),loadJson("data/schools-v6.json?v=6.1.0"),loadJson("data/developments-v6.json?v=6.1.0")]);const repoCoords=await loadJson("data/coordinates.json?v=6.1.0",{});state.coordinates={...repoCoords,...state.coordinates};if(!state.addresses.length)state.addresses=await loadJson("data/residential-address-points.json?v=6.1.0",[]);if(!state.kb.length)state.kb=await loadJson("data/distance-knowledge-base.json?v=6.1.0",[]);const uniq=(f)=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",uniq("target_school")],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;$("openSetup").onclick=()=>{$("token").value=state.token;$("setup").showModal()};$("closeSetup").onclick=()=>$("setup").close();$("saveToken").onclick=()=>{state.token=$("token").value.trim();sessionStorage.setItem("p1_onemap_token",state.token)};$("geocodeKnown").onclick=()=>runQueue([...state.schools.map(s=>["school",s.name]),...state.developments.map(d=>["condo",d.name])]);$("geocodeAddresses").onclick=()=>runQueue(state.addresses.map(a=>["address",a.query]));$("resume").onclick=()=>runQueue(state.queue);$("exportCoords").onclick=()=>exportJson("p1-v6-coordinates.json",state.coordinates);$("importCoords").onchange=async e=>{const o=JSON.parse(await e.target.files[0].text());state.coordinates={...state.coordinates,...o};persist();renderKnowledge();apply()};$("addAddress").onclick=addAddress;$("buildKB").onclick=buildKB;$("exportKB").onclick=()=>exportJson("p1-v6-distance-knowledge-base.json",state.kb);$("tolerance").onchange=()=>{state.tolerance=Number($("tolerance").value);persist()};$("exitAdmin").onclick=()=>setView("explore");document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a")activateAdmin();if(e.key==="Escape")$("drawer").classList.remove("open")});let taps=0,timer;$("brandTrigger").onclick=()=>{taps++;clearTimeout(timer);timer=setTimeout(()=>taps=0,1000);if(taps>=7)activateAdmin()};if(location.hash==="#admin"||sessionStorage.getItem("v6_admin")==="1")$("kbNav").classList.remove("hidden");persist();ensureMap();apply();renderKnowledge()}
 init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 6</h1><p>${e.message}</p></main>`);

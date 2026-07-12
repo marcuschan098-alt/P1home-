@@ -1,19 +1,28 @@
-# P1 Home Intelligence — Version 6.0
+# P1 Home Intelligence — Version 6.1
 
-Version 6 replaces session-only distance calculation with a reusable distance knowledge-base architecture.
+Version 6.1 adds a dedicated Coordinate Manager before distance generation.
 
-## Evidence hierarchy
+## Coordinate Manager
 
-1. Exact residential address points, preferably postal codes
-2. Development-level OneMap point for screening
-3. Missing data, never silently inferred
+- Coverage dashboard for schools, condos and residential blocks
+- Missing-coordinate detection
+- Failed-request queue
+- Bulk queue creation
+- One-at-a-time bulk geocoding
+- Pause and resume
+- Retry failed records
+- Import schools, condos, blocks and coordinate caches
+- Export coordinates, missing records and failures
+- Possible duplicate-coordinate detection
+- Stale-coordinate detection
+- Readiness gate before distance database generation
 
-## Singapore-wide behaviour
+## Important deployment note
 
-The included catalogue contains all schools referenced by the current curated dataset, including alternative schools. A known non-target school can return nearby unscored developments after its coordinate and the distance knowledge base are available. No admission or investment score is invented for those generated results.
+GitHub Pages remains a static site. Browser-to-OneMap geocoding may still fail if the OneMap API blocks the request, the token is expired, or the browser rejects the cross-origin request.
 
-This package does not yet contain every Singapore school or every residential address. The Admin Knowledge Base screen is designed for progressive expansion and quality control.
+Version 6.1 preserves the failed queue and allows coordinate caches to be imported, so geocoding can also be completed outside the public site and then loaded into the app.
 
-## First deployment
+## Admin access
 
-Your existing browser coordinate cache is compatible. Open `#admin`, import or geocode coordinates, add exact residential addresses where needed, then select Build / refresh KB. Export the KB for later inclusion in the repository.
+Use `#admin`, the existing admin shortcut, or the hidden admin activation method. Then open **Coordinate Manager**.

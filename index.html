@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173b57"><title>P1 Home Intelligence — Version 6</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""><link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"><link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"><link rel="stylesheet" href="styles.css?v=6.0.0"></head><body>
-<header class="topbar"><div class="brand" id="brandTrigger"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V6</em></strong></div><nav><button class="nav active" data-view="explore">Explore</button><button class="nav" data-view="compare">Compare <b id="compareCount">0</b></button><button class="nav" data-view="shortlist">Shortlist <b id="shortlistCount">0</b></button><button id="kbNav" class="nav hidden" data-view="knowledge">Knowledge Base</button></nav><button id="exportBtn" class="btn gold">Export CSV</button></header>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#173b57"><title>P1 Home Intelligence — Version 6</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""><link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"><link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"><link rel="stylesheet" href="styles.css?v=6.1.0"></head><body>
+<header class="topbar"><div class="brand" id="brandTrigger"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V6.1</em></strong></div><nav><button class="nav active" data-view="explore">Explore</button><button class="nav" data-view="compare">Compare <b id="compareCount">0</b></button><button class="nav" data-view="shortlist">Shortlist <b id="shortlistCount">0</b></button><button id="kbNav" class="nav hidden" data-view="knowledge">Knowledge Base</button></nav><button id="exportBtn" class="btn gold">Export CSV</button></header>
 <main>
 <section id="exploreView" class="view active"><div class="layout">
 <aside class="filters"><div class="scroll"><h1>School–home intelligence</h1><p class="lede">Search a known school. Curated matches retain full scores; other known schools generate nearby unscored homes from the distance knowledge base.</p><label>School or condo search<input id="search" list="suggestions" placeholder="e.g. Geylang Methodist School (Primary)"><datalist id="suggestions"></datalist></label><div id="searchMode" class="notice"></div><label>Decision profile<select id="profile"><option value="balanced">Balanced family</option><option value="admission">Admission first</option><option value="investment">Investment focus</option><option value="family">Family convenience</option></select></label><div class="budget"><div><b>3-bedroom value</b><output id="priceText">S$1.00M – S$3.00M</output></div><input id="priceMin" type="range" min="1000000" max="3000000" step="50000" value="1000000"><input id="priceMax" type="range" min="1000000" max="3000000" step="50000" value="3000000"></div><div class="grid"><label>Target school<select id="schoolFilter"><option value="">All curated schools</option></select></label><label>Region<select id="regionFilter"><option value="">All regions</option></select></label><label>Distance evidence<select id="evidenceFilter"><option value="">All evidence</option><option value="exact_address">Exact address</option><option value="development_point">Development screening</option><option value="missing">Missing</option></select></label><label>Distance category<select id="distanceFilter"><option value="">All categories</option><option value="within_1km">Within 1 km</option><option value="within_2km">1–2 km</option><option value="outside_2km">Outside 2 km</option><option value="boundary">Boundary-sensitive</option></select></label><label>Admission risk<select id="riskFilter"><option value="">All risks</option></select></label><label>Minimum TOP<select id="topFilter"><option value="">Any TOP</option><option value="2010">2010+</option><option value="2018">2018+</option><option value="2020">2020+</option></select></label><label>Sort<select id="sort"><option value="decision">Decision score</option><option value="distance">Nearest</option><option value="admission">Admission</option><option value="property">Property</option></select></label></div><div class="actions"><button id="reset" class="btn">Reset</button><button id="fit" class="btn">Fit results</button><button id="showAll" class="btn hidden">Show all</button></div><div class="stats"><span><b id="pairCount">0</b>results</span><span><b id="schoolCount">0</b>schools</span><span><b id="condoCount">0</b>homes</span><span><b id="kbCount">0</b>KB records</span></div></div></aside>
@@ -8,8 +8,102 @@
 </div></section>
 <section id="compareView" class="view page"><div class="pagehead"><h2>Compare</h2><button id="clearCompare" class="btn">Clear</button></div><div id="compareGrid" class="comparegrid"></div></section>
 <section id="shortlistView" class="view page"><div class="pagehead"><h2>Shortlist</h2><button id="clearShortlist" class="btn">Clear</button></div><div id="shortlistGrid" class="comparegrid"></div></section>
-<section id="knowledgeView" class="view page"><div class="pagehead"><div><span class="eyebrow">Admin</span><h2>Distance Knowledge Base</h2></div><button id="exitAdmin" class="btn">Exit</button></div><div class="health"><article><b id="hSchools">0</b><small>Known schools</small></article><article><b id="hDevelopments">0</b><small>Developments</small></article><article><b id="hAddresses">0</b><small>Exact addresses</small></article><article><b id="hKB">0</b><small>KB records</small></article><article><b id="hExact">0</b><small>Exact-address results</small></article><article><b id="hMissing">0</b><small>Missing coordinates</small></article></div><div class="admin-grid"><article><h3>Coordinate maintenance</h3><p>Import your V4/V5 coordinate cache or use OneMap Search.</p><button id="openSetup" class="btn gold">Coordinate setup</button><button id="exportCoords" class="btn">Export coordinates</button><label class="btn file">Import coordinates<input id="importCoords" type="file" accept=".json"></label></article><article><h3>Add exact residential address</h3><label>Development<select id="addressCondo"></select></label><label>Block / unit label<input id="addressLabel" placeholder="Block 72"></label><label>Exact address or postal code<input id="addressQuery" placeholder="Postal code preferred"></label><button id="addAddress" class="btn gold">Add address point</button><div id="addressStatus"></div></article><article><h3>Build knowledge base</h3><p>Precomputes school-to-development and school-to-address distances from available coordinates.</p><label>Maximum radius<select id="matrixRadius"><option value="2000">2 km</option><option value="3000">3 km</option><option value="5000">5 km</option></select></label><button id="buildKB" class="btn gold">Build / refresh KB</button><button id="exportKB" class="btn">Export KB</button><div id="kbStatus"></div></article><article><h3>Quality rules</h3><label>Boundary tolerance<select id="tolerance"><option value="25">±25 m</option><option value="50" selected>±50 m</option><option value="100">±100 m</option></select></label><p>Exact-address records outrank development-centroid screening. Boundary cases are never labelled high confidence.</p></article><article class="wide"><h3>Coverage and issues</h3><div class="tablewrap"><table><thead><tr><th>School</th><th>Development</th><th>Best</th><th>Worst</th><th>Category</th><th>Evidence</th><th>Confidence</th><th>Issue</th></tr></thead><tbody id="kbTable"></tbody></table></div></article></div></section>
+<section id="knowledgeView" class="view page"><div class="pagehead"><div><span class="eyebrow">Admin</span><h2>Coordinate Manager</h2></div><button id="exitAdmin" class="btn">Exit</button></div><div class="health"><article><b id="hSchools">0</b><small>Known schools</small></article><article><b id="hDevelopments">0</b><small>Developments</small></article><article><b id="hAddresses">0</b><small>Exact addresses</small></article><article><b id="hKB">0</b><small>KB records</small></article><article><b id="hExact">0</b><small>Exact-address results</small></article><article><b id="hMissing">0</b><small>Missing coordinates</small></article></div><div class="admin-grid"><article><h3>Coordinate maintenance</h3><p>Import your V4/V5 coordinate cache or use OneMap Search.</p><button id="openSetup" class="btn gold">Coordinate setup</button><button id="exportCoords" class="btn">Export coordinates</button><label class="btn file">Import coordinates<input id="importCoords" type="file" accept=".json"></label></article><article><h3>Add exact residential address</h3><label>Development<select id="addressCondo"></select></label><label>Block / unit label<input id="addressLabel" placeholder="Block 72"></label><label>Exact address or postal code<input id="addressQuery" placeholder="Postal code preferred"></label><button id="addAddress" class="btn gold">Add address point</button><div id="addressStatus"></div></article><article><h3>Build knowledge base</h3><p>Precomputes school-to-development and school-to-address distances from available coordinates.</p><label>Maximum radius<select id="matrixRadius"><option value="2000">2 km</option><option value="3000">3 km</option><option value="5000">5 km</option></select></label><button id="buildKB" class="btn gold">Build / refresh KB</button><button id="exportKB" class="btn">Export KB</button><div id="kbStatus"></div></article><article><h3>Quality rules</h3><label>Boundary tolerance<select id="tolerance"><option value="25">±25 m</option><option value="50" selected>±50 m</option><option value="100">±100 m</option></select></label><p>Exact-address records outrank development-centroid screening. Boundary cases are never labelled high confidence.</p></article><article class="wide"><h3>Coverage and issues</h3><div class="tablewrap"><table><thead><tr><th>School</th><th>Development</th><th>Best</th><th>Worst</th><th>Category</th><th>Evidence</th><th>Confidence</th><th>Issue</th></tr></thead><tbody id="kbTable"></tbody></table></div></article></div></section>
+
+<section id="coordinateManagerView" class="view">
+  <div class="standalone">
+    <div class="view-header">
+      <div>
+        <span class="eyebrow">Coordinate Manager</span>
+        <h2>Acquire and validate every location before building distances</h2>
+      </div>
+      <button id="exitCoordinateManagerBtn" class="btn">Back to Map</button>
+    </div>
+
+    <div class="coord-kpis">
+      <article><b id="coordSchoolsDone">0</b><small>Schools mapped</small></article>
+      <article><b id="coordCondosDone">0</b><small>Condos mapped</small></article>
+      <article><b id="coordBlocksDone">0</b><small>Blocks mapped</small></article>
+      <article><b id="coordMissingCount">0</b><small>Missing</small></article>
+      <article><b id="coordFailedCount">0</b><small>Failed</small></article>
+      <article><b id="coordDuplicateCount">0</b><small>Possible duplicates</small></article>
+    </div>
+
+    <div class="coord-grid">
+      <section class="coord-card">
+        <h3>Coverage progress</h3>
+        <div id="coverageProgress"></div>
+        <div class="coord-actions">
+          <button id="buildMissingQueueBtn" class="btn primary">Build missing queue</button>
+          <button id="retryFailedBtn" class="btn">Retry failed</button>
+          <button id="clearQueueBtn" class="btn">Clear queue</button>
+        </div>
+      </section>
+
+      <section class="coord-card">
+        <h3>Bulk geocoding</h3>
+        <p>Uses the current browser session token and processes one request at a time.</p>
+        <label>Temporary OneMap token
+          <textarea id="bulkTokenInput" placeholder="Paste a current OneMap token"></textarea>
+        </label>
+        <div class="coord-actions">
+          <button id="startBulkGeocodeBtn" class="btn primary">Start bulk geocoding</button>
+          <button id="pauseBulkGeocodeBtn" class="btn">Pause</button>
+          <button id="resumeBulkGeocodeBtn" class="btn">Resume</button>
+        </div>
+        <div id="bulkProgressText" class="coord-status">No bulk task running.</div>
+        <progress id="bulkProgressBar" max="100" value="0"></progress>
+      </section>
+
+      <section class="coord-card">
+        <h3>Import data</h3>
+        <p>Import more schools, condos, blocks, or a previous coordinate cache.</p>
+        <label class="btn import-btn">Import schools JSON<input id="importSchoolsInput" type="file" accept=".json"></label>
+        <label class="btn import-btn">Import condos JSON<input id="importCondosInput" type="file" accept=".json"></label>
+        <label class="btn import-btn">Import blocks JSON<input id="importBlocksInput" type="file" accept=".json"></label>
+        <label class="btn import-btn">Import coordinates JSON<input id="importCoordCacheInput" type="file" accept=".json"></label>
+        <div id="importStatus" class="coord-status"></div>
+      </section>
+
+      <section class="coord-card">
+        <h3>Export and readiness</h3>
+        <div class="coord-actions">
+          <button id="exportCoordCacheBtn" class="btn">Export coordinates</button>
+          <button id="exportMissingBtn" class="btn">Export missing list</button>
+          <button id="exportFailedBtn" class="btn">Export failed list</button>
+        </div>
+        <div id="readinessGate" class="readiness-gate"></div>
+        <button id="generateDistanceDbBtn" class="btn primary" disabled>Generate distance database</button>
+      </section>
+
+      <section class="coord-card coord-wide">
+        <div class="section-row">
+          <div>
+            <h3>Coordinate quality audit</h3>
+            <p>Missing, failed, stale, or ambiguous records are shown here.</p>
+          </div>
+          <select id="coordAuditFilter">
+            <option value="">All issues</option>
+            <option value="missing">Missing</option>
+            <option value="failed">Failed</option>
+            <option value="duplicate">Possible duplicate</option>
+            <option value="stale">Stale</option>
+          </select>
+        </div>
+        <div class="audit-table-wrap">
+          <table class="audit-table">
+            <thead>
+              <tr><th>Type</th><th>Name / address</th><th>Status</th><th>Match</th><th>Checked</th><th>Action</th></tr>
+            </thead>
+            <tbody id="coordAuditBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
 </main>
 <aside id="drawer" class="drawer"><div><button id="closeDrawer">×</button><section id="details"></section></div></aside>
-<dialog id="setup"><button id="closeSetup" class="x">×</button><h2>OneMap coordinate setup</h2><p>The token is held only for this browser session.</p><label>Temporary token<textarea id="token"></textarea></label><div><button id="saveToken" class="btn gold">Save</button><button id="geocodeKnown" class="btn">Geocode known entities</button><button id="geocodeAddresses" class="btn">Geocode exact addresses</button><button id="resume" class="btn">Resume</button></div><p id="progress"></p></dialog>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script><script src="app.js?v=6.0.0"></script></body></html>
+<dialog id="setup"><button id="closeSetup" class="x">×</button><h2>Bulk coordinate setup</h2><p>The token is held only for this browser session.</p><label>Temporary token<textarea id="token"></textarea></label><div><button id="saveToken" class="btn gold">Save</button><button id="geocodeKnown" class="btn">Geocode known entities</button><button id="geocodeAddresses" class="btn">Geocode exact addresses</button><button id="resume" class="btn">Resume</button></div><p id="progress"></p></dialog>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script><script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script><script src="app.js?v=6.1.0"></script></body></html>
