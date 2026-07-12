@@ -1,1 +1,1034 @@
-{}
+{
+  "school:admiralty primary school": {
+    "lat": 1.4426347903311,
+    "lng": 103.800040119743,
+    "label": "ADMIRALTY PRIMARY SCHOOL",
+    "address": "11 WOODLANDS CIRCLE ADMIRALTY PRIMARY SCHOOL SINGAPORE 738907",
+    "postal": "738907",
+    "checked_at": "2026-07-12T05:25:08.089Z"
+  },
+  "school:anchor green primary school": {
+    "lat": 1.39036998654612,
+    "lng": 103.887165375933,
+    "label": "ANCHOR GREEN PRIMARY SCHOOL",
+    "address": "31 ANCHORVALE DRIVE ANCHOR GREEN PRIMARY SCHOOL SINGAPORE 544969",
+    "postal": "544969",
+    "checked_at": "2026-07-12T05:25:08.392Z"
+  },
+  "school:blangah rise primary school": {
+    "lat": 1.27612047924037,
+    "lng": 103.808628535239,
+    "label": "BLANGAH RISE PRIMARY SCHOOL",
+    "address": "91 TELOK BLANGAH HEIGHTS BLANGAH RISE PRIMARY SCHOOL SINGAPORE 109100",
+    "postal": "109100",
+    "checked_at": "2026-07-12T05:25:15.918Z"
+  },
+  "school:bukit timah primary school": {
+    "lat": 1.3372995575169,
+    "lng": 103.766828720721,
+    "label": "BUKIT TIMAH PRIMARY SCHOOL",
+    "address": "111 LORONG KISMIS BUKIT TIMAH PRIMARY SCHOOL SINGAPORE 598112",
+    "postal": "598112",
+    "checked_at": "2026-07-12T05:25:16.313Z"
+  },
+  "school:canberra primary school": {
+    "lat": 1.45125024371543,
+    "lng": 103.815858858929,
+    "label": "CANBERRA PRIMARY SCHOOL",
+    "address": "21 ADMIRALTY DRIVE CANBERRA PRIMARY SCHOOL SINGAPORE 757714",
+    "postal": "757714",
+    "checked_at": "2026-07-12T05:25:16.692Z"
+  },
+  "school:cedar primary school": {
+    "lat": 1.3355885014312,
+    "lng": 103.87562104944,
+    "label": "CEDAR PRIMARY SCHOOL",
+    "address": "15 CEDAR AVENUE CEDAR PRIMARY SCHOOL SINGAPORE 349700",
+    "postal": "349700",
+    "checked_at": "2026-07-12T05:25:17.471Z"
+  },
+  "school:chua chu kang primary school": {
+    "lat": 1.37775890093367,
+    "lng": 103.741832917421,
+    "label": "CHUA CHU KANG PRIMARY SCHOOL",
+    "address": "20 CHOA CHU KANG AVENUE 2 CHUA CHU KANG PRIMARY SCHOOL SINGAPORE 689905",
+    "postal": "689905",
+    "checked_at": "2026-07-12T05:25:17.551Z"
+  },
+  "school:clementi primary school": {
+    "lat": 1.31506321827875,
+    "lng": 103.763144493687,
+    "label": "CLEMENTI PRIMARY SCHOOL",
+    "address": "8 CLEMENTI AVENUE 3 CLEMENTI PRIMARY SCHOOL SINGAPORE 129903",
+    "postal": "129903",
+    "checked_at": "2026-07-12T05:25:17.756Z"
+  },
+  "school:concord primary school": {
+    "lat": 1.38000806197242,
+    "lng": 103.736225440727,
+    "label": "CONCORD PRIMARY SCHOOL",
+    "address": "3 CHOA CHU KANG AVENUE 4 CONCORD PRIMARY SCHOOL SINGAPORE 689814",
+    "postal": "689814",
+    "checked_at": "2026-07-12T05:25:18.006Z"
+  },
+  "school:endeavour primary school": {
+    "lat": 1.45403837499301,
+    "lng": 103.817436231731,
+    "label": "ENDEAVOUR PRIMARY SCHOOL",
+    "address": "10 ADMIRALTY LINK ENDEAVOUR PRIMARY SCHOOL SINGAPORE 757521",
+    "postal": "757521",
+    "checked_at": "2026-07-12T05:25:18.266Z"
+  },
+  "school:bukit view primary school": {
+    "lat": 1.34586054788695,
+    "lng": 103.75366641455,
+    "label": "BUKIT VIEW PRIMARY SCHOOL",
+    "address": "18 BUKIT BATOK STREET 21 BUKIT VIEW PRIMARY SCHOOL SINGAPORE 659634",
+    "postal": "659634",
+    "checked_at": "2026-07-12T05:38:03.081Z"
+  },
+  "school:canossa catholic primary school": {
+    "lat": 1.32664424544839,
+    "lng": 103.882227964852,
+    "label": "CANOSSA CATHOLIC PRIMARY SCHOOL",
+    "address": "1 SALLIM ROAD CANOSSA CATHOLIC PRIMARY SCHOOL SINGAPORE 387621",
+    "postal": "387621",
+    "checked_at": "2026-07-12T05:38:03.594Z"
+  },
+  "school:chongfu school": {
+    "lat": 1.43839562897006,
+    "lng": 103.839309173817,
+    "label": "CHONGFU SCHOOL",
+    "address": "170 YISHUN AVENUE 6 CHONGFU SCHOOL SINGAPORE 768959",
+    "postal": "768959",
+    "checked_at": "2026-07-12T05:38:04.515Z"
+  },
+  "school:compassvale primary school": {
+    "lat": 1.39444529636566,
+    "lng": 103.897812229905,
+    "label": "COMPASSVALE PRIMARY SCHOOL",
+    "address": "21 COMPASSVALE STREET COMPASSVALE PRIMARY SCHOOL SINGAPORE 545091",
+    "postal": "545091",
+    "checked_at": "2026-07-12T05:38:05.191Z"
+  },
+  "school:dazhong primary school": {
+    "lat": 1.3591797447277,
+    "lng": 103.74847210784,
+    "label": "DAZHONG PRIMARY SCHOOL",
+    "address": "35 BUKIT BATOK STREET 31 DAZHONG PRIMARY SCHOOL SINGAPORE 659441",
+    "postal": "659441",
+    "checked_at": "2026-07-12T05:38:05.652Z"
+  },
+  "school:evergreen primary school": {
+    "lat": 1.44415332824735,
+    "lng": 103.794577787757,
+    "label": "EVERGREEN PRIMARY SCHOOL",
+    "address": "31 WOODLANDS CIRCLE EVERGREEN PRIMARY SCHOOL SINGAPORE 738908",
+    "postal": "738908",
+    "checked_at": "2026-07-12T05:38:06.085Z"
+  },
+  "school:fairfield methodist school (primary)": {
+    "lat": 1.30054082453424,
+    "lng": 103.785438270044,
+    "label": "FAIRFIELD METHODIST SCHOOL (PRIMARY)",
+    "address": "100 DOVER ROAD FAIRFIELD METHODIST SCHOOL (PRIMARY) SINGAPORE 139648",
+    "postal": "139648",
+    "checked_at": "2026-07-12T05:38:06.461Z"
+  },
+  "school:fuhua primary school": {
+    "lat": 1.33650394789627,
+    "lng": 103.736103745748,
+    "label": "FUHUA PRIMARY SCHOOL",
+    "address": "65 JURONG EAST STREET 13 FUHUA PRIMARY SCHOOL SINGAPORE 609647",
+    "postal": "609647",
+    "checked_at": "2026-07-12T05:38:06.871Z"
+  },
+  "school:gan eng seng primary school": {
+    "lat": 1.28559516494962,
+    "lng": 103.815547410064,
+    "label": "GAN ENG SENG PRIMARY SCHOOL",
+    "address": "100 REDHILL CLOSE GAN ENG SENG PRIMARY SCHOOL SINGAPORE 158901",
+    "postal": "158901",
+    "checked_at": "2026-07-12T05:38:07.279Z"
+  },
+  "school:geylang methodist school (primary)": {
+    "lat": 1.31759126757284,
+    "lng": 103.883845744916,
+    "label": "GEYLANG METHODIST SCHOOL (PRIMARY)",
+    "address": "4 GEYLANG EAST CENTRAL GEYLANG METHODIST SCHOOL (PRIMARY) SINGAPORE 389706",
+    "postal": "389706",
+    "checked_at": "2026-07-12T05:38:07.689Z"
+  },
+  "school:gongshang primary school": {
+    "lat": 1.35723721393297,
+    "lng": 103.949115320172,
+    "label": "GONGSHANG PRIMARY SCHOOL",
+    "address": "1 TAMPINES STREET 42 GONGSHANG PRIMARY SCHOOL SINGAPORE 529176",
+    "postal": "529176",
+    "checked_at": "2026-07-12T05:38:13.220Z"
+  },
+  "school:greenwood primary school": {
+    "lat": 1.43989958331782,
+    "lng": 103.804725587384,
+    "label": "GREENWOOD PRIMARY SCHOOL",
+    "address": "11 WOODLANDS DRIVE 62 GREENWOOD PRIMARY SCHOOL SINGAPORE 737942",
+    "postal": "737942",
+    "checked_at": "2026-07-12T05:38:13.527Z"
+  },
+  "school:henry park primary school": {
+    "lat": 1.31667646178347,
+    "lng": 103.784296227747,
+    "label": "HENRY PARK PRIMARY SCHOOL",
+    "address": "1 HOLLAND GROVE ROAD HENRY PARK PRIMARY SCHOOL SINGAPORE 278790",
+    "postal": "278790",
+    "checked_at": "2026-07-12T05:38:13.834Z"
+  },
+  "school:hougang primary school": {
+    "lat": 1.37738245231461,
+    "lng": 103.880805274557,
+    "label": "HOUGANG PRIMARY SCHOOL",
+    "address": "1 HOUGANG STREET 93 HOUGANG PRIMARY SCHOOL SINGAPORE 534238",
+    "postal": "534238",
+    "checked_at": "2026-07-12T05:38:14.243Z"
+  },
+  "school:huamin primary school": {
+    "lat": 1.42697284512936,
+    "lng": 103.844240226564,
+    "label": "HUAMIN PRIMARY SCHOOL",
+    "address": "21 YISHUN AVENUE 11 HUAMIN PRIMARY SCHOOL SINGAPORE 768857",
+    "postal": "768857",
+    "checked_at": "2026-07-12T05:38:15.702Z"
+  },
+  "school:jiemin primary school": {
+    "lat": 1.42768847665227,
+    "lng": 103.830425490093,
+    "label": "JIEMIN PRIMARY SCHOOL",
+    "address": "2 YISHUN STREET 71 JIEMIN PRIMARY SCHOOL SINGAPORE 768515",
+    "postal": "768515",
+    "checked_at": "2026-07-12T05:38:17.316Z"
+  },
+  "school:junyuan primary school": {
+    "lat": 1.34787074766746,
+    "lng": 103.939221709073,
+    "label": "JUNYUAN PRIMARY SCHOOL",
+    "address": "2 TAMPINES STREET 91 JUNYUAN PRIMARY SCHOOL SINGAPORE 528906",
+    "postal": "528906",
+    "checked_at": "2026-07-12T05:38:17.567Z"
+  },
+  "school:jurong primary school": {
+    "lat": 1.34843859698946,
+    "lng": 103.733156566858,
+    "label": "JURONG PRIMARY SCHOOL",
+    "address": "320 JURONG EAST STREET 32 JURONG PRIMARY SCHOOL SINGAPORE 609476",
+    "postal": "609476",
+    "checked_at": "2026-07-12T05:38:19.056Z"
+  },
+  "school:keming primary school": {
+    "lat": 1.34552849960874,
+    "lng": 103.756449399351,
+    "label": "KEMING PRIMARY SCHOOL",
+    "address": "90 BUKIT BATOK EAST AVENUE 6 KEMING PRIMARY SCHOOL SINGAPORE 659762",
+    "postal": "659762",
+    "checked_at": "2026-07-12T05:38:19.335Z"
+  },
+  "school:kong hwa school": {
+    "lat": 1.31099674009193,
+    "lng": 103.888352029067,
+    "label": "KONG HWA SCHOOL",
+    "address": "350 GUILLEMARD ROAD KONG HWA SCHOOL SINGAPORE 399772",
+    "postal": "399772",
+    "checked_at": "2026-07-12T05:38:20.720Z"
+  },
+  "school:kuo chuan presbyterian primary school": {
+    "lat": 1.34978223750981,
+    "lng": 103.85452928785,
+    "label": "KUO CHUAN PRESBYTERIAN PRIMARY SCHOOL",
+    "address": "8B BISHAN STREET 13 KUO CHUAN PRESBYTERIAN PRIMARY SCHOOL SINGAPORE 579802",
+    "postal": "579802",
+    "checked_at": "2026-07-12T05:38:23.619Z"
+  },
+  "school:lakeside primary school": {
+    "lat": 1.33820397704287,
+    "lng": 103.718089546664,
+    "label": "LAKESIDE PRIMARY SCHOOL",
+    "address": "161 CORPORATION WALK LAKESIDE PRIMARY SCHOOL SINGAPORE 618310",
+    "postal": "618310",
+    "checked_at": "2026-07-12T05:38:23.971Z"
+  },
+  "school:lianhua primary school": {
+    "lat": 1.35424191127295,
+    "lng": 103.754165828711,
+    "label": "LIANHUA PRIMARY SCHOOL",
+    "address": "2 BUKIT BATOK STREET 52 LIANHUA PRIMARY SCHOOL SINGAPORE 659243",
+    "postal": "659243",
+    "checked_at": "2026-07-12T05:38:24.381Z"
+  },
+  "school:holy innocents' primary school": {
+    "lat": 1.36693830877349,
+    "lng": 103.894114899795,
+    "label": "HOLY INNOCENTS' PRIMARY SCHOOL",
+    "address": "5 LORONG LOW KOON HOLY INNOCENTS' PRIMARY SCHOOL SINGAPORE 536451",
+    "postal": "536451",
+    "checked_at": "2026-07-12T05:38:36.794Z"
+  },
+  "school:montfort junior school": {
+    "lat": 1.37382444075979,
+    "lng": 103.889307782925,
+    "label": "MONTFORT JUNIOR SCHOOL",
+    "address": "52 HOUGANG AVENUE 8 MONTFORT JUNIOR SCHOOL SINGAPORE 538786",
+    "postal": "538786",
+    "checked_at": "2026-07-12T05:38:39.502Z"
+  },
+  "school:nan chiau primary school": {
+    "lat": 1.39221149906592,
+    "lng": 103.891180928186,
+    "label": "NAN CHIAU PRIMARY SCHOOL",
+    "address": "50 ANCHORVALE LINK NAN CHIAU PRIMARY SCHOOL SINGAPORE 545080",
+    "postal": "545080",
+    "checked_at": "2026-07-12T05:38:39.799Z"
+  },
+  "school:nan hua primary school": {
+    "lat": 1.31920159956387,
+    "lng": 103.761095065761,
+    "label": "NAN HUA PRIMARY SCHOOL",
+    "address": "30 JALAN LEMPENG NAN HUA PRIMARY SCHOOL SINGAPORE 128806",
+    "postal": "128806",
+    "checked_at": "2026-07-12T05:38:40.068Z"
+  },
+  "school:nanyang primary school": {
+    "lat": 1.32084749904532,
+    "lng": 103.807750155296,
+    "label": "NANYANG PRIMARY SCHOOL",
+    "address": "52 KING'S ROAD NANYANG PRIMARY SCHOOL SINGAPORE 268097",
+    "postal": "268097",
+    "checked_at": "2026-07-12T05:38:40.424Z"
+  },
+  "school:naval base primary school": {
+    "lat": 1.41630663159387,
+    "lng": 103.838794077233,
+    "label": "NAVAL BASE PRIMARY SCHOOL",
+    "address": "7 YISHUN AVENUE 4 NAVAL BASE PRIMARY SCHOOL SINGAPORE 769028",
+    "postal": "769028",
+    "checked_at": "2026-07-12T05:38:40.719Z"
+  },
+  "school:new town primary school": {
+    "lat": 1.29964188181021,
+    "lng": 103.80010216304,
+    "label": "NEW TOWN PRIMARY SCHOOL",
+    "address": "300 TANGLIN HALT ROAD NEW TOWN PRIMARY SCHOOL SINGAPORE 148812",
+    "postal": "148812",
+    "checked_at": "2026-07-12T05:38:41.028Z"
+  },
+  "school:north view primary school": {
+    "lat": 1.42752327193727,
+    "lng": 103.848190787869,
+    "label": "NORTH VIEW PRIMARY SCHOOL",
+    "address": "210 YISHUN AVENUE 6 NORTH VIEW PRIMARY SCHOOL SINGAPORE 768960",
+    "postal": "768960",
+    "checked_at": "2026-07-12T05:38:41.381Z"
+  },
+  "school:northland primary school": {
+    "lat": 1.42096989918951,
+    "lng": 103.840928424929,
+    "label": "NORTHLAND PRIMARY SCHOOL",
+    "address": "15 YISHUN AVENUE 4 NORTHLAND PRIMARY SCHOOL SINGAPORE 769026",
+    "postal": "769026",
+    "checked_at": "2026-07-12T05:38:52.031Z"
+  },
+  "school:pei chun public school": {
+    "lat": 1.33737358725951,
+    "lng": 103.855585578061,
+    "label": "PEI CHUN PUBLIC SCHOOL",
+    "address": "16 LORONG 7 TOA PAYOH PEI CHUN PUBLIC SCHOOL SINGAPORE 319320",
+    "postal": "319320",
+    "checked_at": "2026-07-12T05:38:52.543Z"
+  },
+  "school:pei hwa presbyterian primary school": {
+    "lat": 1.33805634613048,
+    "lng": 103.776106448614,
+    "label": "PEI HWA PRESBYTERIAN PRIMARY SCHOOL",
+    "address": "7 PEI WAH AVENUE PEI HWA PRESBYTERIAN PRIMARY SCHOOL SINGAPORE 597610",
+    "postal": "597610",
+    "checked_at": "2026-07-12T05:38:52.953Z"
+  },
+  "school:pei tong primary school": {
+    "lat": 1.31619786415976,
+    "lng": 103.767599818844,
+    "label": "PEI TONG PRIMARY SCHOOL",
+    "address": "15 CLEMENTI AVENUE 5 PEI TONG PRIMARY SCHOOL SINGAPORE 129857",
+    "postal": "129857",
+    "checked_at": "2026-07-12T05:38:53.259Z"
+  },
+  "school:peiying primary school": {
+    "lat": 1.41723339695904,
+    "lng": 103.830417090698,
+    "label": "PEIYING PRIMARY SCHOOL",
+    "address": "651 YISHUN RING ROAD PEIYING PRIMARY SCHOOL SINGAPORE 768687",
+    "postal": "768687",
+    "checked_at": "2026-07-12T05:38:53.566Z"
+  },
+  "school:poi ching school": {
+    "lat": 1.35765122315688,
+    "lng": 103.935246477199,
+    "label": "POI CHING SCHOOL",
+    "address": "21 TAMPINES STREET 71 POI CHING SCHOOL SINGAPORE 529067",
+    "postal": "529067",
+    "checked_at": "2026-07-12T05:38:53.977Z"
+  },
+  "school:princess elizabeth primary school": {
+    "lat": 1.349203512653,
+    "lng": 103.74101964471,
+    "label": "PRINCESS ELIZABETH PRIMARY SCHOOL",
+    "address": "30 BUKIT BATOK WEST AVENUE 3 PRINCESS ELIZABETH PRIMARY SCHOOL SINGAPORE 659163",
+    "postal": "659163",
+    "checked_at": "2026-07-12T05:38:54.387Z"
+  },
+  "school:punggol primary school": {
+    "lat": 1.37779451191095,
+    "lng": 103.894506933668,
+    "label": "PUNGGOL PRIMARY SCHOOL",
+    "address": "61 HOUGANG AVENUE 8 PUNGGOL PRIMARY SCHOOL SINGAPORE 538787",
+    "postal": "538787",
+    "checked_at": "2026-07-12T05:38:54.797Z"
+  },
+  "school:qifa primary school": {
+    "lat": 1.31325113867272,
+    "lng": 103.756743261958,
+    "label": "QIFA PRIMARY SCHOOL",
+    "address": "50 WEST COAST AVENUE QIFA PRIMARY SCHOOL SINGAPORE 128104",
+    "postal": "128104",
+    "checked_at": "2026-07-12T05:38:55.102Z"
+  },
+  "school:queenstown primary school": {
+    "lat": 1.29559365009015,
+    "lng": 103.807548617332,
+    "label": "QUEENSTOWN PRIMARY SCHOOL",
+    "address": "310 MARGARET DRIVE QUEENSTOWN PRIMARY SCHOOL SINGAPORE 149303",
+    "postal": "149303",
+    "checked_at": "2026-07-12T05:38:55.513Z"
+  },
+  "school:radin mas primary school": {
+    "lat": 1.27495823622634,
+    "lng": 103.824188270373,
+    "label": "RADIN MAS PRIMARY SCHOOL",
+    "address": "1 BUKIT PURMEI AVENUE RADIN MAS PRIMARY SCHOOL SINGAPORE 099840",
+    "postal": "099840",
+    "checked_at": "2026-07-12T05:39:07.596Z"
+  },
+  "school:riverside primary school": {
+    "lat": 1.44704734253719,
+    "lng": 103.801831963297,
+    "label": "RIVERSIDE PRIMARY SCHOOL",
+    "address": "110 WOODLANDS CRESCENT RIVERSIDE PRIMARY SCHOOL SINGAPORE 737803",
+    "postal": "737803",
+    "checked_at": "2026-07-12T05:39:08.006Z"
+  },
+  "school:rosyth school": {
+    "lat": 1.37289067499064,
+    "lng": 103.875001549174,
+    "label": "ROSYTH SCHOOL",
+    "address": "21 SERANGOON NORTH AVENUE 4 ROSYTH SCHOOL SINGAPORE 555855",
+    "postal": "555855",
+    "checked_at": "2026-07-12T05:39:08.415Z"
+  },
+  "school:rulang primary school": {
+    "lat": 1.34673868889096,
+    "lng": 103.718457955487,
+    "label": "RULANG PRIMARY SCHOOL",
+    "address": "6 JURONG WEST STREET 52 RULANG PRIMARY SCHOOL SINGAPORE 649295",
+    "postal": "649295",
+    "checked_at": "2026-07-12T05:39:08.825Z"
+  },
+  "school:sembawang primary school": {
+    "lat": 1.44504676205659,
+    "lng": 103.82102212387,
+    "label": "SEMBAWANG PRIMARY SCHOOL",
+    "address": "10 SEMBAWANG DRIVE SEMBAWANG PRIMARY SCHOOL SINGAPORE 757715",
+    "postal": "757715",
+    "checked_at": "2026-07-12T05:39:09.235Z"
+  },
+  "school:shuqun primary school": {
+    "lat": 1.34765311431632,
+    "lng": 103.721523713379,
+    "label": "SHUQUN PRIMARY SCHOOL",
+    "address": "8 JURONG WEST STREET 51 SHUQUN PRIMARY SCHOOL SINGAPORE 649332",
+    "postal": "649332",
+    "checked_at": "2026-07-12T05:39:09.951Z"
+  },
+  "school:south view primary school": {
+    "lat": 1.38166664389749,
+    "lng": 103.746275846011,
+    "label": "SOUTH VIEW PRIMARY SCHOOL",
+    "address": "6 CHOA CHU KANG CENTRAL SOUTH VIEW PRIMARY SCHOOL SINGAPORE 689762",
+    "postal": "689762",
+    "checked_at": "2026-07-12T05:39:10.228Z"
+  },
+  "school:springdale primary school": {
+    "lat": 1.39467010299293,
+    "lng": 103.889926221247,
+    "label": "SPRINGDALE PRIMARY SCHOOL",
+    "address": "71 ANCHORVALE LINK SPRINGDALE PRIMARY SCHOOL SINGAPORE 544799",
+    "postal": "544799",
+    "checked_at": "2026-07-12T05:39:10.565Z"
+  },
+  "school:st. andrew's junior school": {
+    "lat": 1.33140255308868,
+    "lng": 103.865117134385,
+    "label": "ST ANDREW'S SCHOOL (JUNIOR)",
+    "address": "2 FRANCIS THOMAS DRIVE ST ANDREW'S SCHOOL (JUNIOR) SINGAPORE 359337",
+    "postal": "359337",
+    "checked_at": "2026-07-12T05:39:10.886Z"
+  },
+  "school:st. gabriel's primary school": {
+    "lat": 1.34947192653862,
+    "lng": 103.862561037707,
+    "label": "SAINT GABRIEL'S PRIMARY SCHOOL",
+    "address": "220 LORONG CHUAN SAINT GABRIEL'S PRIMARY SCHOOL SINGAPORE 556742",
+    "postal": "556742",
+    "checked_at": "2026-07-12T05:39:25.005Z"
+  },
+  "school:st. hilda's primary school": {
+    "lat": 1.34938565036336,
+    "lng": 103.937007133662,
+    "label": "SAINT HILDA'S PRIMARY SCHOOL",
+    "address": "2 TAMPINES AVENUE 3 SAINT HILDA'S PRIMARY SCHOOL SINGAPORE 529706",
+    "postal": "529706",
+    "checked_at": "2026-07-12T05:39:25.290Z"
+  },
+  "school:tampines primary school": {
+    "lat": 1.34977870805929,
+    "lng": 103.944004684986,
+    "label": "TAMPINES PRIMARY SCHOOL",
+    "address": "250 TAMPINES STREET 12 TAMPINES PRIMARY SCHOOL SINGAPORE 529426",
+    "postal": "529426",
+    "checked_at": "2026-07-12T05:39:25.621Z"
+  },
+  "school:tanjong katong primary school": {
+    "lat": 1.30525783246242,
+    "lng": 103.900162653092,
+    "label": "TANJONG KATONG PRIMARY SCHOOL",
+    "address": "10 SERAYA ROAD TANJONG KATONG PRIMARY SCHOOL SINGAPORE 437259",
+    "postal": "437259",
+    "checked_at": "2026-07-12T05:39:25.905Z"
+  },
+  "school:tao nan school": {
+    "lat": 1.30528528687321,
+    "lng": 103.911553152326,
+    "label": "TAO NAN SCHOOL",
+    "address": "49 MARINE CRESCENT TAO NAN SCHOOL SINGAPORE 449761",
+    "postal": "449761",
+    "checked_at": "2026-07-12T05:39:26.234Z"
+  },
+  "school:teck whye primary school": {
+    "lat": 1.38364996834457,
+    "lng": 103.753291857016,
+    "label": "TECK WHYE PRIMARY SCHOOL",
+    "address": "11 TECK WHYE WALK TECK WHYE PRIMARY SCHOOL SINGAPORE 688261",
+    "postal": "688261",
+    "checked_at": "2026-07-12T05:39:26.643Z"
+  },
+  "school:townsville primary school": {
+    "lat": 1.36003263746623,
+    "lng": 103.853826048327,
+    "label": "TOWNSVILLE PRIMARY SCHOOL",
+    "address": "3 ANG MO KIO AVENUE 10 TOWNSVILLE PRIMARY SCHOOL SINGAPORE 569730",
+    "postal": "569730",
+    "checked_at": "2026-07-12T05:39:26.951Z"
+  },
+  "school:wellington primary school": {
+    "lat": 1.45192019155475,
+    "lng": 103.822303719094,
+    "label": "WELLINGTON PRIMARY SCHOOL",
+    "address": "10 WELLINGTON CIRCLE WELLINGTON PRIMARY SCHOOL SINGAPORE 757702",
+    "postal": "757702",
+    "checked_at": "2026-07-12T05:39:27.258Z"
+  },
+  "school:west view primary school": {
+    "lat": 1.3836758200336,
+    "lng": 103.760240434318,
+    "label": "WEST VIEW PRIMARY SCHOOL",
+    "address": "31 SENJA ROAD WEST VIEW PRIMARY SCHOOL SINGAPORE 677742",
+    "postal": "677742",
+    "checked_at": "2026-07-12T05:39:27.565Z"
+  },
+  "school:woodlands ring primary school": {
+    "lat": 1.43495229315857,
+    "lng": 103.797435733144,
+    "label": "WOODLANDS RING PRIMARY SCHOOL",
+    "address": "11 WOODLANDS RING ROAD WOODLANDS RING PRIMARY SCHOOL SINGAPORE 738240",
+    "postal": "738240",
+    "checked_at": "2026-07-12T05:39:27.975Z"
+  },
+  "school:xinmin primary school": {
+    "lat": 1.37139548941931,
+    "lng": 103.883080767491,
+    "label": "XINMIN PRIMARY SCHOOL",
+    "address": "9 HOUGANG AVENUE 8 XINMIN PRIMARY SCHOOL SINGAPORE 538784",
+    "postal": "538784",
+    "checked_at": "2026-07-12T05:39:43.206Z"
+  },
+  "school:xishan primary school": {
+    "lat": 1.43347186925064,
+    "lng": 103.837755319448,
+    "label": "XISHAN PRIMARY SCHOOL",
+    "address": "8 YISHUN STREET 21 XISHAN PRIMARY SCHOOL SINGAPORE 768611",
+    "postal": "768611",
+    "checked_at": "2026-07-12T05:39:43.473Z"
+  },
+  "school:yangzheng primary school": {
+    "lat": 1.34864575840923,
+    "lng": 103.868595527042,
+    "label": "YANGZHENG PRIMARY SCHOOL",
+    "address": "15 SERANGOON AVENUE 3 YANGZHENG PRIMARY SCHOOL SINGAPORE 556108",
+    "postal": "556108",
+    "checked_at": "2026-07-12T05:39:43.745Z"
+  },
+  "school:yuhua primary school": {
+    "lat": 1.34280230475033,
+    "lng": 103.741105772644,
+    "label": "YUHUA PRIMARY SCHOOL",
+    "address": "158 JURONG EAST STREET 24 YUHUA PRIMARY SCHOOL SINGAPORE 609558",
+    "postal": "609558",
+    "checked_at": "2026-07-12T05:39:44.156Z"
+  },
+  "school:zhangde primary school": {
+    "lat": 1.28421153335379,
+    "lng": 103.825951875662,
+    "label": "ZHANGDE PRIMARY SCHOOL",
+    "address": "51 JALAN MEMBINA ZHANGDE PRIMARY SCHOOL SINGAPORE 169485",
+    "postal": "169485",
+    "checked_at": "2026-07-12T05:39:44.566Z"
+  },
+  "school:zhonghua primary school": {
+    "lat": 1.36020329705047,
+    "lng": 103.869762438084,
+    "label": "ZHONGHUA PRIMARY SCHOOL",
+    "address": "12 SERANGOON AVENUE 4 ZHONGHUA PRIMARY SCHOOL SINGAPORE 556095",
+    "postal": "556095",
+    "checked_at": "2026-07-12T05:39:44.975Z"
+  },
+  "condo:affinity at serangoon": {
+    "lat": 1.36618702976306,
+    "lng": 103.873674807486,
+    "label": "AFFINITY AT SERANGOON",
+    "address": "26 SERANGOON NORTH AVENUE 1 AFFINITY AT SERANGOON SINGAPORE 554340",
+    "postal": "554340",
+    "checked_at": "2026-07-12T05:39:45.350Z"
+  },
+  "condo:amber park": {
+    "lat": 1.30037788595042,
+    "lng": 103.899209385533,
+    "label": "AMBER PARK",
+    "address": "16 AMBER GARDENS AMBER PARK SINGAPORE 439961",
+    "postal": "439961",
+    "checked_at": "2026-07-12T05:39:45.684Z"
+  },
+  "condo:avenue south residence": {
+    "lat": 1.27662953410733,
+    "lng": 103.829105212029,
+    "label": "AVENUE SOUTH RESIDENCE",
+    "address": "11 SILAT AVENUE AVENUE SOUTH RESIDENCE SINGAPORE 168877",
+    "postal": "168877",
+    "checked_at": "2026-07-12T05:39:45.998Z"
+  },
+  "condo:bartley residences": {
+    "lat": 1.34313292040619,
+    "lng": 103.881774325529,
+    "label": "BARTLEY RESIDENCES",
+    "address": "3 LORONG HOW SUN BARTLEY RESIDENCES SINGAPORE 536560",
+    "postal": "536560",
+    "checked_at": "2026-07-12T05:39:46.306Z"
+  },
+  "condo:bartley ridge": {
+    "lat": 1.3410912750043,
+    "lng": 103.88145756434,
+    "label": "BARTLEY RIDGE",
+    "address": "46 MOUNT VERNON ROAD BARTLEY RIDGE SINGAPORE 368063",
+    "postal": "368063",
+    "checked_at": "2026-07-12T05:40:03.612Z"
+  },
+  "condo:bishan loft": {
+    "lat": 1.34752183684458,
+    "lng": 103.852047817533,
+    "label": "BISHAN LOFT",
+    "address": "31 BISHAN STREET 11 BISHAN LOFT SINGAPORE 579819",
+    "postal": "579819",
+    "checked_at": "2026-07-12T05:40:04.023Z"
+  },
+  "condo:boathouse residences": {
+    "lat": 1.37557855184255,
+    "lng": 103.903316771617,
+    "label": "BOATHOUSE RESIDENCES",
+    "address": "33 UPPER SERANGOON VIEW BOATHOUSE RESIDENCES SINGAPORE 534042",
+    "postal": "534042",
+    "checked_at": "2026-07-12T05:40:04.329Z"
+  },
+  "condo:botanique at bartley": {
+    "lat": 1.34197293873428,
+    "lng": 103.882635407026,
+    "label": "BOTANIQUE AT BARTLEY",
+    "address": "233 UPPER PAYA LEBAR ROAD BOTANIQUE AT BARTLEY SINGAPORE 533869",
+    "postal": "533869",
+    "checked_at": "2026-07-12T05:40:04.738Z"
+  },
+  "condo:citylife @ tampines": {
+    "lat": 1.35948337893924,
+    "lng": 103.941765090305,
+    "label": "CITYLIFE@TAMPINES",
+    "address": "61 TAMPINES CENTRAL 7 CITYLIFE@TAMPINES SINGAPORE 528595",
+    "postal": "528595",
+    "checked_at": "2026-07-12T05:40:05.147Z"
+  },
+  "condo:commonwealth towers": {
+    "lat": 1.29573433474414,
+    "lng": 103.806030198974,
+    "label": "COMMONWEALTH TOWERS",
+    "address": "230 COMMONWEALTH AVENUE COMMONWEALTH TOWERS SINGAPORE 149739",
+    "postal": "149739",
+    "checked_at": "2026-07-12T05:40:05.559Z"
+  },
+  "condo:compass heights": {
+    "lat": 1.39202430708237,
+    "lng": 103.896214703952,
+    "label": "COMPASS HEIGHTS",
+    "address": "11 SENGKANG SQUARE COMPASS HEIGHTS SINGAPORE 545076",
+    "postal": "545076",
+    "checked_at": "2026-07-12T05:40:05.832Z"
+  },
+  "condo:daintree residence": {
+    "lat": 1.33968671314796,
+    "lng": 103.770941441195,
+    "label": "DAINTREE RESIDENCE",
+    "address": "11C TOH TUCK ROAD DAINTREE RESIDENCE SINGAPORE 596159",
+    "postal": "596159",
+    "checked_at": "2026-07-12T05:40:06.101Z"
+  },
+  "condo:dover parkview": {
+    "lat": 1.3053498941342,
+    "lng": 103.784318660605,
+    "label": "DOVER PARKVIEW",
+    "address": "38 DOVER RISE DOVER PARKVIEW SINGAPORE 138684",
+    "postal": "138684",
+    "checked_at": "2026-07-12T05:40:06.366Z"
+  },
+  "condo:heritage view": {
+    "lat": 1.30441672235897,
+    "lng": 103.784278626735,
+    "label": "HERITAGE VIEW",
+    "address": "10 DOVER RISE HERITAGE VIEW SINGAPORE 138680",
+    "postal": "138680",
+    "checked_at": "2026-07-12T05:40:26.039Z"
+  },
+  "condo:ivory heights": {
+    "lat": 1.33568762398856,
+    "lng": 103.737032127309,
+    "label": "IVORY HEIGHTS",
+    "address": "122 JURONG EAST STREET 13 IVORY HEIGHTS SINGAPORE 600122",
+    "postal": "600122",
+    "checked_at": "2026-07-12T05:40:26.470Z"
+  },
+  "condo:j gateway": {
+    "lat": 1.33555731797921,
+    "lng": 103.742416815373,
+    "label": "J GATEWAY",
+    "address": "2 GATEWAY DRIVE J GATEWAY SINGAPORE 608533",
+    "postal": "608533",
+    "checked_at": "2026-07-12T05:40:26.858Z"
+  },
+  "condo:kensington park": {
+    "lat": 1.36774172659847,
+    "lng": 103.869325767023,
+    "label": "KENSINGTON PARK CONDOMINIUM",
+    "address": "10 KENSINGTON PARK DRIVE KENSINGTON PARK CONDOMINIUM SINGAPORE 557324",
+    "postal": "557324",
+    "checked_at": "2026-07-12T05:40:27.335Z"
+  },
+  "condo:kingsford waterbay": {
+    "lat": 1.37578156689291,
+    "lng": 103.904196137886,
+    "label": "KINGSFORD WATERBAY",
+    "address": "80 UPPER SERANGOON VIEW KINGSFORD WATERBAY SINGAPORE 533878",
+    "postal": "533878",
+    "checked_at": "2026-07-12T05:40:27.780Z"
+  },
+  "condo:la fiesta": {
+    "lat": 1.38932868729554,
+    "lng": 103.89578483435,
+    "label": "LA FIESTA",
+    "address": "52 SENGKANG SQUARE LA FIESTA SINGAPORE 544831",
+    "postal": "544831",
+    "checked_at": "2026-07-12T05:40:28.291Z"
+  },
+  "condo:lake life": {
+    "lat": 1.33179151215892,
+    "lng": 103.724203131073,
+    "label": "LAKE LIFE",
+    "address": "12 TAO CHING ROAD LAKE LIFE SINGAPORE 618726",
+    "postal": "618726",
+    "checked_at": "2026-07-12T05:40:28.670Z"
+  },
+  "condo:le quest": {
+    "lat": 1.35594171176111,
+    "lng": 103.741127005764,
+    "label": "LE QUEST",
+    "address": "4 BUKIT BATOK STREET 41 LE QUEST SINGAPORE 657991",
+    "postal": "657991",
+    "checked_at": "2026-07-12T05:40:29.017Z"
+  },
+  "condo:leedon green": {
+    "lat": 1.31303320955725,
+    "lng": 103.803545878281,
+    "label": "LEEDON GREEN",
+    "address": "28 LEEDON HEIGHTS LEEDON GREEN SINGAPORE 266222",
+    "postal": "266222",
+    "checked_at": "2026-07-12T05:40:29.417Z"
+  },
+  "condo:lilydale": {
+    "lat": 1.42423165600449,
+    "lng": 103.848929927009,
+    "label": "LILYDALE",
+    "address": "556 YISHUN AVENUE 6 LILYDALE SINGAPORE 768964",
+    "postal": "768964",
+    "checked_at": "2026-07-12T05:40:29.795Z"
+  },
+  "condo:mayfair gardens": {
+    "lat": 1.33822248553508,
+    "lng": 103.781375965144,
+    "label": "MAYFAIR GARDENS",
+    "address": "8 RIFLE RANGE ROAD MAYFAIR GARDENS SINGAPORE 588376",
+    "postal": "588376",
+    "checked_at": "2026-07-12T05:41:09.867Z"
+  },
+  "condo:northoaks": {
+    "lat": 1.44545498067154,
+    "lng": 103.806251245325,
+    "label": "NORTHOAKS",
+    "address": "32 WOODLANDS CRESCENT NORTHOAKS SINGAPORE 738087",
+    "postal": "738087",
+    "checked_at": "2026-07-12T05:41:10.277Z"
+  },
+  "condo:northvale": {
+    "lat": 1.3875905760788,
+    "lng": 103.745442249639,
+    "label": "NORTHVALE",
+    "address": "71 CHOA CHU KANG LOOP NORTHVALE SINGAPORE 689673",
+    "postal": "689673",
+    "checked_at": "2026-07-12T05:41:10.650Z"
+  },
+  "condo:orchid park condo": {
+    "lat": 1.4123301076417,
+    "lng": 103.834893081979,
+    "label": "ORCHID PARK CONDOMINIUM",
+    "address": "93 YISHUN STREET 81 ORCHID PARK CONDOMINIUM SINGAPORE 768451",
+    "postal": "768451",
+    "checked_at": "2026-07-12T05:41:11.096Z"
+  },
+  "condo:parc clematis": {
+    "lat": 1.31687599476889,
+    "lng": 103.759288539801,
+    "label": "PARC CLEMATIS",
+    "address": "8F JALAN LEMPENG PARC CLEMATIS SINGAPORE 126740",
+    "postal": "126740",
+    "checked_at": "2026-07-12T05:41:11.404Z"
+  },
+  "condo:parkshore": {
+    "lat": 1.29673208730621,
+    "lng": 103.87063419752,
+    "label": "PARKSHORE",
+    "address": "201 TANJONG RHU ROAD PARKSHORE SINGAPORE 436917",
+    "postal": "436917",
+    "checked_at": "2026-07-12T05:41:11.674Z"
+  },
+  "condo:penrose": {
+    "lat": 1.31948983025856,
+    "lng": 103.879994891095,
+    "label": "PENROSE",
+    "address": "22 SIMS DRIVE PENROSE SINGAPORE 387396",
+    "postal": "387396",
+    "checked_at": "2026-07-12T05:41:11.993Z"
+  },
+  "condo:regent park": {
+    "lat": 1.31756792362144,
+    "lng": 103.760950142464,
+    "label": "REGENT PARK",
+    "address": "26 JALAN LEMPENG REGENT PARK SINGAPORE 128805",
+    "postal": "128805",
+    "checked_at": "2026-07-12T05:41:12.268Z"
+  },
+  "condo:riverfront residences": {
+    "lat": 1.37017075252236,
+    "lng": 103.899998611766,
+    "label": "RIVERFRONT RESIDENCES",
+    "address": "41 HOUGANG AVENUE 7 RIVERFRONT RESIDENCES SINGAPORE 533813",
+    "postal": "533813",
+    "checked_at": "2026-07-12T05:41:12.542Z"
+  },
+  "condo:sherwood towers": {
+    "lat": 1.33950014743524,
+    "lng": 103.778815124223,
+    "label": "SHERWOOD TOWERS",
+    "address": "3 JALAN ANAK BUKIT SHERWOOD TOWERS SINGAPORE 588998",
+    "postal": "588998",
+    "checked_at": "2026-07-12T05:41:12.804Z"
+  },
+  "condo:sims urban oasis": {
+    "lat": 1.31918958720539,
+    "lng": 103.881380824314,
+    "label": "SIMS URBAN OASIS",
+    "address": "2 SIMS DRIVE SIMS URBAN OASIS SINGAPORE 387386",
+    "postal": "387386",
+    "checked_at": "2026-07-12T05:41:34.547Z"
+  },
+  "condo:sky vue": {
+    "lat": 1.35276069925482,
+    "lng": 103.850963107518,
+    "label": "SKY VUE",
+    "address": "3 BISHAN STREET 15 SKY VUE SINGAPORE 573911",
+    "postal": "573911",
+    "checked_at": "2026-07-12T05:41:34.857Z"
+  },
+  "condo:skypark residences": {
+    "lat": 1.4430726383769,
+    "lng": 103.819838665024,
+    "label": "SKYPARK RESIDENCES",
+    "address": "15 SEMBAWANG CRESCENT SKYPARK RESIDENCES SINGAPORE 757060",
+    "postal": "757060",
+    "checked_at": "2026-07-12T05:41:35.270Z"
+  },
+  "condo:sol acres": {
+    "lat": 1.37601045367124,
+    "lng": 103.750474717513,
+    "label": "SOL ACRES",
+    "address": "16 CHOA CHU KANG GROVE SOL ACRES SINGAPORE 688210",
+    "postal": "688210",
+    "checked_at": "2026-07-12T05:41:35.670Z"
+  },
+  "condo:stirling residences": {
+    "lat": 1.29205481713546,
+    "lng": 103.805546433928,
+    "label": "STIRLING RESIDENCES",
+    "address": "21 STIRLING ROAD STIRLING RESIDENCES SINGAPORE 148960",
+    "postal": "148960",
+    "checked_at": "2026-07-12T05:41:36.055Z"
+  },
+  "condo:symphony suites": {
+    "lat": 1.43537726152559,
+    "lng": 103.844165552611,
+    "label": "SYMPHONY SUITES",
+    "address": "13 YISHUN CLOSE SYMPHONY SUITES SINGAPORE 768010",
+    "postal": "768010",
+    "checked_at": "2026-07-12T05:41:36.334Z"
+  },
+  "condo:the alps residences": {
+    "lat": 1.35487857823309,
+    "lng": 103.929231871684,
+    "label": "THE ALPS RESIDENCES",
+    "address": "107 TAMPINES STREET 86 THE ALPS RESIDENCES SINGAPORE 528533",
+    "postal": "528533",
+    "checked_at": "2026-07-12T05:41:36.612Z"
+  },
+  "condo:the gazania": {
+    "lat": 1.34523800771608,
+    "lng": 103.878557201884,
+    "label": "THE GAZANIA",
+    "address": "9 HOW SUN DRIVE THE GAZANIA SINGAPORE 538533",
+    "postal": "538533",
+    "checked_at": "2026-07-12T05:41:36.877Z"
+  },
+  "condo:the jade": {
+    "lat": 1.34900073327419,
+    "lng": 103.748907884779,
+    "label": "THE JADE",
+    "address": "9 BUKIT BATOK CENTRAL LINK THE JADE SINGAPORE 658074",
+    "postal": "658074",
+    "checked_at": "2026-07-12T05:41:37.134Z"
+  },
+  "condo:the nautical": {
+    "lat": 1.4428170077791,
+    "lng": 103.824737654777,
+    "label": "THE NAUTICAL",
+    "address": "97 JALAN SENDUDOK THE NAUTICAL SINGAPORE 769474",
+    "postal": "769474",
+    "checked_at": "2026-07-12T05:42:02.745Z"
+  },
+  "condo:the parc condominium": {
+    "lat": 1.31102373363759,
+    "lng": 103.762345189341,
+    "label": "THE PARC CONDOMINIUM",
+    "address": "11 WEST COAST WALK THE PARC CONDOMINIUM SINGAPORE 127161",
+    "postal": "127161",
+    "checked_at": "2026-07-12T05:42:03.237Z"
+  },
+  "condo:the pearl @ mount faber": {
+    "lat": 1.270377712339,
+    "lng": 103.824608053021,
+    "label": "THE PEARL @ MT FABER",
+    "address": "9 MOUNT FABER ROAD THE PEARL @ MT FABER SINGAPORE 099208",
+    "postal": "099208",
+    "checked_at": "2026-07-12T05:42:03.542Z"
+  },
+  "condo:the trilinq": {
+    "lat": 1.31882205054253,
+    "lng": 103.761925431231,
+    "label": "THE TRILINQ",
+    "address": "28A JALAN LEMPENG THE TRILINQ SINGAPORE 128808",
+    "postal": "128808",
+    "checked_at": "2026-07-12T05:42:04.142Z"
+  },
+  "condo:the warren": {
+    "lat": 1.38639752578681,
+    "lng": 103.742567858788,
+    "label": "THE WARREN",
+    "address": "47 CHOA CHU KANG LOOP THE WARREN SINGAPORE 689680",
+    "postal": "689680",
+    "checked_at": "2026-07-12T05:42:04.756Z"
+  },
+  "condo:the wisteria": {
+    "lat": 1.41844703579357,
+    "lng": 103.841112412447,
+    "label": "THE WISTERIA",
+    "address": "590 YISHUN RING ROAD THE WISTERIA SINGAPORE 768694",
+    "postal": "768694",
+    "checked_at": "2026-07-12T05:42:05.373Z"
+  },
+  "condo:the woodleigh res.": {
+    "lat": 1.33818991845165,
+    "lng": 103.87162768584,
+    "label": "THE WOODLEIGH RESIDENCES",
+    "address": "17 BIDADARI PARK DRIVE THE WOODLEIGH RESIDENCES SINGAPORE 367806",
+    "postal": "367806",
+    "checked_at": "2026-07-12T05:42:05.911Z"
+  },
+  "condo:twin vew": {
+    "lat": 1.32004938238057,
+    "lng": 103.75216125907,
+    "label": "TWIN VEW",
+    "address": "91 WEST COAST VALE TWIN VEW SINGAPORE 126755",
+    "postal": "126755",
+    "checked_at": "2026-07-12T05:42:06.588Z"
+  },
+  "condo:whistler grand": {
+    "lat": 1.31961164929376,
+    "lng": 103.754330936499,
+    "label": "WHISTLER GRAND",
+    "address": "109 WEST COAST VALE WHISTLER GRAND SINGAPORE 126752",
+    "postal": "126752",
+    "checked_at": "2026-07-12T05:42:07.009Z"
+  },
+  "condo:woodsvale": {
+    "lat": 1.44452872628659,
+    "lng": 103.805565935828,
+    "label": "WOODSVALE",
+    "address": "9 WOODLANDS DRIVE 72 WOODSVALE SINGAPORE 738093",
+    "postal": "738093",
+    "checked_at": "2026-07-12T05:42:07.536Z"
+  },
+  "condo:d'leedon": {
+    "lat": 1.31442165521267,
+    "lng": 103.803912974494,
+    "label": "D'LEEDON",
+    "address": "7 LEEDON HEIGHTS D'LEEDON SINGAPORE 267953",
+    "postal": "267953",
+    "checked_at": "2026-07-12T05:42:08.239Z"
+  }
+}
