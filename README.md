@@ -1,28 +1,33 @@
-# P1 Home Intelligence — Version 4.2.1
+# P1 Home Intelligence — Version 5.0
 
-Version 4.2.1 adds backward-compatible and fault-tolerant data loading.
+Version 5.0 turns the map, ranked results and details into one decision workspace.
 
-## Reliability changes
+## Major features
 
-- The public application requires only `data/pairings.json`, matching the earlier deployment structure.
-- `schools.json`, `condos.json`, `platform-pairings.json`, `coordinates.json`, and `manifest.json` are optional platform files.
-- Missing optional files no longer stop the public app from loading.
-- HTML or 404 responses are detected and reported clearly instead of producing `Unexpected token '<'`.
-- Corrupt Admin Mode local-storage data falls back safely to repository data.
-
-## Recommended deployment
-
-Upload all files and folders in this package to the repository root. In particular, upload the entire `data` folder.
-
-For the smallest emergency update, these files restore the public application:
-
-- `index.html`
-- `styles.css`
-- `app.js`
-- `data/pairings.json`
-
-The other data files enable the Version 4.2 Admin Mode and platform architecture.
+- Marker clustering at Singapore-wide zoom levels
+- Focus mode for a selected school–condo pairing
+- Automatic 1 km school radius and alternative-school markers
+- Rich school and condo popups
+- Map-aware comparison for up to four pairings
+- Four decision profiles: balanced, admission first, investment focus and family convenience
+- Transparent “Why this score?” breakdown
+- Winner highlighting in comparison cards
+- Non-modal details panel; uncovered map remains interactive
+- Existing shortlist, notes, CSV export and coordinate cache retained
+- Hidden Admin Mode for coordinate maintenance and platform export
 
 ## Admin Mode
 
-Open the site with `#admin` at the end of the URL, or press `Ctrl + Shift + A` on a keyboard.
+Activate by:
+
+- opening the site with `#admin`
+- pressing `Ctrl + Shift + A`
+- tapping the P1 Home Intelligence brand seven times
+
+GitHub Pages is static hosting. Admin Mode is a maintenance interface, not secure authentication.
+
+## Deploy
+
+Upload and replace all files from this package, preserving the `data` folder. After GitHub Pages redeploys, force-refresh the page.
+
+The coordinate cache in the browser remains compatible with Version 4.x.

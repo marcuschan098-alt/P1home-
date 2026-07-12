@@ -3,232 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Singapore primary school and condo pairing intelligence platform">
+  <meta name="description" content="Singapore primary school and condo decision intelligence platform">
   <meta name="theme-color" content="#173b57">
-  <title>P1 Home Intelligence — Version 4.2.1</title>
-  <link rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-  crossorigin="">
-  <link rel="stylesheet" href="styles.css?v=4.2.1">
+  <title>P1 Home Intelligence — Version 5.0</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" href="styles.css?v=5.0.0">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="brand-kicker">Singapore P1 Strategy</span>
-      <strong>P1 Home Intelligence</strong>
-    </div>
-    <nav class="topnav">
-      <button class="topnav-btn active" data-view="map">Map</button>
-      <button class="topnav-btn" data-view="compare">Compare <span id="compareCount">0</span></button>
-      <button class="topnav-btn" data-view="shortlist">Shortlist <span id="shortlistCount">0</span></button>
-    </nav>
-    <div class="top-actions">
-      <button id="oneMapSetupBtn" class="btn secondary">Coordinate setup</button>
-      <button id="exportBtn" class="btn primary">Export CSV</button>
-    </div>
-  </header>
+<header class="topbar">
+  <div class="brand" id="brandTrigger"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence</strong></div>
+  <nav class="topnav">
+    <button class="nav active" data-view="map">Explore</button>
+    <button class="nav" data-view="compare">Compare <b id="compareCount">0</b></button>
+    <button class="nav" data-view="shortlist">Shortlist <b id="shortlistCount">0</b></button>
+    <button id="adminNav" class="nav hidden" data-view="admin">Admin</button>
+  </nav>
+  <button id="exportBtn" class="btn primary">Export CSV</button>
+</header>
 
-  <main>
-    <section id="mapView" class="app-view active">
-      <div class="workspace">
-        <aside class="control-panel">
-          <div class="panel-scroll">
-            <section class="control-section intro">
-              <h1>Find the right school–home pairing</h1>
-              <p>Filter by price, school admission evidence and property attributes. The map and ranked results update together.</p>
-            </section>
-
-            <section class="control-section">
-              <label class="field-label" for="globalSearch">Search</label>
-              <input id="globalSearch" list="searchSuggestions" type="search" placeholder="School, condo or alternative school">
-              <datalist id="searchSuggestions"></datalist>
-            </section>
-
-            <section class="control-section budget">
-              <div class="section-row">
-                <div>
-                  <span class="field-label">Estimated 3-bedroom value</span>
-                  <small>Price ranges that overlap your selection remain visible.</small>
-                </div>
-                <output id="priceRangeLabel">S$1.00M – S$3.00M</output>
-              </div>
-              <div class="budget-values">
-                <div><small>Minimum</small><strong id="priceMinLabel">S$1.00M</strong></div>
-                <div><small>Maximum</small><strong id="priceMaxLabel">S$3.00M</strong></div>
-              </div>
-              <div class="dual-range">
-                <div class="range-track"></div>
-                <div id="rangeFill" class="range-fill"></div>
-                <input id="priceMin" type="range" min="1000000" max="3000000" step="50000" value="1000000">
-                <input id="priceMax" type="range" min="1000000" max="3000000" step="50000" value="3000000">
-              </div>
-              <div class="range-limits"><span>S$1.00M</span><span>S$3.00M</span></div>
-            </section>
-
-            <section class="control-section filter-grid">
-              <label>Target school
-                <select id="schoolFilter"><option value="">All target schools</option></select>
-              </label>
-              <label>Region
-                <select id="regionFilter"><option value="">All regions</option></select>
-              </label>
-              <label>School category
-                <select id="categoryFilter"><option value="">All categories</option></select>
-              </label>
-              <label>Admission risk
-                <select id="riskFilter"><option value="">All risks</option></select>
-              </label>
-              <label>Tenure
-                <select id="tenureFilter"><option value="">All tenure types</option></select>
-              </label>
-              <label>Minimum TOP
-                <select id="topFilter">
-                  <option value="">Any TOP</option>
-                  <option value="2000">2000 or newer</option>
-                  <option value="2010">2010 or newer</option>
-                  <option value="2018">2018 or newer</option>
-                  <option value="2020">2020 or newer</option>
-                </select>
-              </label>
-              <label>Sort by
-                <select id="sortFilter">
-                  <option value="overall_desc">Overall score</option>
-                  <option value="admission_desc">Admission chance</option>
-                  <option value="property_desc">Property score</option>
-                  <option value="price_asc">Lowest 3-bed price</option>
-                  <option value="top_desc">Newest TOP</option>
-                </select>
-              </label>
-            </section>
-
-            <section class="control-section actions-row">
-              <button id="resetFiltersBtn" class="btn secondary">Reset</button>
-              <button id="fitMarkersBtn" class="btn secondary">Fit markers</button>
-            </section>
-
-            <section class="control-section result-summary">
-              <div><strong id="visiblePairings">0</strong><small>pairings</small></div>
-              <div><strong id="visibleSchools">0</strong><small>schools</small></div>
-              <div><strong id="visibleCondos">0</strong><small>condos</small></div>
-              <div><strong id="averageScore">0</strong><small>avg score</small></div>
-            </section>
-
-            <section class="control-section results-section">
-              <div class="section-row">
-                <div><span class="field-label">Ranked results</span><small id="resultCount"></small></div>
-                <button id="toggleResultsBtn" class="text-button">Compact</button>
-              </div>
-              <div id="resultsList" class="results-list"></div>
-            </section>
-          </div>
-        </aside>
-
-        <section class="map-panel">
-          <div class="map-toolbar">
-            <div id="mapStatus" class="map-status">Loading OneMap Default…</div>
-            <div class="map-tools">
-              <label class="inline-check"><input id="showAlternatives" type="checkbox" checked> Alternatives</label>
-              <button id="reloadMapBtn" class="btn small secondary">Reload</button>
-            </div>
-          </div>
-
-          <div class="map-kpis">
-            <span><strong id="mappedSchoolCount">0</strong> mapped schools</span>
-            <span><strong id="mappedCondoCount">0</strong> mapped condos</span>
-            <span><strong id="cachedLocationCount">0</strong> cached locations</span>
-          </div>
-
-          <div id="oneMap" class="one-map"></div>
-          <div id="mapLoadingMask" class="map-loading-mask">Loading map…</div>
-
-          <div class="map-legend">
-            <span><i class="legend school"></i>Target school</span>
-            <span><i class="legend condo"></i>Condo</span>
-            <span><i class="legend alternative"></i>Alternative school</span>
-            <span><i class="legend radius"></i>1 km radius</span>
-          </div>
-
-          <div class="map-attribution official">
-            <img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" alt="OneMap logo">
-            <span><a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener">OneMap</a> © contributors | <a href="https://www.sla.gov.sg/" target="_blank" rel="noopener">Singapore Land Authority</a></span>
-          </div>
-        </section>
-      </div>
-    </section>
-
-    <section id="compareView" class="app-view">
-      <div class="standalone-view">
-        <div class="view-header">
-          <div><span class="eyebrow">Compare</span><h2>Side-by-side decision view</h2></div>
-          <button id="clearCompareBtn" class="btn secondary">Clear</button>
+<main>
+<section id="mapView" class="view active">
+  <div class="explore-layout">
+    <aside class="filters-pane">
+      <div class="pane-scroll">
+        <div class="intro"><h1>Find the best school–home fit</h1><p>Map, ranking and details now work as one decision workspace.</p></div>
+        <label class="field">Search<input id="globalSearch" list="searchSuggestions" type="search" placeholder="School, condo or alternative school"><datalist id="searchSuggestions"></datalist></label>
+        <div class="profile-box"><label class="field">Decision profile<select id="profileFilter"><option value="balanced">Balanced family decision</option><option value="admission">Admission first</option><option value="investment">Investment focus</option><option value="family">Family convenience</option></select></label><small id="profileHelp"></small></div>
+        <div class="budget-box"><div class="budget-head"><div><strong>Estimated 3-bedroom value</strong><small>Overlapping property ranges remain visible.</small></div><output id="priceRangeLabel">S$1.00M – S$3.00M</output></div><div class="budget-values"><span><small>Minimum</small><b id="priceMinLabel">S$1.00M</b></span><span><small>Maximum</small><b id="priceMaxLabel">S$3.00M</b></span></div><div class="dual-range"><i></i><em id="rangeFill"></em><input id="priceMin" type="range" min="1000000" max="3000000" step="50000" value="1000000"><input id="priceMax" type="range" min="1000000" max="3000000" step="50000" value="3000000"></div></div>
+        <div class="filter-grid">
+          <label>Target school<select id="schoolFilter"><option value="">All target schools</option></select></label>
+          <label>Region<select id="regionFilter"><option value="">All regions</option></select></label>
+          <label>School category<select id="categoryFilter"><option value="">All categories</option></select></label>
+          <label>Admission risk<select id="riskFilter"><option value="">All risks</option></select></label>
+          <label>Tenure<select id="tenureFilter"><option value="">All tenure types</option></select></label>
+          <label>Minimum TOP<select id="topFilter"><option value="">Any TOP</option><option value="2000">2000 or newer</option><option value="2010">2010 or newer</option><option value="2018">2018 or newer</option><option value="2020">2020 or newer</option></select></label>
+          <label>Sort by<select id="sortFilter"><option value="decision_desc">Decision score</option><option value="overall_desc">Original overall score</option><option value="admission_desc">Admission chance</option><option value="property_desc">Property score</option><option value="price_asc">Lowest price</option><option value="top_desc">Newest TOP</option></select></label>
         </div>
-        <div id="compareContainer" class="compare-grid"></div>
+        <div class="filter-actions"><button id="resetBtn" class="btn">Reset</button><button id="fitBtn" class="btn">Fit markers</button><button id="clearFocusBtn" class="btn hidden">Show all</button></div>
+        <div class="summary"><span><b id="visiblePairings">0</b>pairings</span><span><b id="visibleSchools">0</b>schools</span><span><b id="visibleCondos">0</b>condos</span><span><b id="averageScore">0</b>avg score</span></div>
       </div>
+    </aside>
+
+    <section class="map-pane">
+      <div class="map-toolbar"><div id="mapStatus" class="map-status">Loading OneMap…</div><div><label><input id="showAlternatives" type="checkbox" checked> Alternatives</label><button id="reloadMapBtn" class="btn small">Reload</button></div></div>
+      <div class="map-kpis"><span><b id="mappedSchoolCount">0</b> schools</span><span><b id="mappedCondoCount">0</b> condos</span><span><b id="cachedLocationCount">0</b> cached</span></div>
+      <div id="oneMap" class="map"></div><div id="mapMask" class="map-mask">Loading map…</div>
+      <div class="legend"><span><i class="school"></i>School</span><span><i class="condo"></i>Condo</span><span><i class="alternative"></i>Alternative</span><span><i class="radius"></i>1 km</span></div>
+      <div class="attribution"><img src="https://www.onemap.gov.sg/web-assets/images/logo/om_logo.png" alt="OneMap"><span><a href="https://www.onemap.gov.sg/" target="_blank" rel="noopener">OneMap</a> © contributors | Singapore Land Authority</span></div>
     </section>
 
-    <section id="shortlistView" class="app-view">
-      <div class="standalone-view">
-        <div class="view-header">
-          <div><span class="eyebrow">Shortlist</span><h2>Saved pairings and notes</h2></div>
-          <button id="clearShortlistBtn" class="btn secondary">Clear</button>
-        </div>
-        <div id="shortlistContainer" class="shortlist-grid"></div>
-      </div>
-    </section>
-  </main>
+    <aside class="results-pane"><div class="results-head"><div><strong>Ranked results</strong><small id="resultCount"></small></div><button id="compactBtn" class="text-btn">Compact</button></div><div id="resultsList" class="results-list"></div></aside>
+  </div>
+</section>
 
-  <aside id="detailDrawer" class="detail-drawer" aria-hidden="true">
-    
-    <div class="drawer-panel">
-      <button id="closeDrawer" class="drawer-close" aria-label="Close details">×</button>
-      <div id="detailContent"></div>
-    </div>
-  </aside>
+<section id="compareView" class="view standalone"><div class="page-head"><div><span>Compare</span><h2>Trade-offs at a glance</h2></div><div><button id="compareOnMapBtn" class="btn primary">Show on map</button><button id="clearCompareBtn" class="btn">Clear</button></div></div><div id="compareContainer" class="compare-grid"></div></section>
+<section id="shortlistView" class="view standalone"><div class="page-head"><div><span>Shortlist</span><h2>Saved options and notes</h2></div><button id="clearShortlistBtn" class="btn">Clear</button></div><div id="shortlistContainer" class="compare-grid"></div></section>
+<section id="adminView" class="view standalone"><div class="page-head"><div><span>Admin Mode</span><h2>Data health and coordinate maintenance</h2></div><button id="exitAdminBtn" class="btn">Exit</button></div><div id="adminHealth" class="admin-health"></div><div class="admin-grid"><article><h3>Coordinate setup</h3><p>Geocode missing entities with a temporary OneMap token.</p><button id="openSetupBtn" class="btn primary">Open coordinate setup</button></article><article><h3>Cache tools</h3><button id="adminExportCoordinates" class="btn">Export coordinates</button><label class="btn file-btn">Import coordinates<input id="adminImportCoordinates" type="file" accept=".json"></label></article><article><h3>Platform bundle</h3><p>Exports optional school, condo and pairing foundation files when available.</p><button id="exportBundleBtn" class="btn">Export platform bundle</button></article></div></section>
+</main>
 
-  <dialog id="setupDialog" class="setup-dialog">
-    <button id="closeSetupDialog" class="drawer-close">×</button>
-    <h2>Coordinate setup</h2>
-    <p>The basemap does not require a token. A temporary OneMap token is required only to geocode school and condo names.</p>
-    <label>Temporary access token
-      <textarea id="tokenInput" placeholder="Paste a current OneMap token"></textarea>
-    </label>
-    <div class="setup-actions">
-      <button id="saveTokenBtn" class="btn primary">Save for session</button>
-      <button id="geocodeVisibleBtn" class="btn secondary">Geocode visible</button>
-      <button id="geocodeAllBtn" class="btn secondary">Geocode all</button>
-      <button id="resumeGeocodeBtn" class="btn secondary">Resume</button>
-    </div>
-    <div class="setup-actions secondary-actions">
-      <button id="exportCoordinatesBtn" class="btn secondary">Export cache</button>
-      <label class="btn secondary import-btn">Import cache<input id="importCoordinatesInput" type="file" accept=".json"></label>
-      <button id="clearCoordinatesBtn" class="btn secondary">Clear cache</button>
-    </div>
-    <div id="setupProgress" class="setup-progress">No geocoding task running.</div>
-  </dialog>
+<aside id="detailDrawer" class="drawer"><div class="drawer-panel"><button id="closeDrawer" class="drawer-close">×</button><div id="detailContent"></div></div></aside>
+<dialog id="setupDialog" class="setup-dialog"><button id="closeSetupDialog" class="drawer-close">×</button><h2>Coordinate setup</h2><p>The basemap is public. The token is used only for OneMap Search geocoding.</p><label>Temporary OneMap access token<textarea id="tokenInput"></textarea></label><div class="dialog-actions"><button id="saveTokenBtn" class="btn primary">Save for session</button><button id="geocodeVisibleBtn" class="btn">Geocode visible</button><button id="geocodeAllBtn" class="btn">Geocode all</button><button id="resumeBtn" class="btn">Resume</button></div><div class="dialog-actions"><button id="exportCoordinatesBtn" class="btn">Export cache</button><label class="btn file-btn">Import cache<input id="importCoordinatesInput" type="file" accept=".json"></label><button id="clearCoordinatesBtn" class="btn">Clear cache</button></div><div id="setupProgress" class="setup-progress">No task running.</div></dialog>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=4.2.1"></script>
-
-  <aside id="adminPanel" class="admin-panel" aria-label="Admin Mode">
-    <div class="admin-head"><div><span>ADMIN MODE</span><h2>Platform maintenance</h2></div><button id="closeAdmin">×</button></div>
-    <p class="admin-warning">This is a maintenance interface, not password security. Use Ctrl+Shift+A or #admin to open it.</p>
-    <div id="adminHealth" class="admin-health"></div>
-    <section class="admin-section"><h3>Data health issues</h3><ul id="adminIssues"></ul></section>
-    <section class="admin-section"><h3>Coordinate manager</h3><button id="adminCoordinateSetup" class="btn secondary">Open coordinate setup</button></section>
-    <section class="admin-section"><h3>Add map-only entity</h3>
-      <label>Type<select id="adminEntityType"><option value="school">School</option><option value="condo">Condo</option></select></label>
-      <label>Name<input id="adminEntityName" placeholder="Exact OneMap search name"></label>
-      <label>Region<input id="adminEntityRegion" placeholder="Optional"></label>
-      <button id="adminAddEntity" class="btn primary">Add entity</button><div id="adminEntityStatus" class="admin-status"></div>
-    </section>
-    <section class="admin-section"><h3>Pairing builder</h3>
-      <label>School<select id="adminSchool"></select></label><label>Condo<select id="adminCondo"></select></label>
-      <label>Coverage<select id="adminCoverage"><option value="mapped">Map only</option><option value="basic">Basic</option><option value="curated">Curated</option></select></label>
-      <button id="adminAddPairing" class="btn primary">Add pairing</button><div id="adminPairingStatus" class="admin-status"></div>
-    </section>
-    <section class="admin-section"><h3>Export</h3><button id="adminExportBundle" class="btn secondary">Export platform bundle</button></section>
-  </aside>
-</body>
-</html>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="app.js?v=5.0.0"></script>
+</body></html>
