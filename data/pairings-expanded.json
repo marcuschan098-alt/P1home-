@@ -49,7 +49,9 @@
     ],
     "id": "P001",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH043",
+    "condo_id": "CON0028"
   },
   {
     "pairing_id": "P002",
@@ -101,7 +103,9 @@
     ],
     "id": "P002",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH057",
+    "condo_id": "CON0026"
   },
   {
     "pairing_id": "P003",
@@ -153,7 +157,9 @@
     ],
     "id": "P003",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH028",
+    "condo_id": "CON0024"
   },
   {
     "pairing_id": "P004",
@@ -205,7 +211,9 @@
     ],
     "id": "P004",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH010",
+    "condo_id": "CON0040"
   },
   {
     "pairing_id": "P005",
@@ -257,7 +265,9 @@
     ],
     "id": "P005",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH001",
+    "condo_id": "CON0053"
   },
   {
     "pairing_id": "P006",
@@ -309,7 +319,9 @@
     ],
     "id": "P006",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH073",
+    "condo_id": "CON0044"
   },
   {
     "pairing_id": "P007",
@@ -361,7 +373,9 @@
     ],
     "id": "P007",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH046",
+    "condo_id": "CON0049"
   },
   {
     "pairing_id": "P008",
@@ -413,7 +427,9 @@
     ],
     "id": "P008",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH040",
+    "condo_id": "CON0011"
   },
   {
     "pairing_id": "P009",
@@ -465,7 +481,9 @@
     ],
     "id": "P009",
     "map_x": 50,
-    "map_y": 18
+    "map_y": 18,
+    "school_id": "SCH006",
+    "condo_id": "CON0037"
   },
   {
     "pairing_id": "P010",
@@ -517,7 +535,9 @@
     ],
     "id": "P010",
     "map_x": 28,
-    "map_y": 28
+    "map_y": 28,
+    "school_id": "SCH063",
+    "condo_id": "CON0038"
   },
   {
     "pairing_id": "P011",
@@ -569,7 +589,9 @@
     ],
     "id": "P011",
     "map_x": 28,
-    "map_y": 28
+    "map_y": 28,
+    "school_id": "SCH063",
+    "condo_id": "CON0027"
   },
   {
     "pairing_id": "P012",
@@ -621,7 +643,9 @@
     ],
     "id": "P012",
     "map_x": 78,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH067",
+    "condo_id": "CON0041"
   },
   {
     "pairing_id": "P013",
@@ -673,7 +697,9 @@
     ],
     "id": "P013",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0032"
   },
   {
     "pairing_id": "P014",
@@ -725,7 +751,9 @@
     ],
     "id": "P014",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH059",
+    "condo_id": "CON0021"
   },
   {
     "pairing_id": "P015",
@@ -777,7 +805,9 @@
     ],
     "id": "P015",
     "map_x": 28,
-    "map_y": 28
+    "map_y": 28,
+    "school_id": "SCH063",
+    "condo_id": "CON0048"
   },
   {
     "pairing_id": "P016",
@@ -830,7 +860,9 @@
     ],
     "id": "P016",
     "map_x": 78,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH051",
+    "condo_id": "CON0009"
   },
   {
     "pairing_id": "P017",
@@ -882,7 +914,9 @@
     ],
     "id": "P017",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH032",
+    "condo_id": "CON0043"
   },
   {
     "pairing_id": "P018",
@@ -934,7 +968,9 @@
     ],
     "id": "P018",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH048",
+    "condo_id": "CON0034"
   },
   {
     "pairing_id": "P019",
@@ -986,7 +1022,9 @@
     ],
     "id": "P019",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH040",
+    "condo_id": "CON0020"
   },
   {
     "pairing_id": "P020",
@@ -1038,7 +1076,9 @@
     ],
     "id": "P020",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH019",
+    "condo_id": "CON0016"
   },
   {
     "pairing_id": "P021",
@@ -1090,7 +1130,9 @@
     ],
     "id": "P021",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH018",
+    "condo_id": "CON0013"
   },
   {
     "pairing_id": "P022",
@@ -1142,7 +1184,9 @@
     ],
     "id": "P022",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH052",
+    "condo_id": "CON0022"
   },
   {
     "pairing_id": "P023",
@@ -1193,7 +1237,9 @@
     ],
     "id": "P023",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH038",
+    "condo_id": "CON0008"
   },
   {
     "pairing_id": "P024",
@@ -1245,7 +1291,9 @@
     ],
     "id": "P024",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0051"
   },
   {
     "pairing_id": "P025",
@@ -1297,7 +1345,9 @@
     ],
     "id": "P025",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0052"
   },
   {
     "pairing_id": "P026",
@@ -1349,7 +1399,9 @@
     ],
     "id": "P026",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH044",
+    "condo_id": "CON0010"
   },
   {
     "pairing_id": "P027",
@@ -1401,7 +1453,9 @@
     ],
     "id": "P027",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH031",
+    "condo_id": "CON0017"
   },
   {
     "pairing_id": "P028",
@@ -1453,7 +1507,9 @@
     ],
     "id": "P028",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0047"
   },
   {
     "pairing_id": "P029",
@@ -1505,7 +1561,9 @@
     ],
     "id": "P029",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH038",
+    "condo_id": "CON0005"
   },
   {
     "pairing_id": "P030",
@@ -1557,7 +1615,9 @@
     ],
     "id": "P030",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH018",
+    "condo_id": "CON0015"
   },
   {
     "pairing_id": "P031",
@@ -1609,7 +1669,9 @@
     ],
     "id": "P031",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH038",
+    "condo_id": "CON0004"
   },
   {
     "pairing_id": "P032",
@@ -1661,7 +1723,9 @@
     ],
     "id": "P032",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH055",
+    "condo_id": "CON0039"
   },
   {
     "pairing_id": "P033",
@@ -1713,7 +1777,9 @@
     ],
     "id": "P033",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH048",
+    "condo_id": "CON0012"
   },
   {
     "pairing_id": "P034",
@@ -1765,7 +1831,9 @@
     ],
     "id": "P034",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0045"
   },
   {
     "pairing_id": "P035",
@@ -1816,7 +1884,9 @@
     ],
     "id": "P035",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH038",
+    "condo_id": "CON0042"
   },
   {
     "pairing_id": "P036",
@@ -1867,7 +1937,9 @@
     ],
     "id": "P036",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH048",
+    "condo_id": "CON0025"
   },
   {
     "pairing_id": "P037",
@@ -1919,7 +1991,9 @@
     ],
     "id": "P037",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH025",
+    "condo_id": "CON0030"
   },
   {
     "pairing_id": "P038",
@@ -1971,7 +2045,9 @@
     ],
     "id": "P038",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH038",
+    "condo_id": "CON0050"
   },
   {
     "pairing_id": "P039",
@@ -2023,7 +2099,9 @@
     ],
     "id": "P039",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH048",
+    "condo_id": "CON0014"
   },
   {
     "pairing_id": "P040",
@@ -2074,7 +2152,9 @@
     ],
     "id": "P040",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH042",
+    "condo_id": "CON0054"
   },
   {
     "pairing_id": "P041",
@@ -2126,7 +2206,9 @@
     ],
     "id": "P041",
     "map_x": 24,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH041",
+    "condo_id": "CON0029"
   },
   {
     "pairing_id": "P042",
@@ -2177,7 +2259,9 @@
     ],
     "id": "P042",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH042",
+    "condo_id": "CON0023"
   },
   {
     "pairing_id": "P043",
@@ -2228,7 +2312,9 @@
     ],
     "id": "P043",
     "map_x": 78,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH033",
+    "condo_id": "CON0031"
   },
   {
     "pairing_id": "P044",
@@ -2280,7 +2366,9 @@
     ],
     "id": "P044",
     "map_x": 78,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH033",
+    "condo_id": "CON0035"
   },
   {
     "pairing_id": "P045",
@@ -2330,7 +2418,9 @@
     ],
     "id": "P045",
     "map_x": 50,
-    "map_y": 80
+    "map_y": 80,
+    "school_id": "SCH056",
+    "condo_id": "CON0003"
   },
   {
     "pairing_id": "P046",
@@ -2381,7 +2471,9 @@
     ],
     "id": "P046",
     "map_x": 50,
-    "map_y": 80
+    "map_y": 80,
+    "school_id": "SCH056",
+    "condo_id": "CON0046"
   },
   {
     "pairing_id": "P047",
@@ -2433,7 +2525,9 @@
     ],
     "id": "P047",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH026",
+    "condo_id": "CON0019"
   },
   {
     "pairing_id": "P048",
@@ -2485,7 +2579,9 @@
     ],
     "id": "P048",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH026",
+    "condo_id": "CON0033"
   },
   {
     "pairing_id": "P049",
@@ -2537,7 +2633,9 @@
     ],
     "id": "P049",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH053",
+    "condo_id": "CON0019"
   },
   {
     "pairing_id": "P050",
@@ -2589,7 +2687,9 @@
     ],
     "id": "P050",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH053",
+    "condo_id": "CON0007"
   },
   {
     "pairing_id": "P051",
@@ -2641,7 +2741,9 @@
     ],
     "id": "P051",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH008",
+    "condo_id": "CON0006"
   },
   {
     "pairing_id": "P052",
@@ -2693,7 +2795,9 @@
     ],
     "id": "P052",
     "map_x": 50,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH008",
+    "condo_id": "CON0036"
   },
   {
     "pairing_id": "P053",
@@ -2745,7 +2849,9 @@
     ],
     "id": "P053",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH058",
+    "condo_id": "CON0018"
   },
   {
     "pairing_id": "P054",
@@ -2797,7 +2903,9 @@
     ],
     "id": "P054",
     "map_x": 72,
-    "map_y": 30
+    "map_y": 30,
+    "school_id": "SCH058",
+    "condo_id": "CON0001"
   },
   {
     "pairing_id": "P055",
@@ -2847,6 +2955,8 @@
     ],
     "id": "P055",
     "map_x": 78,
-    "map_y": 55
+    "map_y": 55,
+    "school_id": "SCH070",
+    "condo_id": "CON0002"
   }
 ]

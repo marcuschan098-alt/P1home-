@@ -1,0 +1,9 @@
+{
+  "version": "6.0.0",
+  "generated_at": "2026-07-12",
+  "known_schools": 81,
+  "curated_target_schools": 32,
+  "developments": 54,
+  "curated_pairings": 55,
+  "distance_model": "precomputed knowledge base with exact-address preference"
+}

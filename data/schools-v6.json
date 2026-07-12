@@ -1,0 +1,650 @@
+[
+  {
+    "school_id": "SCH001",
+    "name": "Admiralty Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH002",
+    "name": "Anchor Green Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH003",
+    "name": "Blangah Rise Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH004",
+    "name": "Bukit Timah Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH005",
+    "name": "Bukit View Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH006",
+    "name": "Canberra Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH007",
+    "name": "Canossa Catholic Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH008",
+    "name": "Catholic High School (Primary Section)",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Elite",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH009",
+    "name": "Cedar Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH010",
+    "name": "Chongfu School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH011",
+    "name": "Chua Chu Kang Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH012",
+    "name": "Clementi Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH013",
+    "name": "Compassvale Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH014",
+    "name": "Concord Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH015",
+    "name": "Dazhong Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH016",
+    "name": "Endeavour Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH017",
+    "name": "Evergreen Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH018",
+    "name": "Fairfield Methodist School (Primary)",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH019",
+    "name": "Fuhua Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Established",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH020",
+    "name": "Gan Eng Seng Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH021",
+    "name": "Geylang Methodist School (Primary)",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH022",
+    "name": "Gongshang Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH023",
+    "name": "Greenwood Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH024",
+    "name": "Guangyang Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH025",
+    "name": "Henry Park Primary School",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH026",
+    "name": "Holy Innocents' Primary School",
+    "coverage": "curated",
+    "region": "North-East",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH027",
+    "name": "Hougang Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH028",
+    "name": "Huamin Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH029",
+    "name": "Jiemin Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH030",
+    "name": "Junyuan Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH031",
+    "name": "Jurong Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Established",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH032",
+    "name": "Keming Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH033",
+    "name": "Kong Hwa School",
+    "coverage": "curated",
+    "region": "East",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH034",
+    "name": "Kuo Chuan Presbyterian Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH035",
+    "name": "Lakeside Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH036",
+    "name": "Lianhua Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH037",
+    "name": "MacPherson Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH038",
+    "name": "Maris Stella High School (Primary Section)",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH039",
+    "name": "Montfort Junior School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH040",
+    "name": "Nan Chiau Primary School",
+    "coverage": "curated",
+    "region": "North-East",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH041",
+    "name": "Nan Hua Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH042",
+    "name": "Nanyang Primary School",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Elite",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH043",
+    "name": "Naval Base Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH044",
+    "name": "New Town Primary School",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Established",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH045",
+    "name": "North View Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH046",
+    "name": "Northland Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH047",
+    "name": "Pei Chun Public School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH048",
+    "name": "Pei Hwa Presbyterian Primary School",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH049",
+    "name": "Pei Tong Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH050",
+    "name": "Peiying Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH051",
+    "name": "Poi Ching School",
+    "coverage": "curated",
+    "region": "East",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH052",
+    "name": "Princess Elizabeth Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH053",
+    "name": "Punggol Primary School",
+    "coverage": "curated",
+    "region": "North-East",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH054",
+    "name": "Qifa Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH055",
+    "name": "Queenstown Primary School",
+    "coverage": "curated",
+    "region": "Central",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH056",
+    "name": "Radin Mas Primary School",
+    "coverage": "curated",
+    "region": "South",
+    "category": "Strong",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH057",
+    "name": "Riverside Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Established",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH058",
+    "name": "Rosyth School",
+    "coverage": "curated",
+    "region": "North-East",
+    "category": "Elite",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH059",
+    "name": "Rulang Primary School",
+    "coverage": "curated",
+    "region": "West",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH060",
+    "name": "Sembawang Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH061",
+    "name": "Serangoon Garden South School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH062",
+    "name": "Shuqun Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH063",
+    "name": "South View Primary School",
+    "coverage": "curated",
+    "region": "Northwest",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH064",
+    "name": "Springdale Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH065",
+    "name": "St. Andrew's Junior School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH066",
+    "name": "St. Gabriel's Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH067",
+    "name": "St. Hilda's Primary School",
+    "coverage": "curated",
+    "region": "East",
+    "category": "Premier",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH068",
+    "name": "Tampines Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH069",
+    "name": "Tanjong Katong Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH070",
+    "name": "Tao Nan School",
+    "coverage": "curated",
+    "region": "East",
+    "category": "Elite",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH071",
+    "name": "Teck Whye Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH072",
+    "name": "Townsville Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH073",
+    "name": "Wellington Primary School",
+    "coverage": "curated",
+    "region": "North",
+    "category": "Established",
+    "source": "current curated dataset"
+  },
+  {
+    "school_id": "SCH074",
+    "name": "West View Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH075",
+    "name": "Woodlands Ring Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH076",
+    "name": "Xinmin Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH077",
+    "name": "Xishan Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH078",
+    "name": "Yangzheng Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH079",
+    "name": "Yuhua Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH080",
+    "name": "Zhangde Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  },
+  {
+    "school_id": "SCH081",
+    "name": "Zhonghua Primary School",
+    "coverage": "location_only",
+    "region": "",
+    "category": "",
+    "source": "alternative-school reference"
+  }
+]
