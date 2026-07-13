@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#173b57">
-<title>P1 Home Intelligence V7.1</title>
+<title>P1 Home Intelligence V10</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=7.1.0">
+<link rel="stylesheet" href="styles.css?v=10.0.0">
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V7.1</em></strong></div>
+  <div class="brand"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V10</em></strong></div>
   <nav>
     <button class="nav active" data-view="explore">Explore</button>
     <button class="nav" data-view="compare">Compare <b id="compareCount">0</b></button>
@@ -49,7 +49,14 @@
           <label>Region<select id="regionFilter"><option value="">All regions</option></select></label>
           <label>Distance evidence<select id="evidenceFilter"><option value="">All evidence</option><option value="exact_address">Exact address</option><option value="development_point">Development screening</option><option value="missing">Missing</option></select></label>
           <label>Distance category<select id="distanceFilter"><option value="">All categories</option><option value="within_1km">Within 1 km</option><option value="within_2km">1–2 km</option><option value="outside_2km">Outside 2 km</option><option value="boundary">Boundary-sensitive</option></select></label>
-          <label>Admission risk<select id="riskFilter"><option value="">All risks</option></select></label>
+          
+<label>School status
+  <select id="statusFilter">
+    <option value="active">Active schools only</option>
+    <option value="all">Include merged legacy schools</option>
+  </select>
+</label>
+<label>Admission risk<select id="riskFilter"><option value="">All risks</option></select></label>
           <label>Minimum TOP<select id="topFilter"><option value="">Any TOP</option><option value="2010">2010+</option><option value="2018">2018+</option><option value="2020">2020+</option></select></label>
           <label>Sort<select id="sort"><option value="decision">Decision score</option><option value="distance">Nearest</option><option value="admission">Admission</option><option value="property">Property</option></select></label>
         </div>
@@ -73,5 +80,5 @@
 <aside id="drawer" class="drawer"><div><button id="closeDrawer">×</button><section id="details"></section></div></aside>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="app.js?v=7.1.0"></script>
+<script src="app.js?v=10.0.0"></script>
 </body></html>

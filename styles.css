@@ -3,3 +3,20 @@
 .data-status{margin-top:12px;padding:10px;border-radius:10px;background:#eef4f7;color:var(--navy);font-size:.72rem}
 .data-status.ok{background:#e4f3eb;color:#21654e}
 .data-status.warn{background:#fff0d5;color:#7f560d}
+
+/* Version 8 map visual corrections */
+.marker{
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:.72rem;border:2px solid #fff;box-shadow:0 2px 7px rgba(0,0,0,.28)
+}
+.marker.school{background:#1f6f8f}
+.marker.condo{background:#d08b16}
+.marker.address{background:#6b4c93}
+.legend i.s{background:#1f6f8f}
+.legend i.c{background:#d08b16}
+.legend i.a{background:#6b4c93}
+.legend i.r{background:#8ec5df}
+.leaflet-bottom.leaflet-right{margin-bottom:48px;margin-right:8px}
+
+.badge.merged{background:#efe4f7;color:#65437d}
+#searchMode b{color:#173f5d}

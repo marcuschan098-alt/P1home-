@@ -10,7 +10,9 @@
     "search_aliases": [
       "Admiralty Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH002",
@@ -23,7 +25,9 @@
     "search_aliases": [
       "Anchor Green Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH003",
@@ -36,7 +40,9 @@
     "search_aliases": [
       "Blangah Rise Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH004",
@@ -49,7 +55,9 @@
     "search_aliases": [
       "Bukit Timah Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH005",
@@ -62,7 +70,9 @@
     "search_aliases": [
       "Bukit View Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH006",
@@ -75,7 +85,9 @@
     "search_aliases": [
       "Canberra Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH007",
@@ -88,22 +100,28 @@
     "search_aliases": [
       "Canossa Catholic Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH008",
-    "name": "Catholic High School (Primary Section)",
+    "name": "Catholic High School (Primary)",
     "coverage": "curated",
     "region": "Central",
     "category": "Elite",
     "source": "current curated dataset",
-    "display_name": "Catholic High School (Primary Section)",
+    "display_name": "Catholic High School (Primary)",
     "search_aliases": [
+      "Catholic High School (Primary)",
       "Catholic High School Primary",
       "Catholic High School"
     ],
     "manual_review_required": true,
-    "match_note": "Confirm the returned result is the Catholic High campus before accepting."
+    "match_note": "Confirm the result is the Catholic High campus before accepting.",
+    "legacy_display_name": "Catholic High School (Primary Section)",
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH009",
@@ -116,7 +134,9 @@
     "search_aliases": [
       "Cedar Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH010",
@@ -129,7 +149,9 @@
     "search_aliases": [
       "Chongfu School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH011",
@@ -142,7 +164,9 @@
     "search_aliases": [
       "Chua Chu Kang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH012",
@@ -155,7 +179,9 @@
     "search_aliases": [
       "Clementi Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH013",
@@ -168,7 +194,9 @@
     "search_aliases": [
       "Compassvale Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH014",
@@ -181,7 +209,9 @@
     "search_aliases": [
       "Concord Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH015",
@@ -194,7 +224,9 @@
     "search_aliases": [
       "Dazhong Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH016",
@@ -207,7 +239,9 @@
     "search_aliases": [
       "Endeavour Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH017",
@@ -220,7 +254,9 @@
     "search_aliases": [
       "Evergreen Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH018",
@@ -233,7 +269,9 @@
     "search_aliases": [
       "Fairfield Methodist School (Primary)"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH019",
@@ -246,7 +284,9 @@
     "search_aliases": [
       "Fuhua Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH020",
@@ -259,7 +299,9 @@
     "search_aliases": [
       "Gan Eng Seng Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH021",
@@ -272,7 +314,9 @@
     "search_aliases": [
       "Geylang Methodist School (Primary)"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH022",
@@ -285,7 +329,9 @@
     "search_aliases": [
       "Gongshang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH023",
@@ -298,7 +344,9 @@
     "search_aliases": [
       "Greenwood Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH024",
@@ -308,11 +356,11 @@
     "category": "",
     "source": "alternative-school reference",
     "display_name": "Guangyang Primary School",
-    "search_aliases": [
-      "Guangyang Primary School",
-      "Guangyang Primary"
-    ],
-    "manual_review_required": false
+    "search_aliases": [],
+    "manual_review_required": false,
+    "registry_status": "merged",
+    "replacement_school": "Townsville Primary School",
+    "match_note": "Legacy school. Searches redirect to Townsville Primary School."
   },
   {
     "school_id": "SCH025",
@@ -325,7 +373,9 @@
     "search_aliases": [
       "Henry Park Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH026",
@@ -338,7 +388,9 @@
     "search_aliases": [
       "Holy Innocents' Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH027",
@@ -351,7 +403,9 @@
     "search_aliases": [
       "Hougang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH028",
@@ -364,7 +418,9 @@
     "search_aliases": [
       "Huamin Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH029",
@@ -377,7 +433,9 @@
     "search_aliases": [
       "Jiemin Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH030",
@@ -390,7 +448,9 @@
     "search_aliases": [
       "Junyuan Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH031",
@@ -403,7 +463,9 @@
     "search_aliases": [
       "Jurong Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH032",
@@ -416,7 +478,9 @@
     "search_aliases": [
       "Keming Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH033",
@@ -429,7 +493,9 @@
     "search_aliases": [
       "Kong Hwa School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH034",
@@ -442,7 +508,9 @@
     "search_aliases": [
       "Kuo Chuan Presbyterian Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH035",
@@ -455,7 +523,9 @@
     "search_aliases": [
       "Lakeside Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH036",
@@ -468,7 +538,9 @@
     "search_aliases": [
       "Lianhua Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH037",
@@ -478,26 +550,30 @@
     "category": "",
     "source": "alternative-school reference",
     "display_name": "MacPherson Primary School",
-    "search_aliases": [
-      "MacPherson Primary School",
-      "Macpherson Primary School"
-    ],
-    "manual_review_required": false
+    "search_aliases": [],
+    "manual_review_required": false,
+    "registry_status": "merged",
+    "replacement_school": "Cedar Primary School",
+    "match_note": "Legacy school. Searches redirect to Cedar Primary School."
   },
   {
     "school_id": "SCH038",
-    "name": "Maris Stella High School (Primary Section)",
+    "name": "Maris Stella High School (Primary)",
     "coverage": "curated",
     "region": "Central",
     "category": "Premier",
     "source": "current curated dataset",
-    "display_name": "Maris Stella High School (Primary Section)",
+    "display_name": "Maris Stella High School (Primary)",
     "search_aliases": [
+      "Maris Stella High School (Primary)",
       "Maris Stella High School Primary",
       "Maris Stella High School"
     ],
     "manual_review_required": true,
-    "match_note": "Confirm the returned result is the Mount Vernon campus before accepting."
+    "match_note": "Confirm the result is the Mount Vernon campus before accepting.",
+    "legacy_display_name": "Maris Stella High School (Primary Section)",
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH039",
@@ -510,7 +586,9 @@
     "search_aliases": [
       "Montfort Junior School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH040",
@@ -523,7 +601,9 @@
     "search_aliases": [
       "Nan Chiau Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH041",
@@ -536,7 +616,9 @@
     "search_aliases": [
       "Nan Hua Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH042",
@@ -549,7 +631,9 @@
     "search_aliases": [
       "Nanyang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH043",
@@ -562,7 +646,9 @@
     "search_aliases": [
       "Naval Base Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH044",
@@ -575,7 +661,9 @@
     "search_aliases": [
       "New Town Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH045",
@@ -588,7 +676,9 @@
     "search_aliases": [
       "North View Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH046",
@@ -601,7 +691,9 @@
     "search_aliases": [
       "Northland Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH047",
@@ -614,7 +706,9 @@
     "search_aliases": [
       "Pei Chun Public School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH048",
@@ -627,7 +721,9 @@
     "search_aliases": [
       "Pei Hwa Presbyterian Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH049",
@@ -640,7 +736,9 @@
     "search_aliases": [
       "Pei Tong Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH050",
@@ -653,7 +751,9 @@
     "search_aliases": [
       "Peiying Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH051",
@@ -666,7 +766,9 @@
     "search_aliases": [
       "Poi Ching School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH052",
@@ -679,7 +781,9 @@
     "search_aliases": [
       "Princess Elizabeth Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH053",
@@ -692,7 +796,9 @@
     "search_aliases": [
       "Punggol Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH054",
@@ -705,7 +811,9 @@
     "search_aliases": [
       "Qifa Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH055",
@@ -718,7 +826,9 @@
     "search_aliases": [
       "Queenstown Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH056",
@@ -731,7 +841,9 @@
     "search_aliases": [
       "Radin Mas Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH057",
@@ -744,7 +856,9 @@
     "search_aliases": [
       "Riverside Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH058",
@@ -757,7 +871,9 @@
     "search_aliases": [
       "Rosyth School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH059",
@@ -770,7 +886,9 @@
     "search_aliases": [
       "Rulang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH060",
@@ -783,7 +901,9 @@
     "search_aliases": [
       "Sembawang Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH061",
@@ -793,11 +913,11 @@
     "category": "",
     "source": "alternative-school reference",
     "display_name": "Serangoon Garden South School",
-    "search_aliases": [
-      "Serangoon Garden South School",
-      "Serangoon Garden South Primary School"
-    ],
-    "manual_review_required": false
+    "search_aliases": [],
+    "manual_review_required": false,
+    "registry_status": "merged",
+    "replacement_school": "Zhonghua Primary School",
+    "match_note": "Legacy school. Searches redirect to Zhonghua Primary School."
   },
   {
     "school_id": "SCH062",
@@ -810,7 +930,9 @@
     "search_aliases": [
       "Shuqun Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH063",
@@ -823,7 +945,9 @@
     "search_aliases": [
       "South View Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH064",
@@ -836,7 +960,9 @@
     "search_aliases": [
       "Springdale Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH065",
@@ -849,7 +975,9 @@
     "search_aliases": [
       "St. Andrew's Junior School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH066",
@@ -862,7 +990,9 @@
     "search_aliases": [
       "St. Gabriel's Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH067",
@@ -875,7 +1005,9 @@
     "search_aliases": [
       "St. Hilda's Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH068",
@@ -888,7 +1020,9 @@
     "search_aliases": [
       "Tampines Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH069",
@@ -901,7 +1035,9 @@
     "search_aliases": [
       "Tanjong Katong Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH070",
@@ -914,7 +1050,9 @@
     "search_aliases": [
       "Tao Nan School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH071",
@@ -927,7 +1065,9 @@
     "search_aliases": [
       "Teck Whye Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH072",
@@ -940,7 +1080,9 @@
     "search_aliases": [
       "Townsville Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH073",
@@ -953,7 +1095,9 @@
     "search_aliases": [
       "Wellington Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH074",
@@ -966,7 +1110,9 @@
     "search_aliases": [
       "West View Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH075",
@@ -979,7 +1125,9 @@
     "search_aliases": [
       "Woodlands Ring Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH076",
@@ -992,7 +1140,9 @@
     "search_aliases": [
       "Xinmin Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH077",
@@ -1005,7 +1155,9 @@
     "search_aliases": [
       "Xishan Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH078",
@@ -1018,7 +1170,9 @@
     "search_aliases": [
       "Yangzheng Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH079",
@@ -1031,7 +1185,9 @@
     "search_aliases": [
       "Yuhua Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH080",
@@ -1044,7 +1200,9 @@
     "search_aliases": [
       "Zhangde Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   },
   {
     "school_id": "SCH081",
@@ -1057,6 +1215,8 @@
     "search_aliases": [
       "Zhonghua Primary School"
     ],
-    "manual_review_required": false
+    "manual_review_required": false,
+    "registry_status": "active",
+    "replacement_school": null
   }
 ]

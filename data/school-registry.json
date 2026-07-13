@@ -1,0 +1,59 @@
+[
+  {
+    "school_name": "Catholic High School (Primary)",
+    "legacy_names": [
+      "Catholic High School (Primary Section)"
+    ],
+    "status": "active",
+    "replacement_school": null,
+    "search_aliases": [
+      "Catholic High School (Primary)",
+      "Catholic High School Primary",
+      "Catholic High School"
+    ],
+    "manual_review_required": true,
+    "note": "Confirm the result is the Catholic High campus before accepting."
+  },
+  {
+    "school_name": "Maris Stella High School (Primary)",
+    "legacy_names": [
+      "Maris Stella High School (Primary Section)"
+    ],
+    "status": "active",
+    "replacement_school": null,
+    "search_aliases": [
+      "Maris Stella High School (Primary)",
+      "Maris Stella High School Primary",
+      "Maris Stella High School"
+    ],
+    "manual_review_required": true,
+    "note": "Confirm the result is the Mount Vernon campus before accepting."
+  },
+  {
+    "school_name": "Serangoon Garden South School",
+    "legacy_names": [],
+    "status": "merged",
+    "replacement_school": "Zhonghua Primary School",
+    "search_aliases": [],
+    "manual_review_required": false,
+    "note": "Legacy school. Searches redirect to Zhonghua Primary School."
+  },
+  {
+    "school_name": "MacPherson Primary School",
+    "legacy_names": [],
+    "status": "merged",
+    "replacement_school": "Cedar Primary School",
+    "search_aliases": [],
+    "manual_review_required": false,
+    "note": "Legacy school. Searches redirect to Cedar Primary School."
+  },
+  {
+    "school_name": "Guangyang Primary School",
+    "legacy_names": [],
+    "status": "merged",
+    "replacement_school": "Townsville Primary School",
+    "search_aliases": [],
+    "manual_review_required": false,
+    "note": "Legacy school. Searches redirect to Townsville Primary School."
+  }
+]
