@@ -82,3 +82,66 @@
 .report-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
 .marker-popup{display:grid;gap:3px}.marker-popup small{color:#657783}.marker-popup span{display:block;font-size:.72rem;margin-top:2px}
 @media(max-width:700px){.expanded-metrics{grid-template-columns:1fr}.cardactions{grid-template-columns:1fr 1fr}.report-panel{padding:24px 18px}.report-hero,.report-grid,.report-actions{grid-template-columns:1fr}.report-bars>div{grid-template-columns:1fr}}
+
+/* Version 12.1 layout and report fixes */
+
+/* Prevent filter controls from spilling beneath the map */
+.shell,.app-shell,.workspace{
+  min-width:0;
+}
+.sidebar,.filters,.leftpanel{
+  min-width:0;
+  overflow-x:hidden;
+}
+.sidebar select,.sidebar input,.sidebar button,
+.filters select,.filters input,.filters button,
+.leftpanel select,.leftpanel input,.leftpanel button{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+}
+.sidebar label,.filters label,.leftpanel label{
+  min-width:0;
+}
+.sidebar .two,.filters .two,.leftpanel .two{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+}
+@media(max-width:1100px){
+  .sidebar .two,.filters .two,.leftpanel .two{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Remove unused grey band above the map */
+.mapwrap,.map-area,.map-pane,#map{
+  margin-top:0!important;
+}
+.mapwrap,.map-area,.map-pane{
+  padding-top:0!important;
+}
+#map{
+  top:0!important;
+  height:100%!important;
+}
+.map-status,.mapstatus{
+  z-index:700;
+}
+
+/* Ensure report is visible above all other panels */
+.report-panel{
+  z-index:5000!important;
+}
+.report-panel.open{
+  right:0!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+#reportContent{
+  min-height:100%;
+}
+
+/* Cleaner card metadata */
+.compact-summary span{
+  white-space:normal;
+  line-height:1.25;
+}
