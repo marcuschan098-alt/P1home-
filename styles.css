@@ -42,3 +42,14 @@
 .intel-actions button{padding:10px;border-radius:9px}
 .cardactions{grid-template-columns:repeat(4,1fr)}
 @media(max-width:600px){.intelligence-panel{padding:22px 18px}.intel-score-row{grid-template-columns:1fr}.intel-actions{grid-template-columns:1fr}.cardactions{grid-template-columns:1fr 1fr}}
+
+/* Version 11.1 action feedback and panel interaction fixes */
+.action-feedback{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);
+  background:#173f5d;color:#fff;padding:11px 18px;border-radius:999px;
+  z-index:4000;opacity:0;pointer-events:none;transition:.2s ease;
+  box-shadow:0 5px 18px rgba(0,0,0,.24);font-weight:800
+}
+.action-feedback.show{opacity:1;transform:translate(-50%,0)}
+#drawer{z-index:3000}
+.intelligence-panel{z-index:2500}
