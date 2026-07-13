@@ -27,7 +27,7 @@
         <h1>School–home intelligence</h1>
         <p class="lede">The public app uses static coordinate and distance files. It never requests a OneMap token.</p>
         <label>School or condo search
-          <input id="search" list="suggestions" placeholder="Search any loaded school or development">
+          <input id="search" list="suggestions" placeholder="Search school or condo...">
           <datalist id="suggestions"></datalist>
         </label>
         <div id="searchMode" class="notice"></div>
@@ -60,7 +60,7 @@
           <label>Minimum TOP<select id="topFilter"><option value="">Any TOP</option><option value="2010">2010+</option><option value="2018">2018+</option><option value="2020">2020+</option></select></label>
           <label>Sort<select id="sort"><option value="decision">Decision score</option><option value="distance">Nearest</option><option value="admission">Admission</option><option value="property">Property</option></select></label>
         </div>
-        <div class="actions"><button id="reset" class="btn">Reset</button><button id="fit" class="btn">Fit results</button><button id="showAll" class="btn hidden">Show all</button></div>
+        <div class="actions"><button id="reset" class="btn">Reset</button><button id="fit" class="btn">Fit Results</button><button id="showAll" class="btn hidden">Show all</button></div>
         <div class="stats"><span><b id="pairCount">0</b>results</span><span><b id="schoolCount">0</b>schools</span><span><b id="condoCount">0</b>homes</span><span><b id="kbCount">0</b>distance records</span></div>
         <div id="dataStatus" class="data-status"></div>
       </div>
@@ -77,8 +77,14 @@
 <section id="compareView" class="view page"><div class="pagehead"><h2>Compare</h2><button id="clearCompare" class="btn">Clear</button></div><div id="compareGrid" class="comparegrid"></div></section>
 <section id="shortlistView" class="view page"><div class="pagehead"><h2>Shortlist</h2><button id="clearShortlist" class="btn">Clear</button></div><div id="shortlistGrid" class="comparegrid"></div></section>
 </main>
+
+<aside id="intelligencePanel" class="intelligence-panel" aria-hidden="true">
+  <button id="closeIntelligence" class="intelligence-close" aria-label="Close intelligence panel">×</button>
+  <div id="intelligenceContent"></div>
+</aside>
+
 <aside id="drawer" class="drawer"><div><button id="closeDrawer">×</button><section id="details"></section></div></aside>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="app.js?v=10.0.0"></script>
+<script src="app.js?v=11.0.0"></script>
 </body></html>

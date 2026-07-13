@@ -67,8 +67,72 @@ function apply(){
 }
 function renderStats(){$("pairCount").textContent=state.results.length;$("schoolCount").textContent=new Set(state.results.map(x=>x.target_school)).size;$("condoCount").textContent=new Set(state.results.map(x=>x.condo)).size;$("kbCount").textContent=state.kb.length;$("shown").textContent=`${state.results.length} shown`}
 function badge(k){if(!k)return'<span class="badge missing">Distance missing</span>';return`<span class="badge ${k.category}">${k.label}${k.best_m?` · ${k.best_m} m`:""}</span>`}
-function card(p){const id=p.id,k=p.kb,score=decision(p),saved=state.shortlist.has(id),reg=p.registry||registryFor(p.searched_school||p.target_school);return`<article class="card ${state.active===id?"active":""}" data-id="${id}"><div class="cardtop"><div><h3>${p.target_school}</h3><div class="condo">${p.condo}</div></div><b class="score">${score??"—"}</b></div><div class="pills">${p.legacy_redirect?`<span class="badge merged">Merged → ${reg?.replacement_school}</span>`:""}${badge(k)}${p.admission_risk?`<span>${p.admission_risk}</span>`:""}${p["3_bed_cost"]?`<span>${p["3_bed_cost"]}</span>`:""}${p.generated?'<span>Unscored nearby result</span>':""}</div><div class="cardactions"><button data-act="details">Details</button><button data-act="compare">Compare</button><button data-act="save">${saved?"Saved":"Save"}</button></div></article>`}
-function renderCards(){$("cards").innerHTML=state.results.length?state.results.map(card).join(""):"<p>No matching results.</p>";document.querySelectorAll(".card").forEach(el=>el.onclick=e=>{const p=state.results.find(x=>x.id===el.dataset.id);if(!p)return;if(e.target.dataset.act==="details")openDetails(p);else if(e.target.dataset.act==="compare"){state.compare.add(p.id);persist()}else if(e.target.dataset.act==="save"){state.shortlist.has(p.id)?state.shortlist.delete(p.id):state.shortlist.add(p.id);persist();renderCards()}else focus(p)})}
+
+function stars(score){
+  const n=Math.max(1,Math.min(5,Math.round((Number(score)||0)/20)));
+  return "★".repeat(n)+"☆".repeat(5-n)
+}
+function intelligenceFor(p){
+  const score=decision(p),k=p.kb||{},pros=[],cons=[],distance=Number(k.best_m);
+  const label=String(k.label||"").toLowerCase();
+  if(label.includes("within 1 km")||k.category==="within1km")pros.push("Within 1 km of the target school");
+  else if(label.includes("boundary"))cons.push("Boundary-sensitive distance; treat the 1 km classification cautiously");
+  else if(Number.isFinite(distance)&&distance<=2000)pros.push("Within 2 km of the target school");
+  else cons.push("No verified distance record is available");
+
+  const risk=String(p.admission_risk||"").toLowerCase();
+  if(risk==="low")pros.push("Relatively lower admission risk");
+  if(["high","very high","extreme"].includes(risk))cons.push("Admission demand is competitive");
+  if(Number(p.top_year)>=2018)pros.push("Newer development");
+  else if(Number(p.top_year)>0&&Number(p.top_year)<2005)cons.push("Older development");
+  if(String(p.tenure||"").toLowerCase().includes("freehold"))pros.push("Freehold tenure");
+  if(Number(p.property_investment_20||0)>=16)pros.push("Strong property fundamentals");
+  if(Number(p.family_living_15||0)>=12)pros.push("Good family-living fit");
+  if(Number(p.transit_10||0)>=8)pros.push("Good transport access");
+  if(Number(p.value_5||0)<=2)cons.push("Weaker value score");
+  if(Number(p.property_investment_20||0)<=10)cons.push("Property fundamentals are less compelling");
+
+  const alternatives=state.results.filter(x=>x.id!==p.id&&x.target_school===p.target_school)
+    .sort((a,b)=>(decision(b)||0)-(decision(a)||0)).slice(0,3);
+
+  let recommendation="Balanced option requiring a closer look at admission evidence, distance confidence and property trade-offs.";
+  if(score>=80&&pros.length>=3)recommendation="Strong all-round option for families balancing school access, property quality and day-to-day liveability.";
+  else if(score>=70)recommendation="Credible option with several strengths, although the highlighted trade-offs should be checked before purchase.";
+  else recommendation="Secondary option. Consider stronger alternatives unless this location or development meets a specific family need.";
+
+  return {score,pros:pros.slice(0,5),cons:cons.slice(0,4),alternatives,recommendation}
+}
+function openIntelligence(p){
+  if(!p)return;
+  const intel=intelligenceFor(p),k=p.kb||{};
+  $("intelligenceContent").innerHTML=`
+    <div class="intel-eyebrow">Decision brief</div>
+    <h2>${p.target_school}</h2>
+    <h3>${p.condo}</h3>
+    <div class="intel-score-row">
+      <div><strong>${intel.score==null?"—":Number(intel.score).toFixed(1)}</strong><span>Decision score</span></div>
+      <div class="intel-stars">${stars(intel.score)}</div>
+      <div><strong>${Number.isFinite(Number(k.best_m))?`${Math.round(Number(k.best_m))} m`:"—"}</strong><span>Best verified distance</span></div>
+    </div>
+    <section><h4>Overall recommendation</h4><p>${intel.recommendation}</p></section>
+    <section><h4>Why it stands out</h4><ul class="intel-pros">${intel.pros.length?intel.pros.map(x=>`<li>✓ ${x}</li>`).join(""):"<li>No clear strengths identified from the current data.</li>"}</ul></section>
+    <section><h4>Key trade-offs</h4><ul class="intel-cons">${intel.cons.length?intel.cons.map(x=>`<li>• ${x}</li>`).join(""):"<li>No major concerns identified from the current data.</li>"}</ul></section>
+    <section><h4>Alternative condos for the same school</h4><div class="intel-alternatives">${intel.alternatives.length?intel.alternatives.map(x=>`<button data-alt="${x.id}"><b>${x.condo}</b><span>${decision(x)?.toFixed(1)||"—"} score</span></button>`).join(""):"<p>No additional alternatives in the current result set.</p>"}</div></section>
+    <div class="intel-actions">
+      <button id="intelDetails">Full details</button>
+      <button id="intelCompare">Add to compare</button>
+      <button id="intelSave">${state.shortlist.has(p.id)?"Saved":"Save"}</button>
+    </div>`;
+  $("intelligencePanel").classList.add("open");
+  $("intelligencePanel").setAttribute("aria-hidden","false");
+  document.querySelectorAll("[data-alt]").forEach(b=>b.onclick=()=>openIntelligence(findAny(b.dataset.alt)));
+  $("intelDetails").onclick=()=>openDetails(p);
+  $("intelCompare").onclick=()=>{state.compare.add(p.id);persist()};
+  $("intelSave").onclick=()=>{state.shortlist.has(p.id)?state.shortlist.delete(p.id):state.shortlist.add(p.id);persist();openIntelligence(p)};
+}
+
+function card(p){const id=p.id,k=p.kb,score=decision(p),saved=state.shortlist.has(id),reg=p.registry||registryFor(p.searched_school||p.target_school);return`<article class="card ${state.active===id?"active":""}" data-id="${id}"><div class="cardtop"><div><h3>${p.target_school}</h3><div class="condo">${p.condo}</div></div><b class="score">${score??"—"}</b></div><div class="pills">${p.legacy_redirect?`<span class="badge merged">Merged → ${reg?.replacement_school}</span>`:""}${badge(k)}${p.admission_risk?`<span>${p.admission_risk}</span>`:""}${p["3_bed_cost"]?`<span>${p["3_bed_cost"]}</span>`:""}${p.generated?'<span>Unscored nearby result</span>':""}</div><div class="cardactions"><button data-act="insight">Insight</button><button data-act="details">Details</button><button data-act="compare">Compare</button><button data-act="save">${saved?"Saved":"Save"}</button></div></article>`}
+function renderCards(){$("cards").innerHTML=state.results.length?state.results.map(card).join(""):"<p>No matching results.</p>";document.querySelectorAll(".card").forEach(el=>el.onclick=e=>{const p=state.results.find(x=>x.id===el.dataset.id);if(!p)return;if(e.target.dataset.act==="insight")openIntelligence(p);else if(e.target.dataset.act==="details")openDetails(p);else if(e.target.dataset.act==="compare"){state.compare.add(p.id);persist()}else if(e.target.dataset.act==="save"){state.shortlist.has(p.id)?state.shortlist.delete(p.id):state.shortlist.add(p.id);persist();renderCards()}else focus(p)})}
 function ensureMap(){if(state.map)return;state.map=L.map("map",{zoomControl:false}).setView([1.3521,103.8198],11);L.control.zoom({position:"bottomright"}).addTo(state.map);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map);state.markers=L.layerGroup().addTo(state.map);state.focus=L.layerGroup().addTo(state.map)}
 function marker(type,label){return L.divIcon({className:"",html:`<div class="marker ${type}">${label}</div>`,iconSize:[28,28],iconAnchor:[14,14]})}
 function renderMap(){ensureMap();state.markers.clearLayers();state.focus.clearLayers();if(state.radius){state.map.removeLayer(state.radius);state.radius=null}const bounds=[],seenS=new Set(),seenC=new Set();for(const p of state.results){const s=coord("school",p.target_school),c=coord("condo",p.condo);if(s&&!seenS.has(p.target_school)){seenS.add(p.target_school);L.marker([s.lat,s.lng],{icon:marker("school","S")}).addTo(state.markers).bindPopup(p.target_school);bounds.push([s.lat,s.lng])}if(c&&!seenC.has(p.condo)){seenC.add(p.condo);L.marker([c.lat,c.lng],{icon:marker("condo","C")}).addTo(state.markers).bindPopup(p.condo);bounds.push([c.lat,c.lng])}}if(bounds.length){state.map.fitBounds(bounds,{padding:[35,35],maxZoom:13});$("mapStatus").textContent=`${bounds.length} static coordinate points shown.`}else{$("mapStatus").textContent="No static coordinates loaded for the current results."}}
@@ -80,6 +144,8 @@ function findAny(id){return state.pairs.find(x=>x.id===id)||state.results.find(x
 function renderCompare(){$("compareGrid").innerHTML=[...state.compare].map(findAny).filter(Boolean).map(compareCard).join("")||"<p>No comparisons selected.</p>"}
 function renderShortlist(){$("shortlistGrid").innerHTML=[...state.shortlist].map(findAny).filter(Boolean).map(compareCard).join("")||"<p>No saved options.</p>"}
 function setView(n){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.view===n));$(n+"View").classList.add("active");if(n==="explore")setTimeout(()=>{state.map.invalidateSize();renderMap()},50);if(n==="compare")renderCompare();if(n==="shortlist")renderShortlist()}
-function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v7-results.csv";a.click()}
-async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=10.0.0",[]),load("data/schools-v6.json?v=10.0.0",[]),load("data/developments-v6.json?v=10.0.0",[]),load("data/residential-address-points.json?v=10.0.0",[]),load("data/coordinates.json?v=10.0.0",{}),load("data/distance-knowledge-base.json?v=10.0.0",[]),load("data/school-registry.json?v=10.0.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
+function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v11-results.csv";a.click()}
+async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=11.0.0",[]),load("data/schools-v6.json?v=11.0.0",[]),load("data/developments-v6.json?v=11.0.0",[]),load("data/residential-address-points.json?v=11.0.0",[]),load("data/coordinates.json?v=11.0.0",{}),load("data/distance-knowledge-base.json?v=11.0.0",[]),load("data/school-registry.json?v=11.0.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
 init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 9</h1><p>${e.message}</p></main>`);
+$("closeIntelligence").onclick=()=>{$("intelligencePanel").classList.remove("open");$("intelligencePanel").setAttribute("aria-hidden","true")};
+$("fit").classList.add("primary-action");

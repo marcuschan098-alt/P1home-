@@ -20,3 +20,25 @@
 
 .badge.merged{background:#efe4f7;color:#65437d}
 #searchMode b{color:#173f5d}
+
+/* Version 11 Intelligence Panel */
+.primary-action{background:#17618d!important;color:#fff!important;border-color:#17618d!important}
+.intelligence-panel{position:fixed;top:0;right:-520px;width:min(520px,100vw);height:100vh;background:#fff;z-index:2500;box-shadow:-10px 0 30px rgba(0,0,0,.22);padding:28px;overflow:auto;transition:right .25s ease}
+.intelligence-panel.open{right:0}
+.intelligence-close{position:absolute;top:14px;right:16px;border:0;background:transparent;font-size:1.8rem;color:#5f6f78}
+.intel-eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.7rem;font-weight:900;color:#17618d;margin-bottom:8px}
+.intelligence-panel h2{margin:0;font-size:1.65rem}.intelligence-panel h3{margin:4px 0 18px;color:#17618d}
+.intel-score-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;background:#eef4f7;border-radius:14px;padding:14px;margin-bottom:18px}
+.intel-score-row>div:first-child,.intel-score-row>div:last-child{text-align:center}
+.intel-score-row strong{display:block;font-size:1.25rem}.intel-score-row span{display:block;font-size:.72rem;color:#667884;margin-top:3px}
+.intel-stars{font-size:1.15rem;color:#d08b16;white-space:nowrap}
+.intelligence-panel section{border-top:1px solid #dfe8ec;padding-top:14px;margin-top:14px}
+.intelligence-panel h4{margin:0 0 8px}
+.intel-pros,.intel-cons{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.intel-pros li{color:#21654e}.intel-cons li{color:#7c4f1b}
+.intel-alternatives{display:grid;gap:8px}.intel-alternatives button{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid #d7e2e7;border-radius:9px;background:#fff;text-align:left}
+.intel-alternatives button span{color:#667884;font-size:.78rem}
+.intel-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:20px}
+.intel-actions button{padding:10px;border-radius:9px}
+.cardactions{grid-template-columns:repeat(4,1fr)}
+@media(max-width:600px){.intelligence-panel{padding:22px 18px}.intel-score-row{grid-template-columns:1fr}.intel-actions{grid-template-columns:1fr}.cardactions{grid-template-columns:1fr 1fr}}

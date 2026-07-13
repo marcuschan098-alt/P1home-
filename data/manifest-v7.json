@@ -1,10 +1,11 @@
 {
-  "version": "10.0.0",
+  "version": "11.0.0",
   "architecture": "registry-driven-coordinate-management-static-public-app",
   "schools": 81,
   "developments": 54,
   "pairings": 55,
   "coordinates": 129,
   "distance_records": 232,
-  "school_registry_records": 5
+  "school_registry_records": 5,
+  "feature": "decision-intelligence-panel"
 }
