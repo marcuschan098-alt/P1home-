@@ -8,7 +8,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.85M-$2.40M",
     "price_min": 1850000.0,
-    "price_max": 2400000.0
+    "price_max": 2400000.0,
+    "display_name": "Affinity at Serangoon",
+    "search_aliases": [
+      "Affinity at Serangoon"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0002",
@@ -19,7 +24,12 @@
     "tenure": "Freehold",
     "three_bed_cost": "$3.00M-$4.00M",
     "price_min": 3000000.0,
-    "price_max": 4000000.0
+    "price_max": 4000000.0,
+    "display_name": "Amber Park",
+    "search_aliases": [
+      "Amber Park"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0003",
@@ -30,7 +40,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$2.20M-$2.80M",
     "price_min": 2200000.0,
-    "price_max": 2800000.0
+    "price_max": 2800000.0,
+    "display_name": "Avenue South Residence",
+    "search_aliases": [
+      "Avenue South Residence"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0004",
@@ -41,7 +56,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.95M-$2.40M",
     "price_min": 1950000.0,
-    "price_max": 2400000.0
+    "price_max": 2400000.0,
+    "display_name": "Bartley Residences",
+    "search_aliases": [
+      "Bartley Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0005",
@@ -52,7 +72,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.90M-$2.30M",
     "price_min": 1900000.0,
-    "price_max": 2300000.0
+    "price_max": 2300000.0,
+    "display_name": "Bartley Ridge",
+    "search_aliases": [
+      "Bartley Ridge"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0006",
@@ -63,7 +88,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$2.00M-$2.50M",
     "price_min": 2000000.0,
-    "price_max": 2500000.0
+    "price_max": 2500000.0,
+    "display_name": "Bishan Loft",
+    "search_aliases": [
+      "Bishan Loft"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0007",
@@ -74,7 +104,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.30M-$1.65M",
     "price_min": 1300000.0,
-    "price_max": 1650000.0
+    "price_max": 1650000.0,
+    "display_name": "Boathouse Residences",
+    "search_aliases": [
+      "Boathouse Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0008",
@@ -85,7 +120,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.65M-$1.90M",
     "price_min": 1650000.0,
-    "price_max": 1900000.0
+    "price_max": 1900000.0,
+    "display_name": "Botanique at Bartley",
+    "search_aliases": [
+      "Botanique at Bartley"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0009",
@@ -96,7 +136,12 @@
     "tenure": "99y EC",
     "three_bed_cost": "$1.50M-$1.70M",
     "price_min": 1500000.0,
-    "price_max": 1700000.0
+    "price_max": 1700000.0,
+    "display_name": "CityLife @ Tampines",
+    "search_aliases": [
+      "CityLife @ Tampines"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0010",
@@ -107,7 +152,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.75M-$2.05M",
     "price_min": 1750000.0,
-    "price_max": 2049999.9999999998
+    "price_max": 2049999.9999999998,
+    "display_name": "Commonwealth Towers",
+    "search_aliases": [
+      "Commonwealth Towers"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0011",
@@ -118,7 +168,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.35M-$1.50M",
     "price_min": 1350000.0,
-    "price_max": 1500000.0
+    "price_max": 1500000.0,
+    "display_name": "Compass Heights",
+    "search_aliases": [
+      "Compass Heights"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0012",
@@ -129,7 +184,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.10M-$2.40M",
     "price_min": 2100000.0,
-    "price_max": 2400000.0
+    "price_max": 2400000.0,
+    "display_name": "Daintree Residence",
+    "search_aliases": [
+      "Daintree Residence"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0013",
@@ -140,7 +200,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.55M-$1.85M",
     "price_min": 1550000.0,
-    "price_max": 1850000.0
+    "price_max": 1850000.0,
+    "display_name": "Dover Parkview",
+    "search_aliases": [
+      "Dover Parkview"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0014",
@@ -151,7 +216,14 @@
     "tenure": "Freehold",
     "three_bed_cost": "$2.25M-$2.60M",
     "price_min": 2250000.0,
-    "price_max": 2600000.0
+    "price_max": 2600000.0,
+    "display_name": "Forett at Bukit Timah",
+    "search_aliases": [
+      "Forett at Bukit Timah",
+      "Forett @ Bukit Timah",
+      "Forett Bukit Timah"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0015",
@@ -162,7 +234,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.95M-$2.25M",
     "price_min": 1950000.0,
-    "price_max": 2250000.0
+    "price_max": 2250000.0,
+    "display_name": "Heritage View",
+    "search_aliases": [
+      "Heritage View"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0016",
@@ -173,7 +250,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.55M-$1.80M",
     "price_min": 1550000.0,
-    "price_max": 1800000.0
+    "price_max": 1800000.0,
+    "display_name": "Ivory Heights",
+    "search_aliases": [
+      "Ivory Heights"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0017",
@@ -184,7 +266,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.80M-$2.15M",
     "price_min": 1800000.0,
-    "price_max": 2150000.0
+    "price_max": 2150000.0,
+    "display_name": "J Gateway",
+    "search_aliases": [
+      "J Gateway"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0018",
@@ -195,7 +282,12 @@
     "tenure": "999-year",
     "three_bed_cost": "$2.30M-$3.00M",
     "price_min": 2300000.0,
-    "price_max": 3000000.0
+    "price_max": 3000000.0,
+    "display_name": "Kensington Park",
+    "search_aliases": [
+      "Kensington Park"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0019",
@@ -206,7 +298,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.45M-$1.80M",
     "price_min": 1450000.0,
-    "price_max": 1800000.0
+    "price_max": 1800000.0,
+    "display_name": "Kingsford Waterbay",
+    "search_aliases": [
+      "Kingsford Waterbay"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0020",
@@ -217,7 +314,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.55M-$1.72M",
     "price_min": 1550000.0,
-    "price_max": 1720000.0
+    "price_max": 1720000.0,
+    "display_name": "La Fiesta",
+    "search_aliases": [
+      "La Fiesta"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0021",
@@ -228,7 +330,12 @@
     "tenure": "99y EC",
     "three_bed_cost": "$1.45M-$1.68M",
     "price_min": 1450000.0,
-    "price_max": 1680000.0
+    "price_max": 1680000.0,
+    "display_name": "Lake Life",
+    "search_aliases": [
+      "Lake Life"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0022",
@@ -239,7 +346,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.60M-$1.85M",
     "price_min": 1600000.0,
-    "price_max": 1850000.0
+    "price_max": 1850000.0,
+    "display_name": "Le Quest",
+    "search_aliases": [
+      "Le Quest"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0023",
@@ -250,7 +362,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.55M-$3.10M",
     "price_min": 2550000.0,
-    "price_max": 3100000.0
+    "price_max": 3100000.0,
+    "display_name": "Leedon Green",
+    "search_aliases": [
+      "Leedon Green"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0024",
@@ -261,7 +378,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.10M-$1.30M",
     "price_min": 1100000.0,
-    "price_max": 1300000.0
+    "price_max": 1300000.0,
+    "display_name": "Lilydale",
+    "search_aliases": [
+      "Lilydale"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0025",
@@ -272,7 +394,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.15M-$2.45M",
     "price_min": 2150000.0,
-    "price_max": 2450000.0
+    "price_max": 2450000.0,
+    "display_name": "Mayfair Gardens",
+    "search_aliases": [
+      "Mayfair Gardens"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0026",
@@ -283,7 +410,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.10M-$1.28M",
     "price_min": 1100000.0,
-    "price_max": 1280000.0
+    "price_max": 1280000.0,
+    "display_name": "Northoaks",
+    "search_aliases": [
+      "Northoaks"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0027",
@@ -294,7 +426,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.38M-$1.65M",
     "price_min": 1380000.0,
-    "price_max": 1650000.0
+    "price_max": 1650000.0,
+    "display_name": "Northvale",
+    "search_aliases": [
+      "Northvale"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0028",
@@ -305,7 +442,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.05M-$1.25M",
     "price_min": 1050000.0,
-    "price_max": 1250000.0
+    "price_max": 1250000.0,
+    "display_name": "Orchid Park Condo",
+    "search_aliases": [
+      "Orchid Park Condo"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0029",
@@ -316,7 +458,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.30M-$2.85M",
     "price_min": 2300000.0,
-    "price_max": 2850000.0
+    "price_max": 2850000.0,
+    "display_name": "Parc Clematis",
+    "search_aliases": [
+      "Parc Clematis"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0030",
@@ -327,7 +474,12 @@
     "tenure": "Freehold",
     "three_bed_cost": "$2.15M-$2.50M",
     "price_min": 2150000.0,
-    "price_max": 2500000.0
+    "price_max": 2500000.0,
+    "display_name": "Parkshore",
+    "search_aliases": [
+      "Parkshore"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0031",
@@ -338,7 +490,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.75M-$2.25M",
     "price_min": 1750000.0,
-    "price_max": 2250000.0
+    "price_max": 2250000.0,
+    "display_name": "Penrose",
+    "search_aliases": [
+      "Penrose"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0032",
@@ -349,7 +506,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.45M-$1.68M",
     "price_min": 1450000.0,
-    "price_max": 1680000.0
+    "price_max": 1680000.0,
+    "display_name": "Regent Park",
+    "search_aliases": [
+      "Regent Park"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0033",
@@ -360,7 +522,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.65M-$2.05M",
     "price_min": 1650000.0,
-    "price_max": 2049999.9999999998
+    "price_max": 2049999.9999999998,
+    "display_name": "Riverfront Residences",
+    "search_aliases": [
+      "Riverfront Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0034",
@@ -371,7 +538,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.50M-$1.85M",
     "price_min": 1500000.0,
-    "price_max": 1850000.0
+    "price_max": 1850000.0,
+    "display_name": "Sherwood Towers",
+    "search_aliases": [
+      "Sherwood Towers"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0035",
@@ -382,7 +554,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$1.65M-$2.10M",
     "price_min": 1650000.0,
-    "price_max": 2100000.0
+    "price_max": 2100000.0,
+    "display_name": "Sims Urban Oasis",
+    "search_aliases": [
+      "Sims Urban Oasis"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0036",
@@ -393,7 +570,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$2.20M-$2.70M",
     "price_min": 2200000.0,
-    "price_max": 2700000.0
+    "price_max": 2700000.0,
+    "display_name": "Sky Vue",
+    "search_aliases": [
+      "Sky Vue"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0037",
@@ -404,7 +586,12 @@
     "tenure": "99y EC",
     "three_bed_cost": "$1.35M-$1.55M",
     "price_min": 1350000.0,
-    "price_max": 1550000.0
+    "price_max": 1550000.0,
+    "display_name": "SkyPark Residences",
+    "search_aliases": [
+      "SkyPark Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0038",
@@ -415,7 +602,12 @@
     "tenure": "99y EC",
     "three_bed_cost": "$1.35M-$1.60M",
     "price_min": 1350000.0,
-    "price_max": 1600000.0
+    "price_max": 1600000.0,
+    "display_name": "Sol Acres",
+    "search_aliases": [
+      "Sol Acres"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0039",
@@ -426,7 +618,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.98M-$2.40M",
     "price_min": 1980000.0,
-    "price_max": 2400000.0
+    "price_max": 2400000.0,
+    "display_name": "Stirling Residences",
+    "search_aliases": [
+      "Stirling Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0040",
@@ -437,7 +634,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.15M-$1.35M",
     "price_min": 1150000.0,
-    "price_max": 1350000.0
+    "price_max": 1350000.0,
+    "display_name": "Symphony Suites",
+    "search_aliases": [
+      "Symphony Suites"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0041",
@@ -448,7 +650,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.40M-$1.65M",
     "price_min": 1400000.0,
-    "price_max": 1650000.0
+    "price_max": 1650000.0,
+    "display_name": "The Alps Residences",
+    "search_aliases": [
+      "The Alps Residences"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0042",
@@ -459,7 +666,12 @@
     "tenure": "Freehold",
     "three_bed_cost": "$2.10M-$2.50M",
     "price_min": 2100000.0,
-    "price_max": 2500000.0
+    "price_max": 2500000.0,
+    "display_name": "The Gazania",
+    "search_aliases": [
+      "The Gazania"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0043",
@@ -470,7 +682,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.50M-$1.78M",
     "price_min": 1500000.0,
-    "price_max": 1780000.0
+    "price_max": 1780000.0,
+    "display_name": "The Jade",
+    "search_aliases": [
+      "The Jade"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0044",
@@ -481,7 +698,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.20M-$1.40M",
     "price_min": 1200000.0,
-    "price_max": 1400000.0
+    "price_max": 1400000.0,
+    "display_name": "The Nautical",
+    "search_aliases": [
+      "The Nautical"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0045",
@@ -492,7 +714,12 @@
     "tenure": "Freehold",
     "three_bed_cost": "$2.10M-$2.45M",
     "price_min": 2100000.0,
-    "price_max": 2450000.0
+    "price_max": 2450000.0,
+    "display_name": "The Parc Condominium",
+    "search_aliases": [
+      "The Parc Condominium"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0046",
@@ -503,7 +730,12 @@
     "tenure": "99-year",
     "three_bed_cost": "$2.10M-$2.60M",
     "price_min": 2100000.0,
-    "price_max": 2600000.0
+    "price_max": 2600000.0,
+    "display_name": "The Pearl @ Mount Faber",
+    "search_aliases": [
+      "The Pearl @ Mount Faber"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0047",
@@ -514,7 +746,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.85M-$2.25M",
     "price_min": 1850000.0,
-    "price_max": 2250000.0
+    "price_max": 2250000.0,
+    "display_name": "The Trilinq",
+    "search_aliases": [
+      "The Trilinq"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0048",
@@ -525,7 +762,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.45M-$1.75M",
     "price_min": 1450000.0,
-    "price_max": 1750000.0
+    "price_max": 1750000.0,
+    "display_name": "The Warren",
+    "search_aliases": [
+      "The Warren"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0049",
@@ -536,7 +778,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.22M-$1.42M",
     "price_min": 1220000.0,
-    "price_max": 1420000.0
+    "price_max": 1420000.0,
+    "display_name": "The Wisteria",
+    "search_aliases": [
+      "The Wisteria"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0050",
@@ -547,7 +794,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.20M-$2.65M",
     "price_min": 2200000.0,
-    "price_max": 2650000.0
+    "price_max": 2650000.0,
+    "display_name": "The Woodleigh Res.",
+    "search_aliases": [
+      "The Woodleigh Res."
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0051",
@@ -558,7 +810,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.70M-$1.98M",
     "price_min": 1700000.0,
-    "price_max": 1980000.0
+    "price_max": 1980000.0,
+    "display_name": "Twin VEW",
+    "search_aliases": [
+      "Twin VEW"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0052",
@@ -569,7 +826,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.75M-$2.05M",
     "price_min": 1750000.0,
-    "price_max": 2049999.9999999998
+    "price_max": 2049999.9999999998,
+    "display_name": "Whistler Grand",
+    "search_aliases": [
+      "Whistler Grand"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0053",
@@ -580,7 +842,12 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$1.15M-$1.35M",
     "price_min": 1150000.0,
-    "price_max": 1350000.0
+    "price_max": 1350000.0,
+    "display_name": "Woodsvale",
+    "search_aliases": [
+      "Woodsvale"
+    ],
+    "manual_review_required": false
   },
   {
     "condo_id": "CON0054",
@@ -591,6 +858,11 @@
     "tenure": "99y leasehold or check",
     "three_bed_cost": "$2.25M-$2.80M",
     "price_min": 2250000.0,
-    "price_max": 2800000.0
+    "price_max": 2800000.0,
+    "display_name": "d'Leedon",
+    "search_aliases": [
+      "d'Leedon"
+    ],
+    "manual_review_required": false
   }
 ]

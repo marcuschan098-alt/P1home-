@@ -15,7 +15,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.557Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH001|CON0053",
@@ -33,7 +33,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.557Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH002|CON0011",
@@ -51,7 +51,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.557Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH002|CON0020",
@@ -69,7 +69,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH003|CON0039",
@@ -87,7 +87,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH003|CON0046",
@@ -105,7 +105,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH004|CON0012",
@@ -123,7 +123,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH004|CON0025",
@@ -141,7 +141,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH004|CON0034",
@@ -159,7 +159,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.558Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH005|CON0017",
@@ -177,7 +177,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH005|CON0022",
@@ -195,7 +195,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH005|CON0043",
@@ -213,7 +213,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH006|CON0026",
@@ -231,7 +231,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH006|CON0037",
@@ -249,7 +249,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH006|CON0044",
@@ -267,7 +267,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH006|CON0053",
@@ -285,7 +285,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0004",
@@ -303,7 +303,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0005",
@@ -321,7 +321,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0008",
@@ -339,7 +339,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0031",
@@ -357,7 +357,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0035",
@@ -375,7 +375,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH007|CON0050",
@@ -393,7 +393,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0004",
@@ -411,7 +411,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0005",
@@ -429,7 +429,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0008",
@@ -447,7 +447,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0031",
@@ -465,7 +465,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0035",
@@ -483,7 +483,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0042",
@@ -501,7 +501,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH009|CON0050",
@@ -519,7 +519,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.559Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH010|CON0024",
@@ -537,7 +537,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH010|CON0040",
@@ -555,7 +555,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH010|CON0044",
@@ -573,7 +573,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.732Z"
   },
   {
     "id": "SCH011|CON0027",
@@ -591,7 +591,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH011|CON0038",
@@ -609,7 +609,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH011|CON0048",
@@ -627,7 +627,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0029",
@@ -645,7 +645,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0032",
@@ -663,7 +663,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0045",
@@ -681,7 +681,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0047",
@@ -699,7 +699,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0051",
@@ -717,7 +717,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH012|CON0052",
@@ -735,7 +735,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH013|CON0011",
@@ -753,7 +753,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH013|CON0020",
@@ -771,7 +771,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.560Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH014|CON0027",
@@ -789,7 +789,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH014|CON0038",
@@ -807,7 +807,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH014|CON0048",
@@ -825,7 +825,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH015|CON0022",
@@ -843,7 +843,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH015|CON0038",
@@ -861,7 +861,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH015|CON0043",
@@ -879,7 +879,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH016|CON0026",
@@ -897,7 +897,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH016|CON0037",
@@ -915,7 +915,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH016|CON0044",
@@ -933,7 +933,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH016|CON0053",
@@ -951,7 +951,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH017|CON0026",
@@ -969,7 +969,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH017|CON0053",
@@ -987,7 +987,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.561Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH018|CON0013",
@@ -1005,7 +1005,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH018|CON0015",
@@ -1023,7 +1023,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH019|CON0016",
@@ -1041,7 +1041,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH019|CON0017",
@@ -1059,7 +1059,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH019|CON0021",
@@ -1077,7 +1077,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH019|CON0043",
@@ -1095,7 +1095,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH020|CON0003",
@@ -1113,7 +1113,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH020|CON0010",
@@ -1131,7 +1131,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH020|CON0039",
@@ -1149,7 +1149,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH020|CON0046",
@@ -1167,7 +1167,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.562Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH021|CON0031",
@@ -1185,7 +1185,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH021|CON0035",
@@ -1203,7 +1203,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH022|CON0009",
@@ -1221,7 +1221,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH023|CON0026",
@@ -1239,7 +1239,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH023|CON0037",
@@ -1257,7 +1257,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH023|CON0053",
@@ -1275,7 +1275,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.564Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH025|CON0013",
@@ -1293,7 +1293,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH025|CON0015",
@@ -1311,7 +1311,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH026|CON0007",
@@ -1329,7 +1329,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH026|CON0019",
@@ -1347,7 +1347,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH026|CON0033",
@@ -1365,7 +1365,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH027|CON0001",
@@ -1383,7 +1383,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH027|CON0018",
@@ -1401,7 +1401,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH028|CON0024",
@@ -1419,7 +1419,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH028|CON0028",
@@ -1437,7 +1437,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH028|CON0040",
@@ -1455,7 +1455,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH028|CON0049",
@@ -1473,7 +1473,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH029|CON0028",
@@ -1491,7 +1491,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH029|CON0040",
@@ -1509,7 +1509,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH029|CON0044",
@@ -1527,7 +1527,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH029|CON0049",
@@ -1545,7 +1545,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH030|CON0009",
@@ -1563,7 +1563,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.565Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH030|CON0041",
@@ -1581,7 +1581,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH031|CON0016",
@@ -1599,7 +1599,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH031|CON0017",
@@ -1617,7 +1617,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.733Z"
   },
   {
     "id": "SCH031|CON0022",
@@ -1635,7 +1635,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH031|CON0043",
@@ -1653,7 +1653,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH032|CON0012",
@@ -1671,7 +1671,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH032|CON0017",
@@ -1689,7 +1689,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH032|CON0043",
@@ -1707,7 +1707,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH033|CON0002",
@@ -1725,7 +1725,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH033|CON0031",
@@ -1743,7 +1743,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH033|CON0035",
@@ -1761,7 +1761,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH034|CON0006",
@@ -1779,7 +1779,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH034|CON0036",
@@ -1797,7 +1797,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH035|CON0021",
@@ -1815,7 +1815,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH036|CON0022",
@@ -1833,7 +1833,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH036|CON0043",
@@ -1851,7 +1851,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.734Z"
   },
   {
     "id": "SCH039|CON0001",
@@ -1869,7 +1869,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH039|CON0007",
@@ -1887,7 +1887,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH039|CON0019",
@@ -1905,7 +1905,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH039|CON0020",
@@ -1923,7 +1923,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH039|CON0033",
@@ -1941,7 +1941,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH040|CON0011",
@@ -1959,7 +1959,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH040|CON0020",
@@ -1977,7 +1977,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.566Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0029",
@@ -1995,7 +1995,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0032",
@@ -2013,7 +2013,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0045",
@@ -2031,7 +2031,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0047",
@@ -2049,7 +2049,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0051",
@@ -2067,7 +2067,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH041|CON0052",
@@ -2085,7 +2085,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH042|CON0023",
@@ -2103,7 +2103,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH042|CON0054",
@@ -2121,7 +2121,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH043|CON0024",
@@ -2139,7 +2139,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH043|CON0028",
@@ -2157,7 +2157,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH043|CON0049",
@@ -2175,7 +2175,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0010",
@@ -2193,7 +2193,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0013",
@@ -2211,7 +2211,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0015",
@@ -2229,7 +2229,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0023",
@@ -2247,7 +2247,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0039",
@@ -2265,7 +2265,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH044|CON0054",
@@ -2283,7 +2283,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH045|CON0024",
@@ -2301,7 +2301,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH045|CON0040",
@@ -2319,7 +2319,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH045|CON0049",
@@ -2337,7 +2337,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH046|CON0024",
@@ -2355,7 +2355,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.567Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH046|CON0028",
@@ -2373,7 +2373,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH046|CON0040",
@@ -2391,7 +2391,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH046|CON0049",
@@ -2409,7 +2409,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH047|CON0006",
@@ -2427,7 +2427,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH047|CON0036",
@@ -2445,7 +2445,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH047|CON0050",
@@ -2463,7 +2463,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH048|CON0012",
@@ -2481,7 +2481,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH048|CON0025",
@@ -2499,7 +2499,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH048|CON0034",
@@ -2517,7 +2517,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0029",
@@ -2535,7 +2535,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0032",
@@ -2553,7 +2553,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0045",
@@ -2571,7 +2571,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0047",
@@ -2589,7 +2589,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0051",
@@ -2607,7 +2607,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH049|CON0052",
@@ -2625,7 +2625,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH050|CON0028",
@@ -2643,7 +2643,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH050|CON0049",
@@ -2661,7 +2661,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH051|CON0009",
@@ -2679,7 +2679,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.735Z"
   },
   {
     "id": "SCH051|CON0041",
@@ -2697,7 +2697,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH052|CON0016",
@@ -2715,7 +2715,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH052|CON0017",
@@ -2733,7 +2733,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH052|CON0022",
@@ -2751,7 +2751,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH052|CON0043",
@@ -2769,7 +2769,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH053|CON0007",
@@ -2787,7 +2787,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH053|CON0011",
@@ -2805,7 +2805,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH053|CON0019",
@@ -2823,7 +2823,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH053|CON0020",
@@ -2841,7 +2841,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.568Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH053|CON0033",
@@ -2859,7 +2859,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0029",
@@ -2877,7 +2877,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0032",
@@ -2895,7 +2895,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0045",
@@ -2913,7 +2913,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0047",
@@ -2931,7 +2931,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0051",
@@ -2949,7 +2949,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH054|CON0052",
@@ -2967,7 +2967,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH055|CON0010",
@@ -2985,7 +2985,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH055|CON0023",
@@ -3003,7 +3003,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH055|CON0039",
@@ -3021,7 +3021,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH056|CON0003",
@@ -3039,7 +3039,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH056|CON0046",
@@ -3057,7 +3057,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH057|CON0026",
@@ -3075,7 +3075,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH057|CON0053",
@@ -3093,7 +3093,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH058|CON0001",
@@ -3111,7 +3111,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH058|CON0018",
@@ -3129,7 +3129,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH059|CON0021",
@@ -3147,7 +3147,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH060|CON0026",
@@ -3165,7 +3165,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.569Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH060|CON0037",
@@ -3183,7 +3183,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH060|CON0044",
@@ -3201,7 +3201,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH060|CON0053",
@@ -3219,7 +3219,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.736Z"
   },
   {
     "id": "SCH062|CON0021",
@@ -3237,7 +3237,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH063|CON0027",
@@ -3255,7 +3255,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH063|CON0038",
@@ -3273,7 +3273,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH063|CON0048",
@@ -3291,7 +3291,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH064|CON0011",
@@ -3309,7 +3309,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH064|CON0020",
@@ -3327,7 +3327,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH065|CON0050",
@@ -3345,7 +3345,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH066|CON0006",
@@ -3363,7 +3363,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH066|CON0036",
@@ -3381,7 +3381,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH066|CON0042",
@@ -3399,7 +3399,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH066|CON0050",
@@ -3417,7 +3417,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH067|CON0009",
@@ -3435,7 +3435,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH067|CON0041",
@@ -3453,7 +3453,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH068|CON0009",
@@ -3471,7 +3471,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH068|CON0041",
@@ -3489,7 +3489,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH069|CON0002",
@@ -3507,7 +3507,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.570Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH070|CON0002",
@@ -3525,7 +3525,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH071|CON0027",
@@ -3543,7 +3543,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH071|CON0038",
@@ -3561,7 +3561,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH071|CON0048",
@@ -3579,7 +3579,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH072|CON0006",
@@ -3597,7 +3597,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH072|CON0018",
@@ -3615,7 +3615,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH072|CON0036",
@@ -3633,7 +3633,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH073|CON0026",
@@ -3651,7 +3651,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH073|CON0037",
@@ -3669,7 +3669,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH073|CON0044",
@@ -3687,7 +3687,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH074|CON0027",
@@ -3705,7 +3705,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH074|CON0038",
@@ -3723,7 +3723,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH074|CON0048",
@@ -3741,7 +3741,7 @@
     "evidence": "development_point",
     "confidence": "Medium",
     "issue": "Near a 1 km or 2 km threshold",
-    "updated_at": "2026-07-12T07:27:34.571Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH075|CON0026",
@@ -3759,7 +3759,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH075|CON0053",
@@ -3777,7 +3777,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH076|CON0001",
@@ -3795,7 +3795,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH076|CON0018",
@@ -3813,7 +3813,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH076|CON0033",
@@ -3831,7 +3831,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.737Z"
   },
   {
     "id": "SCH077|CON0024",
@@ -3849,7 +3849,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH077|CON0040",
@@ -3867,7 +3867,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH077|CON0044",
@@ -3885,7 +3885,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH077|CON0049",
@@ -3903,7 +3903,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0004",
@@ -3921,7 +3921,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0005",
@@ -3939,7 +3939,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0006",
@@ -3957,7 +3957,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0008",
@@ -3975,7 +3975,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0042",
@@ -3993,7 +3993,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH078|CON0050",
@@ -4011,7 +4011,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH079|CON0016",
@@ -4029,7 +4029,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH079|CON0017",
@@ -4047,7 +4047,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH079|CON0022",
@@ -4065,7 +4065,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH079|CON0043",
@@ -4083,7 +4083,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH080|CON0003",
@@ -4101,7 +4101,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH080|CON0046",
@@ -4119,7 +4119,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH081|CON0001",
@@ -4137,7 +4137,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH081|CON0018",
@@ -4155,7 +4155,7 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   },
   {
     "id": "SCH081|CON0042",
@@ -4173,6 +4173,6 @@
     "evidence": "development_point",
     "confidence": "Screening",
     "issue": "",
-    "updated_at": "2026-07-12T07:27:34.572Z"
+    "updated_at": "2026-07-12T11:22:03.738Z"
   }
 ]
