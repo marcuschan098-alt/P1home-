@@ -1,9 +1,9 @@
 const $=id=>document.getElementById(id),safe=v=>v===null||v===undefined||v===""?"—":v,key=(t,n)=>`${t}:${String(n||"").trim().toLowerCase()}`;
-const state={pairs:[],schools:[],developments:[],addresses:[],coordinates:{},kb:[],registry:[],results:[],compare:new Set(JSON.parse(localStorage.getItem("v7_compare")||"[]")),shortlist:new Set(JSON.parse(localStorage.getItem("v7_shortlist")||"[]")),notes:JSON.parse(localStorage.getItem("v7_notes")||"{}"),profile:"balanced",active:null,map:null,base:null,markers:null,focus:null,radius:null,compact:false};
+const state={pairs:[],schools:[],developments:[],addresses:[],coordinates:{},kb:[],registry:[],results:[],compare:new Set(JSON.parse(localStorage.getItem("v7_compare")||"[]")),shortlist:new Set(JSON.parse(localStorage.getItem("v7_shortlist")||"[]")),notes:JSON.parse(localStorage.getItem("v7_notes")||"{}"),savedSnapshots:JSON.parse(localStorage.getItem("v12_saved_snapshots")||"{}"),profile:"balanced",active:null,map:null,base:null,markers:null,focus:null,radius:null,compact:false};
 const profiles={balanced:{school:.20,admission:.22,property:.20,family:.18,transit:.12,value:.08},admission:{school:.30,admission:.40,property:.10,family:.08,transit:.07,value:.05},investment:{school:.10,admission:.10,property:.42,family:.10,transit:.13,value:.15},family:{school:.20,admission:.15,property:.12,family:.30,transit:.18,value:.05}};
 const load=async(url,fallback)=>{try{const r=await fetch(url);if(!r.ok)throw new Error();const t=await r.text();if(t.trim().startsWith("<"))throw new Error();return JSON.parse(t)}catch{return fallback}};
 const coord=(t,n)=>state.coordinates[key(t,n)]||null;
-const persist=()=>{localStorage.setItem("v7_compare",JSON.stringify([...state.compare]));localStorage.setItem("v7_shortlist",JSON.stringify([...state.shortlist]));localStorage.setItem("v7_notes",JSON.stringify(state.notes));$("compareCount").textContent=state.compare.size;$("shortlistCount").textContent=state.shortlist.size};
+const persist=()=>{localStorage.setItem("v7_compare",JSON.stringify([...state.compare]));localStorage.setItem("v7_shortlist",JSON.stringify([...state.shortlist]));localStorage.setItem("v7_notes",JSON.stringify(state.notes));localStorage.setItem("v12_saved_snapshots",JSON.stringify(state.savedSnapshots));$("compareCount").textContent=state.compare.size;$("shortlistCount").textContent=state.shortlist.size};
 function val(p,k){return Number(p[k]||0)}
 function decision(p){if(!p.overall_score_100)return null;const w=profiles[state.profile];return Math.round((val(p,"school_quality_30")/30*w.school+val(p,"admission_chance_20")/20*w.admission+val(p,"property_investment_20")/20*w.property+val(p,"family_living_15")/15*w.family+val(p,"transit_score_10")/10*w.transit+val(p,"value_5")/5*w.value)*1000)/10}
 function kbFor(s,c){return state.kb.find(x=>x.school_name===s&&x.condo_name===c)}
@@ -159,7 +159,7 @@ function openIntelligence(p){
   };
   $("intelSave").onclick=()=>{
     const wasSaved=state.shortlist.has(p.id);
-    if(wasSaved)state.shortlist.delete(p.id);else state.shortlist.add(p.id);
+    if(wasSaved)state.shortlist.delete(p.id);else{rememberItem(p);state.shortlist.add(p.id);}
     persist();
     renderShortlist();
     renderCards();
@@ -168,6 +168,12 @@ function openIntelligence(p){
   };
 }
 
+
+
+function rememberItem(p){
+  if(!p||!p.id)return;
+  state.savedSnapshots[p.id]=JSON.parse(JSON.stringify(p));
+}
 
 function scoreBreakdown(p){
   return [
@@ -242,8 +248,8 @@ function openReport(p){
   $("reportPanel").classList.add("open");
   $("reportPanel").setAttribute("aria-hidden","false");
   document.querySelectorAll("[data-report-alt]").forEach(b=>b.onclick=()=>openReport(findAny(b.dataset.reportAlt)));
-  $("reportCompare").onclick=()=>{state.compare.add(p.id);persist();renderCompare();showActionFeedback("Added to Compare")};
-  $("reportSave").onclick=()=>{const s=state.shortlist.has(p.id);s?state.shortlist.delete(p.id):state.shortlist.add(p.id);persist();renderCards();renderShortlist();showActionFeedback(s?"Removed from Shortlist":"Saved to Shortlist");openReport(p)}
+  $("reportCompare").onclick=()=>{rememberItem(p);state.compare.add(p.id);persist();renderCompare();showActionFeedback("Added to Compare")};
+  $("reportSave").onclick=()=>{const s=state.shortlist.has(p.id);s?state.shortlist.delete(p.id):(rememberItem(p),state.shortlist.add(p.id));persist();renderCards();renderShortlist();showActionFeedback(s?"Removed from Shortlist":"Saved to Shortlist");openReport(p)}
 }
 
 function card(p){
@@ -262,14 +268,18 @@ function card(p){
   </article>`
 }
 function renderCards(){$("cards").innerHTML=state.results.length?state.results.map(card).join(""):"<p>No matching results.</p>";document.querySelectorAll(".card").forEach(el=>el.onclick=e=>{const p=state.results.find(x=>x.id===el.dataset.id);if(!p)return;if(e.target.dataset.act==="insight")openIntelligence(p);else if(e.target.dataset.act==="report")openReport(p);else if(e.target.dataset.act==="details")openDetails(p);else if(e.target.dataset.act==="compare"){
-  state.compare.add(p.id);persist();renderCompare();showActionFeedback("Added to Compare");setView("compare")
+  rememberItem(p);state.compare.add(p.id);persist();renderCompare();showActionFeedback("Added to Compare");setView("compare")
 }else if(e.target.dataset.act==="save"){
   const wasSaved=state.shortlist.has(p.id);
-  if(wasSaved)state.shortlist.delete(p.id);else state.shortlist.add(p.id);
+  if(wasSaved)state.shortlist.delete(p.id);else{rememberItem(p);state.shortlist.add(p.id);}
   persist();renderCards();renderShortlist();
   showActionFeedback(wasSaved?"Removed from Shortlist":"Saved to Shortlist")
 }else focus(p)})}
-function ensureMap(){if(state.map)return;state.map=L.map("map",{zoomControl:false}).setView([1.3521,103.8198],11);L.control.zoom({position:"bottomright"}).addTo(state.map);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map);state.markers=L.layerGroup().addTo(state.map);state.focus=L.layerGroup().addTo(state.map)}
+function ensureMap(){if(state.map)return;state.map=L.map("map",{
+  zoomControl:false,
+  maxBounds:[[1.13,103.55],[1.50,104.12]],
+  maxBoundsViscosity:1
+}).setView([1.3521,103.8198],11);L.control.zoom({position:"bottomright"}).addTo(state.map);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map);state.markers=L.layerGroup().addTo(state.map);state.focus=L.layerGroup().addTo(state.map)}
 function marker(type,label){return L.divIcon({className:"",html:`<div class="marker ${type}">${label}</div>`,iconSize:[28,28],iconAnchor:[14,14]})}
 function renderMap(){
   ensureMap();state.markers.clearLayers();state.focus.clearLayers();
@@ -292,7 +302,7 @@ function renderMap(){
       bounds.push([c.lat,c.lng])
     }
   }
-  if(bounds.length){state.map.fitBounds(bounds,{padding:[35,35],maxZoom:13});$("mapStatus").textContent=`${bounds.length} static coordinate points shown.`}
+  if(bounds.length){state.map.fitBounds(bounds,{paddingTopLeft:[30,45],paddingBottomRight:[30,25],maxZoom:12});state.map.panInsideBounds([[1.13,103.55],[1.50,104.12]],{animate:false});$("mapStatus").textContent=`${bounds.length} static coordinate points shown.`}
   else $("mapStatus").textContent="No static coordinates loaded for the current results."
 }
 function focus(p){state.active=p.id;const s=coord("school",p.target_school),c=coord("condo",p.condo);state.focus.clearLayers();if(state.radius){state.map.removeLayer(state.radius);state.radius=null}const b=[];if(s){L.marker([s.lat,s.lng],{icon:marker("school","S")}).addTo(state.focus);state.radius=L.circle([s.lat,s.lng],{radius:1000,color:"#246b91",fillOpacity:.08}).addTo(state.map);b.push([s.lat,s.lng])}if(c){L.marker([c.lat,c.lng],{icon:marker("condo","C")}).addTo(state.focus);b.push([c.lat,c.lng])}if(b.length)state.map.fitBounds(b,{padding:[80,80],maxZoom:16});$("showAll").classList.remove("hidden");renderCards()}
@@ -314,13 +324,33 @@ function openDetails(p){
   $("drawer").classList.add("open")
 }
 function compareCard(p){const k=p.kb||kbFor(p.target_school,p.condo);return`<article class="comparecard"><h3>${p.target_school}</h3><div class="condo">${p.condo}</div><div class="metric"><span>Decision</span><b>${decision(p)??"Unscored"}</b></div><div class="metric"><span>Distance</span><b>${safe(k?.label)} ${k?.best_m?`(${k.best_m} m)`:""}</b></div><div class="metric"><span>Evidence</span><b>${safe(k?.evidence)}</b></div><div class="metric"><span>Price</span><b>${safe(p["3_bed_cost"])}</b></div></article>`}
-function findAny(id){return state.pairs.find(x=>x.id===id)||state.results.find(x=>x.id===id)}
-function renderCompare(){$("compareGrid").innerHTML=[...state.compare].map(findAny).filter(Boolean).map(compareCard).join("")||"<p>No comparisons selected.</p>"}
-function renderShortlist(){$("shortlistGrid").innerHTML=[...state.shortlist].map(findAny).filter(Boolean).map(compareCard).join("")||"<p>No saved options.</p>"}
+function findAny(id){return state.pairs.find(x=>x.id===id)||state.results.find(x=>x.id===id)||state.savedSnapshots[id]||null}
+function renderCompare(){
+  const cards=[];
+  for(const id of [...state.compare]){
+    const item=findAny(id);
+    if(item)cards.push(item);
+    else state.compare.delete(id);
+  }
+  persist();
+  $("compareCount").textContent=state.compare.size;
+  $("compareGrid").innerHTML=cards.map(compareCard).join("")||"<p>No comparisons selected.</p>"
+}
+function renderShortlist(){
+  const cards=[];
+  for(const id of [...state.shortlist]){
+    const item=findAny(id);
+    if(item)cards.push(item);
+    else state.shortlist.delete(id);
+  }
+  persist();
+  $("shortlistCount").textContent=state.shortlist.size;
+  $("shortlistGrid").innerHTML=cards.map(compareCard).join("")||"<p>No saved options.</p>"
+}
 function setView(n){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.view===n));$(n+"View").classList.add("active");if(n==="explore")setTimeout(()=>{state.map.invalidateSize();renderMap()},50);if(n==="compare")renderCompare();if(n==="shortlist")renderShortlist()}
-function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v12-1-results.csv";a.click()}
-async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=12.1.0",[]),load("data/schools-v6.json?v=12.1.0",[]),load("data/developments-v6.json?v=12.1.0",[]),load("data/residential-address-points.json?v=12.1.0",[]),load("data/coordinates.json?v=12.1.0",{}),load("data/distance-knowledge-base.json?v=12.1.0",[]),load("data/school-registry.json?v=12.1.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("compact").textContent=state.compact?"Expanded":"Compact";$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
-init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 12.1</h1><p>${e.message}</p></main>`);
+function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v12-2-results.csv";a.click()}
+async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=12.2.0",[]),load("data/schools-v6.json?v=12.2.0",[]),load("data/developments-v6.json?v=12.2.0",[]),load("data/residential-address-points.json?v=12.2.0",[]),load("data/coordinates.json?v=12.2.0",{}),load("data/distance-knowledge-base.json?v=12.2.0",[]),load("data/school-registry.json?v=12.2.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("compact").textContent=state.compact?"Expanded":"Compact";$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
+init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 12.2</h1><p>${e.message}</p></main>`);
 $("closeIntelligence").onclick=closeIntelligence;
 $("fit").classList.add("primary-action");
 

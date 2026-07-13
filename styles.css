@@ -145,3 +145,114 @@
   white-space:normal;
   line-height:1.25;
 }
+
+/* Version 12.2 definitive layout corrections */
+
+/* Grid tracks must be allowed to shrink */
+.layout{
+  grid-template-columns:minmax(280px,300px) minmax(0,1fr) minmax(300px,320px)!important;
+  min-width:0!important;
+}
+.filters,.results,.mapwrap,.scroll{
+  min-width:0!important;
+}
+.filters{
+  overflow:hidden!important;
+}
+.scroll{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+}
+
+/* Prevent every two-column filter row from forcing overflow beneath the map */
+.filters .grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  width:100%!important;
+}
+.filters .grid label{
+  min-width:0!important;
+  width:100%!important;
+  overflow:hidden!important;
+}
+.filters input,
+.filters select,
+.filters button,
+.filters output{
+  min-width:0!important;
+  max-width:100%!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+}
+.filters .actions button{
+  width:auto!important;
+}
+.filters .budget>div{
+  min-width:0!important;
+  gap:8px!important;
+}
+.filters .budget output{
+  width:auto!important;
+  text-align:right!important;
+}
+
+@media(max-width:1180px){
+  .layout{
+    grid-template-columns:minmax(260px,285px) minmax(0,1fr) minmax(280px,310px)!important;
+  }
+  .filters .grid{
+    grid-template-columns:1fr!important;
+  }
+}
+@media(max-width:840px){
+  body{overflow:auto!important}
+  main{height:auto!important}
+  .layout{
+    grid-template-columns:1fr!important;
+    height:auto!important;
+  }
+  .filters,.results,.mapwrap{
+    min-height:auto!important;
+  }
+  .mapwrap{
+    height:70vh!important;
+  }
+}
+
+/* OneMap has limited tile coverage outside Singapore.
+   Constrain and colour the canvas so no grey strip appears above the map. */
+.mapwrap,
+.mapwrap #map,
+.leaflet-container{
+  background:#6ea6db!important;
+}
+.mapwrap{
+  padding:0!important;
+  margin:0!important;
+}
+.mapwrap #map{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+}
+
+/* Report must always appear above details/intelligence drawers */
+.report-panel{
+  z-index:6000!important;
+}
+.report-panel.open{
+  right:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+
+/* Compare cards should form a proper responsive grid */
+.comparegrid,
+#compareGrid,
+#shortlistGrid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(300px,420px))!important;
+  gap:16px!important;
+  align-items:start!important;
+}
