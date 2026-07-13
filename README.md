@@ -1,28 +1,30 @@
-# P1 Home Intelligence — Version 6.1
+# P1 Home Intelligence — Version 12.1
 
-Version 6.1 adds a dedicated Coordinate Manager before distance generation.
+Version 12.1 fixes the issues reported after Version 12.
 
-## Coordinate Manager
+## Fixed
 
-- Coverage dashboard for schools, condos and residential blocks
-- Missing-coordinate detection
-- Failed-request queue
-- Bulk queue creation
-- One-at-a-time bulk geocoding
-- Pause and resume
-- Retry failed records
-- Import schools, condos, blocks and coordinate caches
-- Export coordinates, missing records and failures
-- Possible duplicate-coordinate detection
-- Stale-coordinate detection
-- Readiness gate before distance database generation
+- Left-panel dropdowns no longer overflow beneath the map.
+- Filter rows collapse cleanly on narrower screens.
+- The application title now displays **P1 Home Intelligence v12.1**.
+- The unused grey band above the map is removed.
+- The **Report** action now opens the Property Intelligence Report above other drawers.
+- Card metadata is labelled clearly:
+  - distance
+  - TOP year
+  - tenure
+- The malformed `m2017` display is replaced by text such as:
+  - `1011 m`
+  - `TOP 2017 · 99-year`
 
-## Important deployment note
+## Deployment
 
-GitHub Pages remains a static site. Browser-to-OneMap geocoding may still fail if the OneMap API blocks the request, the token is expired, or the browser rejects the cross-origin request.
+Upload these files from `public-app/`:
 
-Version 6.1 preserves the failed queue and allows coordinate caches to be imported, so geocoding can also be completed outside the public site and then loaded into the app.
+- `index.html`
+- `app.js`
+- `styles.css`
 
-## Admin access
+Existing static JSON files can remain unchanged.
 
-Use `#admin`, the existing admin shortcut, or the hidden admin activation method. Then open **Coordinate Manager**.
+After committing, hard refresh with `Ctrl + F5`.
