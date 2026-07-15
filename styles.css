@@ -256,3 +256,20 @@
   gap:16px!important;
   align-items:start!important;
 }
+
+/* Version 13 release-candidate polish */
+.comparison-table-wrap{overflow:auto;background:#fff;border:1px solid #d6e1e7;border-radius:14px}
+.comparison-table{border-collapse:collapse;width:100%;min-width:760px}
+.comparison-table th,.comparison-table td{padding:12px;border-bottom:1px solid #e1e8ec;text-align:center}
+.comparison-table th:first-child,.comparison-table td:first-child{text-align:left;position:sticky;left:0;background:#fff;z-index:1}
+.comparison-table th span{display:block;color:#17618d;font-size:.78rem;margin-top:4px}
+.comparison-table .best-cell{background:#edf8f2;font-weight:900;color:#21654e}
+.notebook-card{background:#fff;border:1px solid #d6e1e7;border-radius:14px;padding:16px;display:grid;gap:12px}
+.notebook-head{display:flex;justify-content:space-between;gap:12px}
+.notebook-head h3{margin:0}.notebook-head h4{margin:4px 0 0;color:#17618d}
+.notebook-card label{display:grid;gap:5px;font-weight:800}
+.notebook-card textarea{min-height:74px;resize:vertical}
+.notebook-actions{display:flex;gap:8px}
+#shortlistGrid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))!important}
+.pagecard{max-width:900px;margin:30px auto;background:#fff;border:1px solid #d6e1e7;border-radius:16px;padding:26px}
+.pagecard h2{margin-top:0}.pagecard h3{margin-top:22px}

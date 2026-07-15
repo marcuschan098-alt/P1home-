@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#173b57">
-<title>P1 Home Intelligence v12.2</title>
+<title>P1 Home Intelligence v13</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-<link rel="stylesheet" href="styles.css?v=12.2.0">
+<link rel="stylesheet" href="styles.css?v=13.0.0">
 </head>
 <body>
 <header class="topbar">
-  <div class="brand"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V12.2</em></strong></div>
+  <div class="brand"><span>Singapore P1 Strategy</span><strong>P1 Home Intelligence <em>V13</em></strong></div>
   <nav>
     <button class="nav active" data-view="explore">Explore</button>
     <button class="nav" data-view="compare">Compare <b id="compareCount">0</b></button>
@@ -76,6 +76,19 @@
 </section>
 <section id="compareView" class="view page"><div class="pagehead"><h2>Compare</h2><button id="clearCompare" class="btn">Clear</button></div><div id="compareGrid" class="comparegrid"></div></section>
 <section id="shortlistView" class="view page"><div class="pagehead"><h2>Shortlist</h2><button id="clearShortlist" class="btn">Clear</button></div><div id="shortlistGrid" class="comparegrid"></div></section>
+
+<section id="aboutView" class="pageview hidden">
+  <div class="pagecard">
+    <h2>About P1 Home Intelligence</h2>
+    <p>A static decision-support tool for comparing primary-school and condominium pairings in Singapore.</p>
+    <h3>Methodology</h3>
+    <p>Scores combine school quality, admission evidence, property fundamentals, family living, transit and value. Distance evidence is displayed separately with its confidence level.</p>
+    <h3>Disclaimer</h3>
+    <p>This tool supports screening and comparison only. It does not guarantee school admission, property performance or official distance eligibility.</p>
+    <h3>Version</h3><p>Version 13 Release Candidate</p>
+  </div>
+</section>
+
 </main>
 
 
@@ -92,5 +105,5 @@
 <aside id="drawer" class="drawer"><div><button id="closeDrawer">×</button><section id="details"></section></div></aside>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="app.js?v=12.2.0"></script>
+<script src="app.js?v=13.0.0"></script>
 </body></html>

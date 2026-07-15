@@ -1,9 +1,9 @@
 const $=id=>document.getElementById(id),safe=v=>v===null||v===undefined||v===""?"—":v,key=(t,n)=>`${t}:${String(n||"").trim().toLowerCase()}`;
-const state={pairs:[],schools:[],developments:[],addresses:[],coordinates:{},kb:[],registry:[],results:[],compare:new Set(JSON.parse(localStorage.getItem("v7_compare")||"[]")),shortlist:new Set(JSON.parse(localStorage.getItem("v7_shortlist")||"[]")),notes:JSON.parse(localStorage.getItem("v7_notes")||"{}"),savedSnapshots:JSON.parse(localStorage.getItem("v12_saved_snapshots")||"{}"),profile:"balanced",active:null,map:null,base:null,markers:null,focus:null,radius:null,compact:false};
+const state={pairs:[],schools:[],developments:[],addresses:[],coordinates:{},kb:[],registry:[],results:[],compare:new Set(JSON.parse(localStorage.getItem("v7_compare")||"[]")),shortlist:new Set(JSON.parse(localStorage.getItem("v7_shortlist")||"[]")),notes:JSON.parse(localStorage.getItem("v7_notes")||"{}"),savedSnapshots:JSON.parse(localStorage.getItem("v12_saved_snapshots")||"{}"),notebook:JSON.parse(localStorage.getItem("v13_notebook")||"{}"),profile:"balanced",active:null,map:null,base:null,markers:null,focus:null,radius:null,compact:false};
 const profiles={balanced:{school:.20,admission:.22,property:.20,family:.18,transit:.12,value:.08},admission:{school:.30,admission:.40,property:.10,family:.08,transit:.07,value:.05},investment:{school:.10,admission:.10,property:.42,family:.10,transit:.13,value:.15},family:{school:.20,admission:.15,property:.12,family:.30,transit:.18,value:.05}};
 const load=async(url,fallback)=>{try{const r=await fetch(url);if(!r.ok)throw new Error();const t=await r.text();if(t.trim().startsWith("<"))throw new Error();return JSON.parse(t)}catch{return fallback}};
 const coord=(t,n)=>state.coordinates[key(t,n)]||null;
-const persist=()=>{localStorage.setItem("v7_compare",JSON.stringify([...state.compare]));localStorage.setItem("v7_shortlist",JSON.stringify([...state.shortlist]));localStorage.setItem("v7_notes",JSON.stringify(state.notes));localStorage.setItem("v12_saved_snapshots",JSON.stringify(state.savedSnapshots));$("compareCount").textContent=state.compare.size;$("shortlistCount").textContent=state.shortlist.size};
+const persist=()=>{localStorage.setItem("v7_compare",JSON.stringify([...state.compare]));localStorage.setItem("v7_shortlist",JSON.stringify([...state.shortlist]));localStorage.setItem("v7_notes",JSON.stringify(state.notes));localStorage.setItem("v12_saved_snapshots",JSON.stringify(state.savedSnapshots));localStorage.setItem("v13_notebook",JSON.stringify(state.notebook));$("compareCount").textContent=state.compare.size;$("shortlistCount").textContent=state.shortlist.size};
 function val(p,k){return Number(p[k]||0)}
 function decision(p){if(!p.overall_score_100)return null;const w=profiles[state.profile];return Math.round((val(p,"school_quality_30")/30*w.school+val(p,"admission_chance_20")/20*w.admission+val(p,"property_investment_20")/20*w.property+val(p,"family_living_15")/15*w.family+val(p,"transit_score_10")/10*w.transit+val(p,"value_5")/5*w.value)*1000)/10}
 function kbFor(s,c){return state.kb.find(x=>x.school_name===s&&x.condo_name===c)}
@@ -325,33 +325,90 @@ function openDetails(p){
 }
 function compareCard(p){const k=p.kb||kbFor(p.target_school,p.condo);return`<article class="comparecard"><h3>${p.target_school}</h3><div class="condo">${p.condo}</div><div class="metric"><span>Decision</span><b>${decision(p)??"Unscored"}</b></div><div class="metric"><span>Distance</span><b>${safe(k?.label)} ${k?.best_m?`(${k.best_m} m)`:""}</b></div><div class="metric"><span>Evidence</span><b>${safe(k?.evidence)}</b></div><div class="metric"><span>Price</span><b>${safe(p["3_bed_cost"])}</b></div></article>`}
 function findAny(id){return state.pairs.find(x=>x.id===id)||state.results.find(x=>x.id===id)||state.savedSnapshots[id]||null}
+
+function metricWinner(items,getter,mode="max"){
+  const vals=items.map(x=>Number(getter(x))).filter(Number.isFinite);
+  if(!vals.length)return null;
+  return mode==="min"?Math.min(...vals):Math.max(...vals)
+}
+function compareTable(items){
+  if(!items.length)return "<p>No comparisons selected.</p>";
+  const rows=[
+    ["Decision score",x=>decision(x),"max",x=>decision(x)?.toFixed(1)||"—"],
+    ["Distance",x=>Number(x.kb?.best_m),"min",x=>Number.isFinite(Number(x.kb?.best_m))?`${Math.round(Number(x.kb.best_m))} m`:"—"],
+    ["Admission",x=>Number(x.admission_chance_20),"max",x=>`${x.admission_chance_20??"—"}/20`],
+    ["Property",x=>Number(x.property_investment_20),"max",x=>`${x.property_investment_20??"—"}/20`],
+    ["Family",x=>Number(x.family_living_15),"max",x=>`${x.family_living_15??"—"}/15`],
+    ["Transit",x=>Number(x.transit_10),"max",x=>`${x.transit_10??"—"}/10`],
+    ["Value",x=>Number(x.value_5),"max",x=>`${x.value_5??"—"}/5`],
+    ["3-bed value",x=>Number(x.price_min),"min",x=>x["3_bed_cost"]||"—"],
+    ["TOP",x=>Number(x.top_year),"max",x=>x.top_year||"—"],
+    ["Tenure",x=>0,"max",x=>x.tenure||"—"]
+  ];
+  return `<div class="comparison-table-wrap"><table class="comparison-table">
+    <thead><tr><th>Metric</th>${items.map(x=>`<th><b>${x.target_school}</b><span>${x.condo}</span></th>`).join("")}</tr></thead>
+    <tbody>${rows.map(([label,getter,mode,format])=>{
+      const winner=metricWinner(items,getter,mode);
+      return `<tr><td>${label}</td>${items.map(x=>{
+        const val=Number(getter(x)),best=Number.isFinite(val)&&winner!==null&&val===winner;
+        return `<td class="${best?"best-cell":""}">${format(x)}</td>`;
+      }).join("")}</tr>`;
+    }).join("")}</tbody>
+  </table></div>`
+}
+
 function renderCompare(){
-  const cards=[];
+  const items=[];
   for(const id of [...state.compare]){
     const item=findAny(id);
-    if(item)cards.push(item);
-    else state.compare.delete(id);
+    if(item)items.push(item);else state.compare.delete(id);
   }
   persist();
   $("compareCount").textContent=state.compare.size;
-  $("compareGrid").innerHTML=cards.map(compareCard).join("")||"<p>No comparisons selected.</p>"
+  $("compareGrid").innerHTML=compareTable(items)
 }
+
+function notebookFor(id){
+  return state.notebook[id]||{rating:0,status:"Considering",pros:"",cons:"",notes:""}
+}
+function shortlistCard(p){
+  const n=notebookFor(p.id);
+  return `<article class="notebook-card" data-id="${p.id}">
+    <div class="notebook-head"><div><h3>${p.target_school}</h3><h4>${p.condo}</h4></div><b>${decision(p)?.toFixed(1)||"—"}</b></div>
+    <label>Rating<select data-field="rating">${[0,1,2,3,4,5].map(v=>`<option value="${v}" ${Number(n.rating)===v?"selected":""}>${v?`${v} star${v>1?"s":""}`:"Not rated"}</option>`).join("")}</select></label>
+    <label>Status<select data-field="status">${["Considering","Viewing arranged","Viewed","Agent contacted","Rejected","Finalist"].map(v=>`<option ${n.status===v?"selected":""}>${v}</option>`).join("")}</select></label>
+    <label>Pros<textarea data-field="pros">${n.pros||""}</textarea></label>
+    <label>Cons<textarea data-field="cons">${n.cons||""}</textarea></label>
+    <label>Notes<textarea data-field="notes">${n.notes||""}</textarea></label>
+    <div class="notebook-actions"><button data-open="report">Open report</button><button data-remove="1">Remove</button></div>
+  </article>`
+}
+
 function renderShortlist(){
-  const cards=[];
+  const items=[];
   for(const id of [...state.shortlist]){
     const item=findAny(id);
-    if(item)cards.push(item);
-    else state.shortlist.delete(id);
+    if(item)items.push(item);else state.shortlist.delete(id);
   }
   persist();
   $("shortlistCount").textContent=state.shortlist.size;
-  $("shortlistGrid").innerHTML=cards.map(compareCard).join("")||"<p>No saved options.</p>"
+  $("shortlistGrid").innerHTML=items.length?items.map(shortlistCard).join(""):"<p>No saved options.</p>";
+  document.querySelectorAll(".notebook-card").forEach(card=>{
+    const id=card.dataset.id,item=findAny(id);
+    card.querySelectorAll("[data-field]").forEach(el=>el.onchange=()=>{
+      const n=notebookFor(id);n[el.dataset.field]=el.value;state.notebook[id]=n;persist()
+    });
+    card.querySelector("[data-open='report']").onclick=()=>openReport(item);
+    card.querySelector("[data-remove]").onclick=()=>{state.shortlist.delete(id);delete state.notebook[id];persist();renderShortlist();renderCards()}
+  })
 }
 function setView(n){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.querySelectorAll(".nav").forEach(b=>b.classList.toggle("active",b.dataset.view===n));$(n+"View").classList.add("active");if(n==="explore")setTimeout(()=>{state.map.invalidateSize();renderMap()},50);if(n==="compare")renderCompare();if(n==="shortlist")renderShortlist()}
-function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v12-2-results.csv";a.click()}
-async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=12.2.0",[]),load("data/schools-v6.json?v=12.2.0",[]),load("data/developments-v6.json?v=12.2.0",[]),load("data/residential-address-points.json?v=12.2.0",[]),load("data/coordinates.json?v=12.2.0",{}),load("data/distance-knowledge-base.json?v=12.2.0",[]),load("data/school-registry.json?v=12.2.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("compact").textContent=state.compact?"Expanded":"Compact";$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
-init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 12.2</h1><p>${e.message}</p></main>`);
+function exportCsv(){const f=["target_school","condo","distance_category","best_distance_m","evidence","decision_score","3_bed_cost"],lines=[f.join(",")].concat(state.results.map(p=>{const k=p.kb||kbFor(p.target_school,p.condo),o={...p,distance_category:k?.label,best_distance_m:k?.best_m,evidence:k?.evidence,decision_score:decision(p)};return f.map(x=>`"${String(o[x]??"").replaceAll('"','""')}"`).join(",")}));const a=document.createElement("a"),b=new Blob([lines.join("\n")],{type:"text/csv"});a.href=URL.createObjectURL(b);a.download="p1-home-v13-results.csv";a.click()}
+async function init(){[state.pairs,state.schools,state.developments,state.addresses,state.coordinates,state.kb,state.registry]=await Promise.all([load("data/pairings-expanded.json?v=13.0.0",[]),load("data/schools-v6.json?v=13.0.0",[]),load("data/developments-v6.json?v=13.0.0",[]),load("data/residential-address-points.json?v=13.0.0",[]),load("data/coordinates.json?v=13.0.0",{}),load("data/distance-knowledge-base.json?v=13.0.0",[]),load("data/school-registry.json?v=13.0.0",[])]);const uniq=f=>[...new Set(state.pairs.map(x=>x[f]).filter(Boolean))].sort();for(const [id,vals] of [["schoolFilter",state.schools.map(x=>x.name).sort()],["regionFilter",uniq("region")],["riskFilter",uniq("admission_risk")]])for(const v of vals){const o=document.createElement("option");o.value=o.textContent=v;$(id).appendChild(o)}$("suggestions").innerHTML=[...state.schools.map(s=>s.name),...state.developments.map(d=>d.name)].sort().map(n=>`<option value="${n}"></option>`).join("");document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>setView(b.dataset.view));["search","profile","priceMin","priceMax","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","statusFilter","topFilter","sort"].forEach(id=>$(id).addEventListener("input",apply));$("reset").onclick=()=>{["search","schoolFilter","regionFilter","evidenceFilter","distanceFilter","riskFilter","topFilter"].forEach(id=>$(id).value="");$("priceMin").value=1e6;$("priceMax").value=3e6;if($("statusFilter"))$("statusFilter").value="active";clearFocus();apply()};$("fit").onclick=renderMap;$("showAll").onclick=clearFocus;$("reload").onclick=()=>{state.map.removeLayer(state.base);state.base=L.tileLayer("https://www.onemap.gov.sg/maps/tiles/Default/{z}/{x}/{y}.png",{detectRetina:true,minZoom:11,maxZoom:19}).addTo(state.map)};$("compact").onclick=()=>{state.compact=!state.compact;$("compact").textContent=state.compact?"Expanded":"Compact";renderCards()};$("compact").textContent=state.compact?"Expanded":"Compact";$("closeDrawer").onclick=()=>$("drawer").classList.remove("open");$("clearCompare").onclick=()=>{state.compare.clear();persist();renderCompare()};$("clearShortlist").onclick=()=>{state.shortlist.clear();persist();renderShortlist()};$("exportBtn").onclick=exportCsv;persist();ensureMap();const coordinateCount=Object.keys(state.coordinates).length;$("dataStatus").className=`data-status ${coordinateCount&&state.kb.length?"ok":"warn"}`;$("dataStatus").textContent=coordinateCount&&state.kb.length?`${coordinateCount} static coordinates and ${state.kb.length} distance records loaded. No live geocoding is used.`:"Static data is incomplete. Run the Coordinate Builder, then copy its output files into public-app/data.";apply()}
+init().catch(e=>document.body.innerHTML=`<main style="padding:30px"><h1>Unable to load Version 13</h1><p>${e.message}</p></main>`);
 $("closeIntelligence").onclick=closeIntelligence;
 $("fit").classList.add("primary-action");
 
 $("closeReport").onclick=()=>{$("reportPanel").classList.remove("open");$("reportPanel").setAttribute("aria-hidden","true")};
+
+$("aboutTab").onclick=()=>setView("about");

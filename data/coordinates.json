@@ -1030,46 +1030,5 @@
     "address": "7 LEEDON HEIGHTS D'LEEDON SINGAPORE 267953",
     "postal": "267953",
     "checked_at": "2026-07-12T05:42:08.239Z"
-  },
-  "school:catholic high school (primary)": {
-    "error": "Manual confirmation required",
-    "candidates": [
-      {
-        "lat": 1.35438878373608,
-        "lng": 103.844210670766,
-        "label": "COMMIT LEARNING SCHOOLHOUSE @ CATHOLIC HIGH SCHOOL (PRIMARY)",
-        "address": "9 BISHAN STREET 22 COMMIT LEARNING SCHOOLHOUSE @ CATHOLIC HIGH SCHOOL (PRIMARY) SINGAPORE 579767",
-        "postal": "579767",
-        "source": "OneMap Search"
-      }
-    ],
-    "search_query": "Catholic High School (Primary)",
-    "checked_at": "2026-07-13T02:07:10Z"
-  },
-  "school:maris stella high school (primary)": {
-    "error": "Manual confirmation required",
-    "candidates": [
-      {
-        "lat": 1.34139473323668,
-        "lng": 103.877852484435,
-        "label": "MARIS STELLA HIGH SCHOOL",
-        "address": "25 MOUNT VERNON ROAD MARIS STELLA HIGH SCHOOL SINGAPORE 368051",
-        "postal": "368051",
-        "source": "OneMap Search"
-      }
-    ],
-    "search_query": "Maris Stella High School",
-    "checked_at": "2026-07-13T02:07:12Z"
-  },
-  "condo:forett at bukit timah": {
-    "lat": 1.33990853882395,
-    "lng": 103.767523150763,
-    "label": "FORETT@BUKIT TIMAH",
-    "address": "32 TOH TUCK ROAD FORETT@BUKIT TIMAH SINGAPORE 596710",
-    "postal": "596710",
-    "source": "OneMap Search",
-    "checked_at": "2026-07-13T02:07:13Z",
-    "search_query": "Forett @ Bukit Timah",
-    "manual_acceptance": false
   }
 }
