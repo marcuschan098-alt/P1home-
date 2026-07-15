@@ -1,5 +1,5 @@
 {
-  "version": "13.0.0",
+  "version": "14.0.0",
   "architecture": "registry-driven-coordinate-management-static-public-app",
   "schools": 81,
   "developments": 54,
@@ -7,5 +7,5 @@
   "coordinates": 129,
   "distance_records": 232,
   "school_registry_records": 5,
-  "feature": "release-candidate-comparison-notebook-export-about"
+  "feature": "nearby-discovery-responsive-compare-map-result-linking-coverage-audit"
 }
